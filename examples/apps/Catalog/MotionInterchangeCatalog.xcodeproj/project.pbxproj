@@ -12,6 +12,8 @@
 		663ED7C71EDF1F0C0096B2A9 /* HexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663ED7C21EDF1F0C0096B2A9 /* HexColor.swift */; };
 		663ED7C81EDF1F0C0096B2A9 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663ED7C31EDF1F0C0096B2A9 /* Layout.swift */; };
 		663ED7C91EDF1F0C0096B2A9 /* ModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663ED7C41EDF1F0C0096B2A9 /* ModalViewController.swift */; };
+		663ED8011EE628BA0096B2A9 /* MDMMotionCurveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663ED8001EE628BA0096B2A9 /* MDMMotionCurveTests.swift */; };
+		663ED8031EE6299A0096B2A9 /* MDMMotionCurveTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 663ED8021EE6299A0096B2A9 /* MDMMotionCurveTests.m */; };
 		666FAA841D384A6B000363DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666FAA831D384A6B000363DA /* AppDelegate.swift */; };
 		666FAA8B1D384A6B000363DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 666FAA8A1D384A6B000363DA /* Assets.xcassets */; };
 		666FAA8E1D384A6B000363DA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 666FAA8C1D384A6B000363DA /* LaunchScreen.storyboard */; };
@@ -49,6 +51,8 @@
 		663ED7C21EDF1F0C0096B2A9 /* HexColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HexColor.swift; sourceTree = "<group>"; };
 		663ED7C31EDF1F0C0096B2A9 /* Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
 		663ED7C41EDF1F0C0096B2A9 /* ModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalViewController.swift; sourceTree = "<group>"; };
+		663ED8001EE628BA0096B2A9 /* MDMMotionCurveTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDMMotionCurveTests.swift; sourceTree = "<group>"; };
+		663ED8021EE6299A0096B2A9 /* MDMMotionCurveTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDMMotionCurveTests.m; sourceTree = "<group>"; };
 		666FAA801D384A6B000363DA /* MotionInterchangeCatalog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MotionInterchangeCatalog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		666FAA831D384A6B000363DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Catalog/AppDelegate.swift; sourceTree = "<group>"; };
 		666FAA8A1D384A6B000363DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -156,6 +160,8 @@
 		666FAA971D384A6B000363DA /* tests */ = {
 			isa = PBXGroup;
 			children = (
+				663ED8001EE628BA0096B2A9 /* MDMMotionCurveTests.swift */,
+				663ED8021EE6299A0096B2A9 /* MDMMotionCurveTests.m */,
 			);
 			name = tests;
 			path = ../../../tests/unit;
@@ -455,6 +461,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				663ED8031EE6299A0096B2A9 /* MDMMotionCurveTests.m in Sources */,
+				663ED8011EE628BA0096B2A9 /* MDMMotionCurveTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
