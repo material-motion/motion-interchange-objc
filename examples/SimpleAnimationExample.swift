@@ -57,8 +57,9 @@ let cardCollapse = MaterialMaskedTransitionMotion(
 
 class SimpleAnimationExampleViewController: ExampleViewController {
 
+  var button: UIButton!
   var isOpen = false
-  func didTap(_ button: UIButton) {
+  func didTap() {
     let animator = MotionTimingAnimator()
 
     // This allows us to define our animation in terms of movement in one direction. When the
@@ -89,12 +90,6 @@ class SimpleAnimationExampleViewController: ExampleViewController {
 
     animator.addAnimation(with: motion.maskTransformation,
                           to: button.layer,
-                          withValues: [CGSize(width: 64, height: 64),
-                                       CGSize(width: 128, height: 128)],
-                          keyPath: "bounds.size")
-
-    animator.addAnimation(with: motion.maskTransformation,
-                          to: button.layer,
                           withValues: [CGPoint(x: view.bounds.width / 2,
                                                y: view.bounds.height - 64 - 32),
                                        CGPoint(x: view.bounds.width / 2,
@@ -105,14 +100,16 @@ class SimpleAnimationExampleViewController: ExampleViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    let exampleView = UIButton(type: .custom)
-    exampleView.backgroundColor = .primaryColor
-    exampleView.bounds = CGRect(origin: .zero, size: .init(width: 64, height: 64))
-    exampleView.center = .init(x: view.bounds.width / 2,
-                               y: view.bounds.height - exampleView.bounds.height - 32)
-    exampleView.layer.cornerRadius = exampleView.bounds.width / 2
-    exampleView.addTarget(self, action: #selector(didTap), for: .touchUpInside)
-    view.addSubview(exampleView)
+    button = UIButton(type: .custom)
+    button.backgroundColor = .primaryColor
+    button.bounds = CGRect(origin: .zero, size: .init(width: 64, height: 64))
+    button.center = .init(x: view.bounds.width / 2,
+                          y: view.bounds.height - button.bounds.height - 32)
+    button.layer.cornerRadius = button.bounds.width / 2
+    view.addSubview(button)
+
+    let tap = UITapGestureRecognizer(target: self, action: #selector(didTap))
+    view.addGestureRecognizer(tap)
   }
 
   override func exampleInformation() -> ExampleInfo {
