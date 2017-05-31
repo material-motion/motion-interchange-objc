@@ -18,6 +18,41 @@
 
 #import "MDMMotionTiming.h"
 
+@protocol MDMAnimatorStates
+
+- (nullable NSDictionary<NSString *, id> *)objectForKeyedSubscript:(nonnull NSString *)key;
+- (void)setObject:(nullable NSDictionary<NSString *, id> *)obj forKeyedSubscript:(nonnull NSString *)key;
+
+@end
+
+@protocol MDMAnimatorKeyOptions
+
+- (MDMMotionTiming)timingForKey:(nonnull NSString *)key;
+
+@end
+
+@protocol MDMAnimatorStateOptions
+
+- (nullable id<MDMAnimatorKeyOptions>)objectForKeyedSubscript:(nonnull NSString *)key;
+- (void)setObject:(nullable id<MDMAnimatorKeyOptions>)obj forKeyedSubscript:(nonnull NSString *)key;
+
+@end
+
+@interface UIView (MaterialMotion)
+
+@property(nonatomic, strong, readonly, nonnull) id<MDMAnimatorStates> states;
+
+@property(nonatomic, strong, readonly, nonnull) id<MDMAnimatorStateOptions> optionsForState;
+
+- (void)animateToValues:(nonnull NSDictionary<NSString *, id> *)values;
+
+// TODO: Do we like this?
+- (void)animateToValues:(nonnull NSDictionary<NSString *, id> *)values timing:(MDMMotionTiming)timing;
+
+- (void)animateToState:(nonnull NSString *)state;
+
+@end
+
 /**
  A motion timing animator is responsible for adding Core Animation animations to a layer based on a
  provided timing structure.

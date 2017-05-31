@@ -22,7 +22,24 @@ import MotionInterchange
 
 // Our motion specification. Each row of the spec defines strict timing for some part of the
 // animation.
-struct MaterialMaskedTransitionMotion {
+class MaterialMaskedTransitionMotion: MDMAnimatorKeyOptions {
+  init(floodColorTransformation: MotionTiming, maskTransformation: MotionTiming) {
+    self.floodColorTransformation = floodColorTransformation
+    self.maskTransformation = maskTransformation
+  }
+
+  func timing(forKey key: String) -> MotionTiming {
+    switch key {
+    case "backgroundColor": return floodColorTransformation
+    case "position": return maskTransformation
+    case "cornerRadius": return maskTransformation
+    case "size": return maskTransformation
+    default: break
+    }
+    assertionFailure("Unknown key")
+    return maskTransformation // TODO: Return some sensible noop
+  }
+
   let floodColorTransformation: MotionTiming
   let maskTransformation: MotionTiming
 }
@@ -60,41 +77,9 @@ class SimpleAnimationExampleViewController: ExampleViewController {
   var button: UIButton!
   var isOpen = false
   func didTap() {
-    let animator = MotionTimingAnimator()
-
-    // This allows us to define our animation in terms of movement in one direction. When the
-    // direction of motion changes, we tell the animator to reverse the values.
-    animator.shouldReverseValues = isOpen
-
-    // Pick which motion spec we're using. For more complicated cases we might turn this into a
-    // function.
-    let motion = isOpen ? cardCollapse : cardExpansion
-
     isOpen = !isOpen
 
-    animator.addAnimation(with: motion.floodColorTransformation,
-                          to: button.layer,
-                          withValues: [UIColor.primaryColor, UIColor.secondaryColor],
-                          keyPath: "backgroundColor")
-
-    animator.addAnimation(with: motion.maskTransformation,
-                          to: button.layer,
-                          withValues: [32, 0],
-                          keyPath: "cornerRadius")
-
-    animator.addAnimation(with: motion.maskTransformation,
-                          to: button.layer,
-                          withValues: [CGSize(width: 64, height: 64),
-                                       CGSize(width: 128, height: 128)],
-                          keyPath: "bounds.size")
-
-    animator.addAnimation(with: motion.maskTransformation,
-                          to: button.layer,
-                          withValues: [CGPoint(x: view.bounds.width / 2,
-                                               y: view.bounds.height - 64 - 32),
-                                       CGPoint(x: view.bounds.width / 2,
-                                               y: view.bounds.height - 64 - 64)],
-                          keyPath: "position")
+    button.animate(toState: isOpen ? "open" : "closed")
   }
 
   override func viewDidLoad() {
@@ -107,6 +92,21 @@ class SimpleAnimationExampleViewController: ExampleViewController {
                           y: view.bounds.height - button.bounds.height - 32)
     button.layer.cornerRadius = button.bounds.width / 2
     view.addSubview(button)
+
+    button.states["open"] = [
+      "backgroundColor": UIColor.secondaryColor,
+      "cornerRadius": 0,
+      "size": CGSize(width: 128, height: 128),
+      "position": CGPoint(x: view.bounds.width / 2, y: view.bounds.height - 64 - 64)
+    ]
+    button.states["closed"] = [
+      "backgroundColor": UIColor.primaryColor,
+      "cornerRadius": 32,
+      "size": CGSize(width: 64, height: 64),
+      "position": CGPoint(x: view.bounds.width / 2, y: view.bounds.height - 64 - 32)
+    ]
+    button.optionsForState["open"] = cardExpansion
+    button.optionsForState["closed"] = cardCollapse
 
     let tap = UITapGestureRecognizer(target: self, action: #selector(didTap))
     view.addGestureRecognizer(tap)
