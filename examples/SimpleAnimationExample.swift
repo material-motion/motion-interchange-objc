@@ -81,7 +81,9 @@ class SimpleAnimationExampleViewController: ExampleViewController {
   func didTap() {
     isOpen = !isOpen
 
-    button.animator.animate(toState: isOpen ? "open" : "closed")
+    button.animator.animate(toState: isOpen ? "open" : "closed") { didComplete in
+      print("Done \(didComplete)")
+    }
   }
 
   override func viewDidLoad() {

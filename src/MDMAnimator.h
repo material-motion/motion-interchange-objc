@@ -100,11 +100,11 @@ NS_SWIFT_NAME(AnimatorOptions)
  Animates with default timing.
  */
 - (void)animateToValues:(nonnull NSDictionary<NSString *, id> *)values;
-
-// TODO: Do we like this?
 - (void)animateToValues:(nonnull NSDictionary<NSString *, id> *)values timing:(MDMMotionTiming)timing;
 
 - (void)animateToState:(nonnull NSString *)state;
+
+- (void)animateToState:(nonnull NSString *)state completion:(void (^ __nonnull)(BOOL didComplete))completion;
 
 /**
  The default timing to be applied to an animation.
