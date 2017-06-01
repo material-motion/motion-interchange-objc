@@ -20,12 +20,60 @@
 
 #import "MotionInterchangeCatalog-Swift.h"
 
+#define easeInEaseOut {0.4f, 0.0f, 0.2f, 1.0f}
+
 struct MaterialMaskedTransitionMotion {
-  MDMMotionTiming floodBackgroundColor;
+  MDMMotionTiming floodColorTransformation;
   MDMMotionTiming maskTransformation;
   BOOL isCentered;
 };
 typedef struct MaterialMaskedTransitionMotion MaterialMaskedTransitionMotion;
+
+static const MaterialMaskedTransitionMotion cardExpansion = {
+  .floodColorTransformation = {
+    .delay = 0.075, .duration = 0.075, .controlPoints = easeInEaseOut,
+  },
+  .maskTransformation = {
+    .delay = 0.045, .duration = 0.255, .controlPoints = easeInEaseOut,
+  }
+};
+
+static const MaterialMaskedTransitionMotion cardCollapse = {
+  .floodColorTransformation = {
+    .delay = 0.060, .duration = 0.150, .controlPoints = easeInEaseOut,
+  },
+  .maskTransformation = {
+    .delay = 0.000, .duration = 0.180, .controlPoints = easeInEaseOut,
+  }
+};
+
+@interface Options : NSObject <MDMAnimatorKeyOptions>
+@end
+
+@implementation Options {
+  MaterialMaskedTransitionMotion _spec;
+}
+
+- (instancetype)initWithSpec:(MaterialMaskedTransitionMotion)spec {
+  self = [super init];
+  if (self) {
+    _spec = spec;
+  }
+  return self;
+}
+
+- (MDMMotionTiming)timingForKey:(NSString *)key {
+  if ([key isEqualToString:@"backgroundColor"]) {
+    return _spec.floodColorTransformation;
+
+  } else if ([[NSSet setWithObjects:@"position", @"cornerRadius", @"size", nil] containsObject:key]) {
+    return _spec.maskTransformation;
+  }
+
+  return MDMMotionTimingNone;
+}
+
+@end
 
 @implementation SimpleAnimationExampleObjcViewController {
   UIButton *_button;
@@ -47,7 +95,7 @@ typedef struct MaterialMaskedTransitionMotion MaterialMaskedTransitionMotion;
   _button.backgroundColor = [UIColor primaryColor];
   _button.bounds = CGRectMake(0, 0, 64, 64);
   _button.center = CGPointMake(self.view.bounds.size.width / 2,
-                              self.view.bounds.size.height - _button.bounds.size.height - 32);
+                               self.view.bounds.size.height - _button.bounds.size.height - 32);
   _button.layer.cornerRadius = _button.bounds.size.width / 2;
   [self.view addSubview:_button];
 
@@ -61,7 +109,10 @@ typedef struct MaterialMaskedTransitionMotion MaterialMaskedTransitionMotion;
   @{@"backgroundColor": [UIColor secondaryColor],
     @"cornerRadius": @0,
     @"size": @(CGSizeMake(128, 128)),
-    @"position": @(CGPointMake(_button.layer.position.x, _button.layer.position.y - 92))};
+    @"position": @(CGPointMake(_button.layer.position.x, _button.layer.position.y - 64))};
+
+  _button.optionsForState[@"open"] = [[Options alloc] initWithSpec:cardExpansion];
+  _button.optionsForState[@"closed"] = [[Options alloc] initWithSpec:cardCollapse];
 
   UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] init];
   [tap addTarget:self action:@selector(didTap)];

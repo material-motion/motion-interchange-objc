@@ -15,4 +15,4 @@
  */
 
 #import "MDMMotionTiming.h"
-#import "MDMMotionTimingAnimator.h"
+#import "MDMStateAnimator.h"

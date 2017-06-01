@@ -17,6 +17,8 @@
 import Foundation
 import MotionInterchange
 
+let materialEaseInEaseOut: (Float, Float, Float, Float) = (0.4, 0.0, 0.2, 1.0)
+
 // This demo shows how one might use a motion spec structure to define timing for a multi-state
 // animation such as the Material "masked transition" motion.
 
@@ -117,5 +119,3 @@ class SimpleAnimationExampleViewController: ExampleViewController {
                  instructions: "Tap to present a modal transition.")
   }
 }
-
-let materialEaseInEaseOut: (Float, Float, Float, Float) = (0.4, 0.0, 0.2, 1.0)

@@ -14,7 +14,7 @@
  limitations under the License.
  */
 
-#import "MDMMotionTimingAnimator.h"
+#import "MDMStateAnimator.h"
 
 #import <objc/runtime.h>
 
