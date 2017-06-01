@@ -14,7 +14,20 @@
  limitations under the License.
  */
 
-#import "CoreGraphics+SwiftCompat.h"
-#import "MDMAnimator.h"
-#import "MDMMotionTiming.h"
-#import "UIView+Animator.h"
+#import <Foundation/Foundation.h>
+#import <MotionInterchange/MotionInterchange.h>
+
+struct MaterialMaskedTransitionMotion {
+  MDMMotionTiming floodColorTransformation;
+  MDMMotionTiming maskTransformation;
+};
+typedef struct MaterialMaskedTransitionMotion MaterialMaskedTransitionMotion;
+
+FOUNDATION_EXTERN const MaterialMaskedTransitionMotion cardExpansion;
+FOUNDATION_EXTERN const MaterialMaskedTransitionMotion cardCollapse;
+
+@interface MaterialMaskedTransitionConfigurator : NSObject <MDMAnimationConfigurator>
+
+- (nonnull instancetype)initWithSpec:(MaterialMaskedTransitionMotion)spec;
+
+@end

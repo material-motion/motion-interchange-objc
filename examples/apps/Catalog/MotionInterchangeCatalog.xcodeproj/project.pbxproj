@@ -14,6 +14,7 @@
 		663ED7C81EDF1F0C0096B2A9 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663ED7C31EDF1F0C0096B2A9 /* Layout.swift */; };
 		663ED7C91EDF1F0C0096B2A9 /* ModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663ED7C41EDF1F0C0096B2A9 /* ModalViewController.swift */; };
 		663ED7CC1EE057150096B2A9 /* SimpleAnimationExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 663ED7CB1EE057150096B2A9 /* SimpleAnimationExample.m */; };
+		663ED7D51EE07E820096B2A9 /* MaterialMaskedTransitionMotion.m in Sources */ = {isa = PBXBuildFile; fileRef = 663ED7D41EE07E820096B2A9 /* MaterialMaskedTransitionMotion.m */; };
 		666FAA841D384A6B000363DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666FAA831D384A6B000363DA /* AppDelegate.swift */; };
 		666FAA8B1D384A6B000363DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 666FAA8A1D384A6B000363DA /* Assets.xcassets */; };
 		666FAA8E1D384A6B000363DA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 666FAA8C1D384A6B000363DA /* LaunchScreen.storyboard */; };
@@ -54,6 +55,8 @@
 		663ED7C41EDF1F0C0096B2A9 /* ModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalViewController.swift; sourceTree = "<group>"; };
 		663ED7CA1EE057150096B2A9 /* SimpleAnimationExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleAnimationExample.h; sourceTree = "<group>"; };
 		663ED7CB1EE057150096B2A9 /* SimpleAnimationExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleAnimationExample.m; sourceTree = "<group>"; };
+		663ED7D31EE07E820096B2A9 /* MaterialMaskedTransitionMotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaterialMaskedTransitionMotion.h; sourceTree = "<group>"; };
+		663ED7D41EE07E820096B2A9 /* MaterialMaskedTransitionMotion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaterialMaskedTransitionMotion.m; sourceTree = "<group>"; };
 		666FAA801D384A6B000363DA /* MotionInterchangeCatalog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MotionInterchangeCatalog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		666FAA831D384A6B000363DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Catalog/AppDelegate.swift; sourceTree = "<group>"; };
 		666FAA8A1D384A6B000363DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -123,6 +126,25 @@
 			path = ../../supplemental;
 			sourceTree = "<group>";
 		};
+		663ED7D11EE07E610096B2A9 /* Swift */ = {
+			isa = PBXGroup;
+			children = (
+				663ED7BD1EDF1DF20096B2A9 /* SimpleAnimationExample.swift */,
+			);
+			name = Swift;
+			sourceTree = "<group>";
+		};
+		663ED7D21EE07E650096B2A9 /* Objective-C */ = {
+			isa = PBXGroup;
+			children = (
+				663ED7CA1EE057150096B2A9 /* SimpleAnimationExample.h */,
+				663ED7CB1EE057150096B2A9 /* SimpleAnimationExample.m */,
+				663ED7D31EE07E820096B2A9 /* MaterialMaskedTransitionMotion.h */,
+				663ED7D41EE07E820096B2A9 /* MaterialMaskedTransitionMotion.m */,
+			);
+			name = "Objective-C";
+			sourceTree = "<group>";
+		};
 		666FAA771D384A6B000363DA = {
 			isa = PBXGroup;
 			children = (
@@ -170,9 +192,8 @@
 		666FAAA31D384B13000363DA /* examples */ = {
 			isa = PBXGroup;
 			children = (
-				663ED7BD1EDF1DF20096B2A9 /* SimpleAnimationExample.swift */,
-				663ED7CA1EE057150096B2A9 /* SimpleAnimationExample.h */,
-				663ED7CB1EE057150096B2A9 /* SimpleAnimationExample.m */,
+				663ED7D21EE07E650096B2A9 /* Objective-C */,
+				663ED7D11EE07E610096B2A9 /* Swift */,
 			);
 			name = examples;
 			path = ../..;
@@ -464,6 +485,7 @@
 				663ED7C51EDF1F0C0096B2A9 /* ExampleViewController.swift in Sources */,
 				663ED7CC1EE057150096B2A9 /* SimpleAnimationExample.m in Sources */,
 				667A3F541DEE273000CB3A99 /* TableOfContents.swift in Sources */,
+				663ED7D51EE07E820096B2A9 /* MaterialMaskedTransitionMotion.m in Sources */,
 				663ED7C81EDF1F0C0096B2A9 /* Layout.swift in Sources */,
 				663ED7C61EDF1F0C0096B2A9 /* ExampleViews.swift in Sources */,
 				663ED7BE1EDF1DF20096B2A9 /* SimpleAnimationExample.swift in Sources */,

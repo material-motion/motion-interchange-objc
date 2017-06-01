@@ -14,9 +14,7 @@
  limitations under the License.
  */
 
-#import "MDMStateAnimator.h"
-
-#import <objc/runtime.h>
+#import "MDMAnimator.h"
 
 const MDMMotionTiming MDMMotionTimingInstantaneous = {
   .duration = -2,
@@ -104,8 +102,6 @@ static CAMediaTimingFunction* timingFunctionWithControlPoints(float controlPoint
 
 @end
 
-const MDMMotionTiming defaultTiming = {.delay = 0.000, .duration = 0.300, .controlPoints = {0.4f, 0.0f, 0.2f, 1.0f}};
-
 @implementation MDMAnimator {
   MDMAnimatorStatesStorage *_states;
   MDMAnimatorOptionsStorage *_options;
@@ -118,6 +114,11 @@ const MDMMotionTiming defaultTiming = {.delay = 0.000, .duration = 0.300, .contr
     _object = object;
 
     _states = [[MDMAnimatorStatesStorage alloc] init];
+    _defaultTiming = (MDMMotionTiming){
+      .delay = 0.000,
+      .duration = 0.300,
+      .controlPoints = {0.4f, 0.0f, 0.2f, 1.0f}
+    };
   }
   return self;
 }
@@ -164,13 +165,13 @@ const MDMMotionTiming defaultTiming = {.delay = 0.000, .duration = 0.300, .contr
       timing = [keyedOptions timingForProperty:key];
 
       if (timing.duration == MDMMotionTimingNone.duration) {
-        timing = defaultTiming;
+        timing = self.defaultTiming;
       }
 
       // TODO: Check for MDMMotionTimingInstantaneous
 
     } else {
-      timing = defaultTiming;
+      timing = self.defaultTiming;
     }
 
     if ([key isEqualToString:@"cornerRadius"]) {
@@ -205,7 +206,7 @@ const MDMMotionTiming defaultTiming = {.delay = 0.000, .duration = 0.300, .contr
           [self.layer setValue:value forKeyPath:@"bounds.size"];
 
         } else {
-          [self setValue:value forKeyPath:key];
+          [_object setValue:value forKeyPath:key];
         }
       } completion: nil];
     }
@@ -213,26 +214,13 @@ const MDMMotionTiming defaultTiming = {.delay = 0.000, .duration = 0.300, .contr
 }
 
 - (void)animateToValues:(NSDictionary<NSString *, id> *)values {
-  [self animateToValues:values timing:defaultTiming];
+  [self animateToValues:values timing:self.defaultTiming];
 }
 
 - (void)animateToState:(NSString *)name {
   NSDictionary *state = self.states[name];
   id<MDMAnimationConfigurator> options = self.configurationForState[name];
   [self animateToValues:state options:options];
-}
-
-@end
-
-@implementation UIView (MaterialMotion)
-
-- (MDMAnimator *)mdm_animator {
-  MDMAnimator *animator = objc_getAssociatedObject(self, _cmd);
-  if (!animator) {
-    animator = [[MDMAnimator alloc] initWithObject:self];
-    objc_setAssociatedObject(self, _cmd, animator, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-  }
-  return animator;
 }
 
 @end

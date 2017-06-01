@@ -1,5 +1,5 @@
 /*
- Copyright 2017-present The Material Motion Authors. All Rights Reserved.
+ Copyright 2017-present the Material Components for iOS authors. All Rights Reserved.
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -14,7 +14,12 @@
  limitations under the License.
  */
 
-#import "CoreGraphics+SwiftCompat.h"
-#import "MDMAnimator.h"
-#import "MDMMotionTiming.h"
-#import "UIView+Animator.h"
+#import <CoreGraphics/CoreGraphics.h>
+
+// Allows CoreGraphics types to be cleanly used in Swift dictionaries.
+#if __has_attribute(objc_boxable)
+typedef struct __attribute__((objc_boxable)) CGPoint CGPoint;
+typedef struct __attribute__((objc_boxable)) CGSize CGSize;
+typedef struct __attribute__((objc_boxable)) CGRect CGRect;
+typedef struct __attribute__((objc_boxable)) CGVector CGVector;
+#endif

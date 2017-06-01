@@ -16,64 +16,8 @@
 
 #import "SimpleAnimationExample.h"
 
-#import <MotionInterchange/MotionInterchange.h>
-
+#import "MaterialMaskedTransitionMotion.h"
 #import "MotionInterchangeCatalog-Swift.h"
-
-#define easeInEaseOut {0.4f, 0.0f, 0.2f, 1.0f}
-
-struct MaterialMaskedTransitionMotion {
-  MDMMotionTiming floodColorTransformation;
-  MDMMotionTiming maskTransformation;
-  BOOL isCentered;
-};
-typedef struct MaterialMaskedTransitionMotion MaterialMaskedTransitionMotion;
-
-static const MaterialMaskedTransitionMotion cardExpansion = {
-  .floodColorTransformation = {
-    .delay = 0.075, .duration = 0.075, .controlPoints = easeInEaseOut,
-  },
-  .maskTransformation = {
-    .delay = 0.045, .duration = 0.255, .controlPoints = easeInEaseOut,
-  }
-};
-
-static const MaterialMaskedTransitionMotion cardCollapse = {
-  .floodColorTransformation = {
-    .delay = 0.060, .duration = 0.150, .controlPoints = easeInEaseOut,
-  },
-  .maskTransformation = {
-    .delay = 0.000, .duration = 0.180, .controlPoints = easeInEaseOut,
-  }
-};
-
-@interface MaterialMaskedTransitionConfigurator : NSObject <MDMAnimationConfigurator>
-@end
-
-@implementation MaterialMaskedTransitionConfigurator {
-  MaterialMaskedTransitionMotion _spec;
-}
-
-- (instancetype)initWithSpec:(MaterialMaskedTransitionMotion)spec {
-  self = [super init];
-  if (self) {
-    _spec = spec;
-  }
-  return self;
-}
-
-- (MDMMotionTiming)timingForProperty:(MDMMotionProperty)key {
-  if ([key isEqualToString:@"backgroundColor"]) {
-    return _spec.floodColorTransformation;
-
-  } else if ([[NSSet setWithObjects:@"position", @"cornerRadius", @"size", nil] containsObject:key]) {
-    return _spec.maskTransformation;
-  }
-
-  return MDMMotionTimingNone;
-}
-
-@end
 
 @implementation SimpleAnimationExampleObjcViewController {
   UIButton *_button;
@@ -111,7 +55,7 @@ static const MaterialMaskedTransitionMotion cardCollapse = {
   @{@"backgroundColor": [UIColor secondaryColor],
     @"cornerRadius": @0,
     @"size": @(CGSizeMake(128, 128)),
-    @"position": @(CGPointMake(_button.layer.position.x, _button.layer.position.y - 64))};
+    @"position": @(CGPointMake(_button.layer.position.x, _button.layer.position.y - 32))};
 
   animator.configurationForState[@"open"] = [[MaterialMaskedTransitionConfigurator alloc] initWithSpec:cardExpansion];
   animator.configurationForState[@"closed"] = [[MaterialMaskedTransitionConfigurator alloc] initWithSpec:cardCollapse];

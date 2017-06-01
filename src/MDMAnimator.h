@@ -18,13 +18,6 @@
 
 #import "MDMMotionTiming.h"
 
-#if __has_attribute(objc_boxable)
-typedef struct __attribute__((objc_boxable)) CGPoint CGPoint;
-typedef struct __attribute__((objc_boxable)) CGSize CGSize;
-typedef struct __attribute__((objc_boxable)) CGRect CGRect;
-typedef struct __attribute__((objc_boxable)) CGVector CGVector;
-#endif
-
 /**
  A timing structure that indicates that no animation should occur.
  */
@@ -59,11 +52,11 @@ NS_SWIFT_NAME(AnimationConfigurator)
  An AnimatorStates instance stores the desired values for an object at a given named state.
 
  Example usage (Objective-C):
- 
+
      states[@"open"] = @{ @"x": @500 }
 
  Example usage (Swift):
- 
+
      states["open"] = [ "x": 500 ]
  */
 NS_SWIFT_NAME(AnimatorStates)
@@ -87,14 +80,25 @@ NS_SWIFT_NAME(AnimatorOptions)
 
 @end
 
+/**
+ An animator is a state-based animation system.
+ */
 @interface MDMAnimator : NSObject
 
+/**
+ Initializes the animator with the provided object.
+ 
+ The object is weakly held.
+ */
 - (nonnull instancetype)initWithObject:(nonnull id)object NS_DESIGNATED_INITIALIZER;
 
 @property(nonatomic, strong, readonly, nonnull) id<MDMAnimatorStates> states;
 
 @property(nonatomic, strong, readonly, nonnull) id<MDMAnimatorOptions> configurationForState;
 
+/**
+ Animates with default timing.
+ */
 - (void)animateToValues:(nonnull NSDictionary<NSString *, id> *)values;
 
 // TODO: Do we like this?
@@ -102,12 +106,11 @@ NS_SWIFT_NAME(AnimatorOptions)
 
 - (void)animateToState:(nonnull NSString *)state;
 
+/**
+ The default timing to be applied to an animation.
+ */
+@property(nonatomic, assign) MDMMotionTiming defaultTiming;
+
 - (nonnull instancetype)init NS_UNAVAILABLE;;
-
-@end
-
-@interface UIView (MaterialMotion)
-
-@property(nonatomic, strong, readonly, nonnull) MDMAnimator *mdm_animator NS_SWIFT_NAME(animator);
 
 @end
