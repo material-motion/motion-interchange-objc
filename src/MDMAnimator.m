@@ -102,6 +102,96 @@ static CAMediaTimingFunction* timingFunctionWithControlPoints(float controlPoint
 
 @end
 
+@protocol MDMPropertyAnimator
+
+- (void)animateProperty:(MDMMotionProperty)property to:(id)value withTiming:(MDMMotionTiming)timing;
+
+@end
+
+@interface MDMLayerPropertyAnimator : NSObject <MDMPropertyAnimator>
+
+- (instancetype)initWithLayer:(CALayer *)layer;
+
+@end
+
+@implementation MDMLayerPropertyAnimator {
+  __weak CALayer *_layer;
+}
+
+- (instancetype)initWithLayer:(CALayer *)layer {
+  self = [super init];
+  if (self) {
+    _layer = layer;
+  }
+  return self;
+}
+
+- (void)animateProperty:(MDMMotionProperty)property to:(id)value withTiming:(MDMMotionTiming)timing {
+  CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:property];
+  if (timing.delay != 0) {
+    animation.beginTime = ([_layer convertTime:CACurrentMediaTime() fromLayer:nil]
+                           + timing.delay * simulatorAnimationDragCoefficient());
+    animation.fillMode = kCAFillModeBackwards;
+  }
+  animation.duration = timing.duration * simulatorAnimationDragCoefficient();
+  animation.timingFunction = timingFunctionWithControlPoints(timing.controlPoints);
+
+  // TODO(featherless): Support other numerical types.
+  if ([value isKindOfClass:[NSNumber class]]) {
+    CGFloat currentValue = [[_layer valueForKeyPath:property] doubleValue];
+    animation.fromValue = @(currentValue - [value doubleValue]);
+    animation.toValue = @0;
+    animation.additive = true;
+
+  } else {
+    animation.toValue = value;
+  }
+
+  NSString *uniqueKey = [animation.keyPath stringByAppendingString:[NSUUID UUID].UUIDString];
+  [_layer addAnimation:animation forKey:uniqueKey];
+
+  [_layer setValue:value forKeyPath:animation.keyPath];
+}
+
+@end
+
+@interface MDMViewPropertyAnimator : NSObject <MDMPropertyAnimator>
+
+- (instancetype)initWithView:(UIView *)view;
+
+@end
+
+@implementation MDMViewPropertyAnimator {
+  __weak UIView *_view;
+}
+
+- (instancetype)initWithView:(UIView *)view {
+  self = [super init];
+  if (self) {
+    _view = view;
+  }
+  return self;
+}
+
+- (void)animateProperty:(MDMMotionProperty)property to:(id)value withTiming:(MDMMotionTiming)timing {
+  [UIView animateWithDuration:timing.duration delay:timing.delay options:0 animations:^{
+    // TODO: Route key paths somehow.
+
+    if ([property isEqualToString:@"x"]) {
+      [_view.layer setValue:value forKeyPath:@"position.x"];
+
+    } else if ([property isEqualToString:@"size"]) {
+      [_view.layer setValue:value forKeyPath:@"bounds.size"];
+
+    } else {
+      [_view setValue:value forKeyPath:property];
+    }
+  } completion: nil];
+}
+
+@end
+
+
 @implementation MDMAnimator {
   MDMAnimatorStatesStorage *_states;
   MDMAnimatorOptionsStorage *_options;
@@ -131,15 +221,17 @@ static CAMediaTimingFunction* timingFunctionWithControlPoints(float controlPoint
   return _options;
 }
 
-- (CALayer *)layer {
-  CALayer *layer = nil;
-  if ([_object isKindOfClass:[UIView class]]) {
-    layer = [(UIView *)_object layer];
-  } else if ([_object isKindOfClass:[CALayer class]]) {
-    layer = _object;
+- (id<MDMPropertyAnimator>)propertyAnimatorForProperty:(MDMMotionProperty)property {
+  if ([self layer] && [property isEqualToString:@"cornerRadius"]) {
+    return [[MDMLayerPropertyAnimator alloc] initWithLayer:[self layer]];
+
+  } else if ([_object isKindOfClass:[UIView class]]) {
+    return [[MDMViewPropertyAnimator alloc] initWithView:_object];
   }
-  return layer;
+  return nil;
 }
+
+#pragma mark - Animate
 
 - (void)animateToValues:(NSDictionary<NSString *, id> *)values timing:(MDMMotionTiming)timing {
   [UIView animateWithDuration:timing.duration delay:timing.delay options:0 animations:^{
@@ -158,11 +250,11 @@ static CAMediaTimingFunction* timingFunctionWithControlPoints(float controlPoint
 }
 
 - (void)animateToValues:(NSDictionary<NSString *, id> *)values options:(id<MDMAnimationConfigurator>)keyedOptions {
-  for (NSString *key in values) {
-    id value = values[key];
+  for (NSString *property in values) {
+    id value = values[property];
     MDMMotionTiming timing;
     if (keyedOptions) {
-      timing = [keyedOptions timingForProperty:key];
+      timing = [keyedOptions timingForProperty:property];
 
       if (timing.duration == MDMMotionTimingNone.duration) {
         timing = self.defaultTiming;
@@ -174,42 +266,8 @@ static CAMediaTimingFunction* timingFunctionWithControlPoints(float controlPoint
       timing = self.defaultTiming;
     }
 
-    if ([key isEqualToString:@"cornerRadius"]) {
-      CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:key];
-      if (timing.delay != 0) {
-        animation.beginTime = ([self.layer convertTime:CACurrentMediaTime() fromLayer:nil]
-                               + timing.delay * simulatorAnimationDragCoefficient());
-        animation.fillMode = kCAFillModeBackwards;
-      }
-      animation.duration = timing.duration * simulatorAnimationDragCoefficient();
-      animation.timingFunction = timingFunctionWithControlPoints(timing.controlPoints);
-
-      // TODO: Support other numerical types.
-      CGFloat currentValue = [[self.layer valueForKeyPath:key] doubleValue];
-      animation.fromValue = @(currentValue - [value doubleValue]);
-      animation.toValue = @0;
-      animation.additive = true;
-
-      NSString *uniqueKey = [animation.keyPath stringByAppendingString:[NSUUID UUID].UUIDString];
-      [self.layer addAnimation:animation forKey:uniqueKey];
-
-      [self.layer setValue:value forKeyPath:animation.keyPath];
-
-    } else {
-      [UIView animateWithDuration:timing.duration delay:timing.delay options:0 animations:^{
-
-        // TODO: Extract this out to a keypath router.
-        if ([key isEqualToString:@"x"]) {
-          [self.layer setValue:value forKeyPath:@"position.x"];
-
-        } else if ([key isEqualToString:@"size"]) {
-          [self.layer setValue:value forKeyPath:@"bounds.size"];
-
-        } else {
-          [_object setValue:value forKeyPath:key];
-        }
-      } completion: nil];
-    }
+    id<MDMPropertyAnimator> animator = [self propertyAnimatorForProperty:property];
+    [animator animateProperty:property to:value withTiming:timing];
   }
 }
 
@@ -221,6 +279,18 @@ static CAMediaTimingFunction* timingFunctionWithControlPoints(float controlPoint
   NSDictionary *state = self.states[name];
   id<MDMAnimationConfigurator> options = self.configurationForState[name];
   [self animateToValues:state options:options];
+}
+
+#pragma mark - Private
+
+- (CALayer *)layer {
+  CALayer *layer = nil;
+  if ([_object isKindOfClass:[UIView class]]) {
+    layer = [(UIView *)_object layer];
+  } else if ([_object isKindOfClass:[CALayer class]]) {
+    layer = _object;
+  }
+  return layer;
 }
 
 @end
