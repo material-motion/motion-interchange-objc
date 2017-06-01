@@ -24,14 +24,14 @@ let materialEaseInEaseOut: (Float, Float, Float, Float) = (0.4, 0.0, 0.2, 1.0)
 
 // Our motion specification. Each row of the spec defines strict timing for some part of the
 // animation.
-class MaterialMaskedTransitionMotion: MDMAnimatorKeyOptions {
+class MaterialMaskedTransitionMotion: AnimationConfigurator {
   init(floodColorTransformation: MotionTiming, maskTransformation: MotionTiming) {
     self.floodColorTransformation = floodColorTransformation
     self.maskTransformation = maskTransformation
   }
 
-  func timing(forKey key: String) -> MotionTiming {
-    switch key {
+  func timing(forProperty property: String) -> MotionTiming {
+    switch property {
     case "backgroundColor": return floodColorTransformation
     case "position": return maskTransformation
     case "cornerRadius": return maskTransformation
@@ -81,7 +81,7 @@ class SimpleAnimationExampleViewController: ExampleViewController {
   func didTap() {
     isOpen = !isOpen
 
-    button.animate(toState: isOpen ? "open" : "closed")
+    button.animator.animate(toState: isOpen ? "open" : "closed")
   }
 
   override func viewDidLoad() {
@@ -95,20 +95,20 @@ class SimpleAnimationExampleViewController: ExampleViewController {
     button.layer.cornerRadius = button.bounds.width / 2
     view.addSubview(button)
 
-    button.states["open"] = [
+    button.animator.states["open"] = [
       "backgroundColor": UIColor.secondaryColor,
       "cornerRadius": 0,
       "size": CGSize(width: 128, height: 128),
       "position": CGPoint(x: view.bounds.width / 2, y: view.bounds.height - 64 - 64)
     ]
-    button.states["closed"] = [
+    button.animator.states["closed"] = [
       "backgroundColor": UIColor.primaryColor,
       "cornerRadius": 32,
       "size": CGSize(width: 64, height: 64),
       "position": CGPoint(x: view.bounds.width / 2, y: view.bounds.height - 64 - 32)
     ]
-    button.optionsForState["open"] = cardExpansion
-    button.optionsForState["closed"] = cardCollapse
+    button.animator.configurationForState["open"] = cardExpansion
+    button.animator.configurationForState["closed"] = cardCollapse
 
     let tap = UITapGestureRecognizer(target: self, action: #selector(didTap))
     view.addGestureRecognizer(tap)

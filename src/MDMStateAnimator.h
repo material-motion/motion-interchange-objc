@@ -25,31 +25,75 @@ typedef struct __attribute__((objc_boxable)) CGRect CGRect;
 typedef struct __attribute__((objc_boxable)) CGVector CGVector;
 #endif
 
+/**
+ A timing structure that indicates that no animation should occur.
+ */
+extern const MDMMotionTiming MDMMotionTimingInstantaneous
+NS_SWIFT_NAME(MotionTimingInstantaneous);
+
+/**
+ A timing structure that indicates that no timing is provided - equivalent to "nil".
+ */
+extern const MDMMotionTiming MDMMotionTimingNone
+NS_SWIFT_NAME(MotionTimingNone);
+
+typedef NSString* MDMMotionProperty;
+
+/**
+ An animation configurator is responsible for customizing the timing parameters of an animation
+ for a given property.
+ */
+NS_SWIFT_NAME(AnimationConfigurator)
+@protocol MDMAnimationConfigurator
+
+/**
+ Asks the receiver to return a timing structure for the given property.
+ 
+ If MDMMotionTimingNone is returned, then default timing will be used.
+ */
+- (MDMMotionTiming)timingForProperty:(nonnull MDMMotionProperty)property;
+
+@end
+
+/**
+ An AnimatorStates instance stores the desired values for an object at a given named state.
+
+ Example usage (Objective-C):
+ 
+     states[@"open"] = @{ @"x": @500 }
+
+ Example usage (Swift):
+ 
+     states["open"] = [ "x": 500 ]
+ */
+NS_SWIFT_NAME(AnimatorStates)
 @protocol MDMAnimatorStates
 
-- (nullable NSDictionary<NSString *, id> *)objectForKeyedSubscript:(nonnull NSString *)key;
-- (void)setObject:(nullable NSDictionary<NSString *, id> *)obj forKeyedSubscript:(nonnull NSString *)key;
+// Subscript access support
+- (nullable NSDictionary<NSString *, id> *)objectForKeyedSubscript:(nonnull NSString *)stateName;
+- (void)setObject:(nullable NSDictionary<NSString *, id> *)obj forKeyedSubscript:(nonnull NSString *)stateName;
 
 @end
 
-@protocol MDMAnimatorKeyOptions
+/**
+ An AnimatorOptions instance stores the desired configurations for an object at a given name state.
+ */
+NS_SWIFT_NAME(AnimatorOptions)
+@protocol MDMAnimatorOptions
 
-- (MDMMotionTiming)timingForKey:(nonnull NSString *)key;
+// Subscript access support
+- (nullable id<MDMAnimationConfigurator>)objectForKeyedSubscript:(nonnull NSString *)stateName;
+- (void)setObject:(nullable id<MDMAnimationConfigurator>)obj forKeyedSubscript:(nonnull NSString *)stateName;
 
 @end
 
-@protocol MDMAnimatorStateOptions
+@interface MDMAnimator : NSObject
 
-- (nullable id<MDMAnimatorKeyOptions>)objectForKeyedSubscript:(nonnull NSString *)key;
-- (void)setObject:(nullable id<MDMAnimatorKeyOptions>)obj forKeyedSubscript:(nonnull NSString *)key;
-
-@end
-
-@interface UIView (MaterialMotion)
+- (nonnull instancetype)initWithObject:(nonnull id)object NS_DESIGNATED_INITIALIZER;
 
 @property(nonatomic, strong, readonly, nonnull) id<MDMAnimatorStates> states;
 
-@property(nonatomic, strong, readonly, nonnull) id<MDMAnimatorStateOptions> optionsForState;
+@property(nonatomic, strong, readonly, nonnull) id<MDMAnimatorOptions> configurationForState;
 
 - (void)animateToValues:(nonnull NSDictionary<NSString *, id> *)values;
 
@@ -57,5 +101,13 @@ typedef struct __attribute__((objc_boxable)) CGVector CGVector;
 - (void)animateToValues:(nonnull NSDictionary<NSString *, id> *)values timing:(MDMMotionTiming)timing;
 
 - (void)animateToState:(nonnull NSString *)state;
+
+- (nonnull instancetype)init NS_UNAVAILABLE;;
+
+@end
+
+@interface UIView (MaterialMotion)
+
+@property(nonatomic, strong, readonly, nonnull) MDMAnimator *mdm_animator NS_SWIFT_NAME(animator);
 
 @end

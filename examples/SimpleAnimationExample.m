@@ -47,10 +47,10 @@ static const MaterialMaskedTransitionMotion cardCollapse = {
   }
 };
 
-@interface Options : NSObject <MDMAnimatorKeyOptions>
+@interface MaterialMaskedTransitionConfigurator : NSObject <MDMAnimationConfigurator>
 @end
 
-@implementation Options {
+@implementation MaterialMaskedTransitionConfigurator {
   MaterialMaskedTransitionMotion _spec;
 }
 
@@ -62,7 +62,7 @@ static const MaterialMaskedTransitionMotion cardCollapse = {
   return self;
 }
 
-- (MDMMotionTiming)timingForKey:(NSString *)key {
+- (MDMMotionTiming)timingForProperty:(MDMMotionProperty)key {
   if ([key isEqualToString:@"backgroundColor"]) {
     return _spec.floodColorTransformation;
 
@@ -83,7 +83,7 @@ static const MaterialMaskedTransitionMotion cardCollapse = {
 - (void)didTap {
   _isOpen = !_isOpen;
 
-  [_button animateToState: _isOpen ? @"open" : @"closed"];
+  [_button.mdm_animator animateToState: _isOpen ? @"open" : @"closed"];
 }
 
 - (void)viewDidLoad {
@@ -99,20 +99,22 @@ static const MaterialMaskedTransitionMotion cardCollapse = {
   _button.layer.cornerRadius = _button.bounds.size.width / 2;
   [self.view addSubview:_button];
 
-  _button.states[@"closed"] =
+  MDMAnimator *animator = _button.mdm_animator;
+
+  animator.states[@"closed"] =
   @{@"backgroundColor": [UIColor primaryColor],
     @"cornerRadius": @(_button.layer.cornerRadius),
     @"size": @(_button.bounds.size),
     @"position": @(_button.layer.position)};
 
-  _button.states[@"open"] =
+  animator.states[@"open"] =
   @{@"backgroundColor": [UIColor secondaryColor],
     @"cornerRadius": @0,
     @"size": @(CGSizeMake(128, 128)),
     @"position": @(CGPointMake(_button.layer.position.x, _button.layer.position.y - 64))};
 
-  _button.optionsForState[@"open"] = [[Options alloc] initWithSpec:cardExpansion];
-  _button.optionsForState[@"closed"] = [[Options alloc] initWithSpec:cardCollapse];
+  animator.configurationForState[@"open"] = [[MaterialMaskedTransitionConfigurator alloc] initWithSpec:cardExpansion];
+  animator.configurationForState[@"closed"] = [[MaterialMaskedTransitionConfigurator alloc] initWithSpec:cardCollapse];
 
   UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] init];
   [tap addTarget:self action:@selector(didTap)];

@@ -79,10 +79,10 @@ static CAMediaTimingFunction* timingFunctionWithControlPoints(float controlPoint
 
 @end
 
-@interface MDMAnimatorStateOptionsStorage : NSObject <MDMAnimatorStateOptions>
+@interface MDMAnimatorOptionsStorage : NSObject <MDMAnimatorOptions>
 @end
 
-@implementation MDMAnimatorStateOptionsStorage {
+@implementation MDMAnimatorOptionsStorage {
   NSMutableDictionary *_states;
 }
 
@@ -94,11 +94,11 @@ static CAMediaTimingFunction* timingFunctionWithControlPoints(float controlPoint
   return self;
 }
 
-- (id<MDMAnimatorKeyOptions>)objectForKeyedSubscript:(NSString *)key {
+- (id<MDMAnimationConfigurator>)objectForKeyedSubscript:(NSString *)key {
   return _states[key];
 }
 
-- (void)setObject:(id<MDMAnimatorKeyOptions>)obj forKeyedSubscript:(NSString *)key {
+- (void)setObject:(id<MDMAnimationConfigurator>)obj forKeyedSubscript:(NSString *)key {
   [_states setObject:obj forKey:key];
 }
 
@@ -106,28 +106,42 @@ static CAMediaTimingFunction* timingFunctionWithControlPoints(float controlPoint
 
 const MDMMotionTiming defaultTiming = {.delay = 0.000, .duration = 0.300, .controlPoints = {0.4f, 0.0f, 0.2f, 1.0f}};
 
-@implementation UIView (MaterialMotion)
-
-- (id<MDMAnimatorStates>)states {
-  id<MDMAnimatorStates> states = objc_getAssociatedObject(self, _cmd);
-  if (!states) {
-    states = [[MDMAnimatorStatesStorage alloc] init];
-    objc_setAssociatedObject(self, _cmd, states, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-  }
-  return states;
+@implementation MDMAnimator {
+  MDMAnimatorStatesStorage *_states;
+  MDMAnimatorOptionsStorage *_options;
+  __weak id _object;
 }
 
-- (id<MDMAnimatorStateOptions>)optionsForState {
-  id<MDMAnimatorStateOptions> states = objc_getAssociatedObject(self, _cmd);
-  if (!states) {
-    states = [[MDMAnimatorStateOptionsStorage alloc] init];
-    objc_setAssociatedObject(self, _cmd, states, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+- (instancetype)initWithObject:(id)object {
+  self = [super init];
+  if (self) {
+    _object = object;
+
+    _states = [[MDMAnimatorStatesStorage alloc] init];
   }
-  return states;
+  return self;
+}
+
+- (id<MDMAnimatorStates>)states {
+  return _states;
+}
+
+- (id<MDMAnimatorOptions>)configurationForState {
+  return _options;
+}
+
+- (CALayer *)layer {
+  CALayer *layer = nil;
+  if ([_object isKindOfClass:[UIView class]]) {
+    layer = [(UIView *)_object layer];
+  } else if ([_object isKindOfClass:[CALayer class]]) {
+    layer = _object;
+  }
+  return layer;
 }
 
 - (void)animateToValues:(NSDictionary<NSString *, id> *)values timing:(MDMMotionTiming)timing {
-  [UIView animateWithDuration:0.3 delay:0.0 options:0 animations:^{
+  [UIView animateWithDuration:timing.duration delay:timing.delay options:0 animations:^{
     for (NSString *keyPath in values) {
       id value = values[keyPath];
 
@@ -142,13 +156,12 @@ const MDMMotionTiming defaultTiming = {.delay = 0.000, .duration = 0.300, .contr
   } completion: nil];
 }
 
-- (void)animateToValues:(NSDictionary<NSString *, id> *)values options:(id<MDMAnimatorKeyOptions>)keyedOptions {
-
+- (void)animateToValues:(NSDictionary<NSString *, id> *)values options:(id<MDMAnimationConfigurator>)keyedOptions {
   for (NSString *key in values) {
     id value = values[key];
     MDMMotionTiming timing;
     if (keyedOptions) {
-      timing = [keyedOptions timingForKey:key];
+      timing = [keyedOptions timingForProperty:key];
 
       if (timing.duration == MDMMotionTimingNone.duration) {
         timing = defaultTiming;
@@ -205,8 +218,21 @@ const MDMMotionTiming defaultTiming = {.delay = 0.000, .duration = 0.300, .contr
 
 - (void)animateToState:(NSString *)name {
   NSDictionary *state = self.states[name];
-  id<MDMAnimatorKeyOptions> options = self.optionsForState[name];
+  id<MDMAnimationConfigurator> options = self.configurationForState[name];
   [self animateToValues:state options:options];
+}
+
+@end
+
+@implementation UIView (MaterialMotion)
+
+- (MDMAnimator *)mdm_animator {
+  MDMAnimator *animator = objc_getAssociatedObject(self, _cmd);
+  if (!animator) {
+    animator = [[MDMAnimator alloc] initWithObject:self];
+    objc_setAssociatedObject(self, _cmd, animator, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+  }
+  return animator;
 }
 
 @end
