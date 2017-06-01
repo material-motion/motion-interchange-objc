@@ -34,10 +34,10 @@ class MaterialMaskedTransitionMotion: MDMAnimatorKeyOptions {
     case "position": return maskTransformation
     case "cornerRadius": return maskTransformation
     case "size": return maskTransformation
-    default: break
+    default:
+      assertionFailure("Unknown key")
+      return MotionTimingNone
     }
-    assertionFailure("Unknown key")
-    return maskTransformation // TODO: Return some sensible noop
   }
 
   let floodColorTransformation: MotionTiming

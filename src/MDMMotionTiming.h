@@ -41,7 +41,14 @@ struct MDMMotionTiming {
 } NS_SWIFT_NAME(MotionTiming);
 typedef struct MDMMotionTiming MDMMotionTiming;
 
-// A timing structure that has no duration.
-//
-// Represents an absence of animation.
-#define MDMNoAnimation (MDMMotionTiming){ .duration = 0 }
+/**
+ A timing structure that indicates that no animation should occur.
+ */
+extern const MDMMotionTiming MDMMotionTimingInstantaneous
+NS_SWIFT_NAME(MotionTimingInstantaneous);
+
+/**
+ A timing structure that indicates that no timing is provided - equivalent to "nil".
+ */
+extern const MDMMotionTiming MDMMotionTimingNone
+ NS_SWIFT_NAME(MotionTimingNone);

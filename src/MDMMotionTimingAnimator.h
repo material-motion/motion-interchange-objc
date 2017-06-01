@@ -18,6 +18,13 @@
 
 #import "MDMMotionTiming.h"
 
+#if __has_attribute(objc_boxable)
+typedef struct __attribute__((objc_boxable)) CGPoint CGPoint;
+typedef struct __attribute__((objc_boxable)) CGSize CGSize;
+typedef struct __attribute__((objc_boxable)) CGRect CGRect;
+typedef struct __attribute__((objc_boxable)) CGVector CGVector;
+#endif
+
 @protocol MDMAnimatorStates
 
 - (nullable NSDictionary<NSString *, id> *)objectForKeyedSubscript:(nonnull NSString *)key;
@@ -50,44 +57,5 @@
 - (void)animateToValues:(nonnull NSDictionary<NSString *, id> *)values timing:(MDMMotionTiming)timing;
 
 - (void)animateToState:(nonnull NSString *)state;
-
-@end
-
-/**
- A motion timing animator is responsible for adding Core Animation animations to a layer based on a
- provided timing structure.
- */
-NS_SWIFT_NAME(MotionTimingAnimator)
-@interface MDMMotionTimingAnimator : NSObject
-
-/**
- Adds a single animation to the layer with the given timing structure.
- 
- If the animation is delayed, the added animation will have a backwards fill mode.
-
- The animation will be added to the layer with `keyPath` as the key.
-
- Side effects:
-
- - Sets the last value of the animation to the layer's key path.
-
- @param timing The timing to be used for the animation.
- @param layer The layer to be animated.
- @param values The values to be used in the animation. Must contain exactly two values. Supported
- UIKit types will be coerced to their Core Animation equivalent. Supported UIKit values include
- UIColor and UIBezierPath.
- @param keyPath The key path of the property to be animated.
- */
-- (void)addAnimationWithTiming:(MDMMotionTiming)timing
-                       toLayer:(nonnull CALayer *)layer
-                    withValues:(nonnull NSArray *)values
-                       keyPath:(nonnull NSString *)keyPath;
-
-/**
- If enabled, all animations will reverse the provided values array before building the animation.
- 
- The default value is false.
- */
-@property(nonatomic, assign) BOOL shouldReverseValues;
 
 @end

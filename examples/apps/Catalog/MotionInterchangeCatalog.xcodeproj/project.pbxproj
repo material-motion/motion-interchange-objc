@@ -13,6 +13,7 @@
 		663ED7C71EDF1F0C0096B2A9 /* HexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663ED7C21EDF1F0C0096B2A9 /* HexColor.swift */; };
 		663ED7C81EDF1F0C0096B2A9 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663ED7C31EDF1F0C0096B2A9 /* Layout.swift */; };
 		663ED7C91EDF1F0C0096B2A9 /* ModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663ED7C41EDF1F0C0096B2A9 /* ModalViewController.swift */; };
+		663ED7CC1EE057150096B2A9 /* SimpleAnimationExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 663ED7CB1EE057150096B2A9 /* SimpleAnimationExample.m */; };
 		666FAA841D384A6B000363DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666FAA831D384A6B000363DA /* AppDelegate.swift */; };
 		666FAA8B1D384A6B000363DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 666FAA8A1D384A6B000363DA /* Assets.xcassets */; };
 		666FAA8E1D384A6B000363DA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 666FAA8C1D384A6B000363DA /* LaunchScreen.storyboard */; };
@@ -51,6 +52,8 @@
 		663ED7C21EDF1F0C0096B2A9 /* HexColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HexColor.swift; sourceTree = "<group>"; };
 		663ED7C31EDF1F0C0096B2A9 /* Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
 		663ED7C41EDF1F0C0096B2A9 /* ModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalViewController.swift; sourceTree = "<group>"; };
+		663ED7CA1EE057150096B2A9 /* SimpleAnimationExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleAnimationExample.h; sourceTree = "<group>"; };
+		663ED7CB1EE057150096B2A9 /* SimpleAnimationExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleAnimationExample.m; sourceTree = "<group>"; };
 		666FAA801D384A6B000363DA /* MotionInterchangeCatalog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MotionInterchangeCatalog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		666FAA831D384A6B000363DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Catalog/AppDelegate.swift; sourceTree = "<group>"; };
 		666FAA8A1D384A6B000363DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -168,6 +171,8 @@
 			isa = PBXGroup;
 			children = (
 				663ED7BD1EDF1DF20096B2A9 /* SimpleAnimationExample.swift */,
+				663ED7CA1EE057150096B2A9 /* SimpleAnimationExample.h */,
+				663ED7CB1EE057150096B2A9 /* SimpleAnimationExample.m */,
 			);
 			name = examples;
 			path = ../..;
@@ -294,7 +299,7 @@
 				TargetAttributes = {
 					666FAA7F1D384A6B000363DA = {
 						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0830;
 					};
 					666FAA931D384A6B000363DA = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -457,6 +462,7 @@
 				666FAA841D384A6B000363DA /* AppDelegate.swift in Sources */,
 				663ED7C71EDF1F0C0096B2A9 /* HexColor.swift in Sources */,
 				663ED7C51EDF1F0C0096B2A9 /* ExampleViewController.swift in Sources */,
+				663ED7CC1EE057150096B2A9 /* SimpleAnimationExample.m in Sources */,
 				667A3F541DEE273000CB3A99 /* TableOfContents.swift in Sources */,
 				663ED7C81EDF1F0C0096B2A9 /* Layout.swift in Sources */,
 				663ED7C61EDF1F0C0096B2A9 /* ExampleViews.swift in Sources */,
@@ -604,10 +610,12 @@
 			baseConfigurationReference = 2DE76D4D35953D836F578CDE /* Pods-MotionInterchangeCatalog.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Catalog/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.google.Catalog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -617,6 +625,7 @@
 			baseConfigurationReference = 4AAB8EBB088513D48896641A /* Pods-MotionInterchangeCatalog.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Catalog/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.google.Catalog;

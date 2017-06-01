@@ -18,6 +18,18 @@
 
 #import <objc/runtime.h>
 
+const MDMMotionTiming MDMMotionTimingInstantaneous = {
+  .duration = -2,
+  .delay = 0,
+  .controlPoints = {0.0f, 0.0f, 1.0f, 1.0f}
+};
+
+const MDMMotionTiming MDMMotionTimingNone = {
+  .duration = -1,
+  .delay = 0,
+  .controlPoints = {0.0f, 0.0f, 1.0f, 1.0f}
+};
+
 #if TARGET_IPHONE_SIMULATOR
 UIKIT_EXTERN float UIAnimationDragCoefficient(void); // UIKit private drag coefficient.
 #endif
@@ -30,24 +42,6 @@ static CGFloat simulatorAnimationDragCoefficient(void) {
 #endif
 }
 
-static NSArray* coerceUIKitValuesToCoreAnimationValues(NSArray *values) {
-  if ([[values firstObject] isKindOfClass:[UIColor class]]) {
-    NSMutableArray *convertedArray = [NSMutableArray arrayWithCapacity:values.count];
-    for (UIColor *color in values) {
-      [convertedArray addObject:(id)color.CGColor];
-    }
-    values = convertedArray;
-
-  } else if ([[values firstObject] isKindOfClass:[UIBezierPath class]]) {
-    NSMutableArray *convertedArray = [NSMutableArray arrayWithCapacity:values.count];
-    for (UIBezierPath *bezierPath in values) {
-      [convertedArray addObject:(id)bezierPath.CGPath];
-    }
-    values = convertedArray;
-  }
-  return values;
-}
-
 static CAMediaTimingFunction* timingFunctionWithControlPoints(float controlPoints[4]) {
   return [CAMediaTimingFunction functionWithControlPoints:controlPoints[0]
                                                          :controlPoints[1]
@@ -55,7 +49,7 @@ static CAMediaTimingFunction* timingFunctionWithControlPoints(float controlPoint
                                                          :controlPoints[3]];
 }
 
-@interface MDMAnimatorStatesStorage : NSObject <MDMAnimatorStates, MDMAnimatorStateOptions>
+@interface MDMAnimatorStatesStorage : NSObject <MDMAnimatorStates>
 @end
 
 @implementation MDMAnimatorStatesStorage {
@@ -85,6 +79,31 @@ static CAMediaTimingFunction* timingFunctionWithControlPoints(float controlPoint
 
 @end
 
+@interface MDMAnimatorStateOptionsStorage : NSObject <MDMAnimatorStateOptions>
+@end
+
+@implementation MDMAnimatorStateOptionsStorage {
+  NSMutableDictionary *_states;
+}
+
+- (instancetype)init {
+  self = [super init];
+  if (self) {
+    _states = [NSMutableDictionary dictionary];
+  }
+  return self;
+}
+
+- (id<MDMAnimatorKeyOptions>)objectForKeyedSubscript:(NSString *)key {
+  return _states[key];
+}
+
+- (void)setObject:(id<MDMAnimatorKeyOptions>)obj forKeyedSubscript:(NSString *)key {
+  [_states setObject:obj forKey:key];
+}
+
+@end
+
 const MDMMotionTiming defaultTiming = {.delay = 0.000, .duration = 0.300, .controlPoints = {0.4f, 0.0f, 0.2f, 1.0f}};
 
 @implementation UIView (MaterialMotion)
@@ -101,7 +120,7 @@ const MDMMotionTiming defaultTiming = {.delay = 0.000, .duration = 0.300, .contr
 - (id<MDMAnimatorStateOptions>)optionsForState {
   id<MDMAnimatorStateOptions> states = objc_getAssociatedObject(self, _cmd);
   if (!states) {
-    states = [[MDMAnimatorStatesStorage alloc] init];
+    states = [[MDMAnimatorStateOptionsStorage alloc] init];
     objc_setAssociatedObject(self, _cmd, states, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
   }
   return states;
@@ -127,7 +146,19 @@ const MDMMotionTiming defaultTiming = {.delay = 0.000, .duration = 0.300, .contr
 
   for (NSString *key in values) {
     id value = values[key];
-    MDMMotionTiming timing = [keyedOptions timingForKey:key];
+    MDMMotionTiming timing;
+    if (keyedOptions) {
+      timing = [keyedOptions timingForKey:key];
+
+      if (timing.duration == MDMMotionTimingNone.duration) {
+        timing = defaultTiming;
+      }
+
+      // TODO: Check for MDMMotionTimingInstantaneous
+
+    } else {
+      timing = defaultTiming;
+    }
 
     if ([key isEqualToString:@"cornerRadius"]) {
       CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:key];
@@ -145,7 +176,8 @@ const MDMMotionTiming defaultTiming = {.delay = 0.000, .duration = 0.300, .contr
       animation.toValue = @0;
       animation.additive = true;
 
-      [self.layer addAnimation:animation forKey:animation.keyPath];
+      NSString *uniqueKey = [animation.keyPath stringByAppendingString:[NSUUID UUID].UUIDString];
+      [self.layer addAnimation:animation forKey:uniqueKey];
 
       [self.layer setValue:value forKeyPath:animation.keyPath];
 
@@ -175,38 +207,6 @@ const MDMMotionTiming defaultTiming = {.delay = 0.000, .duration = 0.300, .contr
   NSDictionary *state = self.states[name];
   id<MDMAnimatorKeyOptions> options = self.optionsForState[name];
   [self animateToValues:state options:options];
-}
-
-@end
-
-@implementation MDMMotionTimingAnimator
-
-- (void)addAnimationWithTiming:(MDMMotionTiming)timing
-                       toLayer:(CALayer *)layer
-                    withValues:(NSArray *)values
-                       keyPath:(NSString *)keyPath {
-  if (timing.duration == 0) {
-    return;
-  }
-
-  if (_shouldReverseValues) {
-    values = [[values reverseObjectEnumerator] allObjects];
-  }
-
-  values = coerceUIKitValuesToCoreAnimationValues(values);
-
-  CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:keyPath];
-  if (timing.delay != 0) {
-    animation.beginTime = ([layer convertTime:CACurrentMediaTime() fromLayer:nil]
-                           + timing.delay * simulatorAnimationDragCoefficient());
-    animation.fillMode = kCAFillModeBackwards;
-  }
-  animation.duration = timing.duration * simulatorAnimationDragCoefficient();
-  animation.timingFunction = timingFunctionWithControlPoints(timing.controlPoints);
-  animation.fromValue = [values firstObject];
-  animation.toValue = [values lastObject];
-  [layer addAnimation:animation forKey:animation.keyPath];
-  [layer setValue:animation.toValue forKeyPath:animation.keyPath];
 }
 
 @end
