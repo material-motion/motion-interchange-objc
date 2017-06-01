@@ -16,5 +16,6 @@
 
 #import "CoreGraphics+SwiftCompat.h"
 #import "MDMAnimator.h"
+#import "MDMMotionCurve.h"
 #import "MDMMotionTiming.h"
 #import "UIView+Animator.h"

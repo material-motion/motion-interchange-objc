@@ -165,9 +165,9 @@ static CAMediaTimingFunction* timingFunctionWithControlPoints(CGFloat controlPoi
 
         case MDMMotionCurveTypeSpring: {
           CASpringAnimation *spring = [CASpringAnimation animationWithKeyPath:property];
-          spring.mass = timing.curve.data[0];
-          spring.stiffness = timing.curve.data[1];
-          spring.damping = timing.curve.data[2];
+          spring.mass = timing.curve.data[MDMSpringMotionCurveDataIndexMass];
+          spring.stiffness = timing.curve.data[MDMSpringMotionCurveDataIndexTension];
+          spring.damping = timing.curve.data[MDMSpringMotionCurveDataIndexFriction];
           spring.duration = spring.settlingDuration;
           animation = spring;
           break;

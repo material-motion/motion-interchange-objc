@@ -14,18 +14,12 @@
  limitations under the License.
  */
 
-#import "MDMMotionTiming.h"
+#import "MDMMotionCurve.h"
 
 MDMMotionCurve MDMMotionCurveMakeBezier(float p1x, float p1y, float p2x, float p2y) {
-  return (MDMMotionCurve){
-    .type = MDMMotionCurveTypeBezier,
-    .data = {p1x, p1y, p2x, p2y}
-  };
+  return _MDMBezier(p1x, p1y, p2x, p2y);
 }
 
 MDMMotionCurve MDMMotionCurveMakeSpring(float mass, float tension, float friction) {
-  return (MDMMotionCurve){
-    .type = MDMMotionCurveTypeSpring,
-    .data = {mass, tension, friction, 0}
-  };
+  return _MDMSpring(mass, tension, friction);
 }
