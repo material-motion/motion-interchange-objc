@@ -9,6 +9,16 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "8.0"
   s.requires_arc = true
 
-  s.public_header_files = "src/*.h"
-  s.source_files = "src/*.{h,m,mm}", "src/private/*.{h,m,mm}"
+  s.subspec "Interchange" do |ss|
+    ss.public_header_files = "src/*.h"
+    ss.source_files = "src/interchange/*.{h,m,mm}", "src/interchange/private/*.{h,m,mm}"
+  end
+
+  s.subspec "Animator" do |ss|
+    ss.public_header_files = "src/*.h"
+    ss.source_files = "src/animator/*.{h,m,mm}", "src/animator/private/*.{h,m,mm}"
+    
+    ss.dependency "MotionInterchange/Interchange"
+  end
+
 end

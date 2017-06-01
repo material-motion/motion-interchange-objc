@@ -15,7 +15,8 @@
  */
 
 #import <Foundation/Foundation.h>
-#import <MotionInterchange/MotionInterchange.h>
+
+@import MotionInterchange;
 
 struct MaterialMaskedTransitionMotion {
   MDMMotionTiming floodColorTransformation;
