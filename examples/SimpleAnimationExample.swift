@@ -17,7 +17,7 @@
 import Foundation
 import MotionInterchange
 
-let materialEaseInEaseOut: (Float, Float, Float, Float) = (0.4, 0.0, 0.2, 1.0)
+let materialEaseInEaseOut = MotionCurveMakeBezier(p1x: 0.4, p1y: 0.0, p2x: 0.2, p2y: 1.0)
 
 // This demo shows how one might use a motion spec structure to define timing for a multi-state
 // animation such as the Material "masked transition" motion.
@@ -51,12 +51,12 @@ let cardExpansion = MaterialMaskedTransitionMotion(
   floodColorTransformation: .init(
     delay:    0.075,
     duration: 0.075,
-    controlPoints: materialEaseInEaseOut
+    curve: materialEaseInEaseOut
   ),
   maskTransformation: .init(
     delay:    0.045,
     duration: 0.255,
-    controlPoints: materialEaseInEaseOut
+    curve: materialEaseInEaseOut
   )
 )
 
@@ -65,12 +65,12 @@ let cardCollapse = MaterialMaskedTransitionMotion(
   floodColorTransformation: .init(
     delay:    0.060,
     duration: 0.150,
-    controlPoints: materialEaseInEaseOut
+    curve: materialEaseInEaseOut
   ),
   maskTransformation: .init(
     delay:    0.000,
     duration: 0.180,
-    controlPoints: materialEaseInEaseOut
+    curve: materialEaseInEaseOut
   )
 )
 

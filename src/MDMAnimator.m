@@ -17,15 +17,21 @@
 #import "MDMAnimator.h"
 
 const MDMMotionTiming MDMMotionTimingInstantaneous = {
-  .duration = -2,
+  .duration = 0,
   .delay = 0,
-  .controlPoints = {0.0f, 0.0f, 1.0f, 1.0f}
+  .curve = {
+    .type = MDMMotionCurveTypeInstant,
+    .data = {0, 0, 0, 0}
+  }
 };
 
-const MDMMotionTiming MDMMotionTimingNone = {
-  .duration = -1,
+const MDMMotionTiming MDMMotionTimingDefault = {
+  .duration = 0,
   .delay = 0,
-  .controlPoints = {0.0f, 0.0f, 1.0f, 1.0f}
+  .curve = {
+    .type = MDMMotionCurveTypeDefault,
+    .data = {0, 0, 0, 0}
+  }
 };
 
 #if TARGET_IPHONE_SIMULATOR
@@ -40,11 +46,11 @@ static CGFloat simulatorAnimationDragCoefficient(void) {
 #endif
 }
 
-static CAMediaTimingFunction* timingFunctionWithControlPoints(float controlPoints[4]) {
-  return [CAMediaTimingFunction functionWithControlPoints:controlPoints[0]
-                                                         :controlPoints[1]
-                                                         :controlPoints[2]
-                                                         :controlPoints[3]];
+static CAMediaTimingFunction* timingFunctionWithControlPoints(CGFloat controlPoints[4]) {
+  return [CAMediaTimingFunction functionWithControlPoints:(float)controlPoints[0]
+                                                         :(float)controlPoints[1]
+                                                         :(float)controlPoints[2]
+                                                         :(float)controlPoints[3]];
 }
 
 @interface MDMAnimatorStatesStorage : NSObject <MDMAnimatorStates>
@@ -103,22 +109,24 @@ static CAMediaTimingFunction* timingFunctionWithControlPoints(float controlPoint
 @end
 
 @implementation MDMAnimator {
-  NSString *_state;
+  __weak id _object;
   MDMAnimatorStatesStorage *_states;
   MDMAnimatorOptionsStorage *_options;
-  __weak id _object;
+
+  NSString *_state;
 }
 
 - (instancetype)initWithObject:(id)object {
   self = [super init];
   if (self) {
     _object = object;
-
     _states = [[MDMAnimatorStatesStorage alloc] init];
+    _options = [[MDMAnimatorOptionsStorage alloc] init];
+
     _defaultTiming = (MDMMotionTiming){
       .delay = 0.000,
       .duration = 0.300,
-      .controlPoints = {0.4f, 0.0f, 0.2f, 1.0f}
+      .curve = _MDMBezier(0.4f, 0.0f, 0.2f, 1.0f)
     };
   }
   return self;
@@ -142,36 +150,59 @@ static CAMediaTimingFunction* timingFunctionWithControlPoints(float controlPoint
     return ^(id object, MDMMotionProperty property, id value, MDMMotionTiming timing) {
       CALayer *layer = [self layerFromObject:_object];
 
-      CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:property];
-      if (timing.delay != 0) {
-        animation.beginTime = ([layer convertTime:CACurrentMediaTime() fromLayer:nil]
-                               + timing.delay * simulatorAnimationDragCoefficient());
-        animation.fillMode = kCAFillModeBackwards;
+      CABasicAnimation *animation;
+      switch (timing.curve.type) {
+        case MDMMotionCurveTypeInstant:
+          animation = nil;
+          break;
+
+        case MDMMotionCurveTypeDefault:
+        case MDMMotionCurveTypeBezier:
+          animation = [CABasicAnimation animationWithKeyPath:property];
+          animation.timingFunction = timingFunctionWithControlPoints(timing.curve.data);
+          animation.duration = timing.duration * simulatorAnimationDragCoefficient();
+          break;
+
+        case MDMMotionCurveTypeSpring: {
+          CASpringAnimation *spring = [CASpringAnimation animationWithKeyPath:property];
+          spring.mass = timing.curve.data[0];
+          spring.stiffness = timing.curve.data[1];
+          spring.damping = timing.curve.data[2];
+          spring.duration = spring.settlingDuration;
+          animation = spring;
+          break;
+        }
       }
-      animation.duration = timing.duration * simulatorAnimationDragCoefficient();
-      animation.timingFunction = timingFunctionWithControlPoints(timing.controlPoints);
 
-      // TODO(featherless): Support other numerical types.
-      if ([value isKindOfClass:[NSNumber class]]) {
-        CGFloat currentValue = [[layer valueForKeyPath:property] doubleValue];
-        animation.fromValue = @(currentValue - [value doubleValue]);
-        animation.toValue = @0;
-        animation.additive = true;
+      if (animation) {
+        if (timing.delay != 0) {
+          animation.beginTime = ([layer convertTime:CACurrentMediaTime() fromLayer:nil]
+                                 + timing.delay * simulatorAnimationDragCoefficient());
+          animation.fillMode = kCAFillModeBackwards;
+        }
 
-      } else {
-        animation.toValue = value;
+        // TODO(featherless): Support other numerical types.
+        if ([value isKindOfClass:[NSNumber class]]) {
+          CGFloat currentValue = [[layer valueForKeyPath:property] doubleValue];
+          animation.fromValue = @(currentValue - [value doubleValue]);
+          animation.toValue = @0;
+          animation.additive = true;
+
+        } else {
+          animation.toValue = value;
+        }
+
+        NSString *uniqueKey = [animation.keyPath stringByAppendingString:[NSUUID UUID].UUIDString];
+        [layer addAnimation:animation forKey:uniqueKey];
       }
 
-      NSString *uniqueKey = [animation.keyPath stringByAppendingString:[NSUUID UUID].UUIDString];
-      [layer addAnimation:animation forKey:uniqueKey];
-
-      [layer setValue:value forKeyPath:animation.keyPath];
+      [layer setValue:value forKeyPath:property];
     };
 
   } else if ([_object isKindOfClass:[UIView class]]) {
     return ^(UIView *view, MDMMotionProperty property, id value, MDMMotionTiming timing) {
 
-      [UIView animateWithDuration:timing.duration delay:timing.delay options:0 animations:^{
+      void (^animations)() = ^{
         // TODO: Route key paths somehow.
 
         if ([property isEqualToString:@"x"]) {
@@ -183,7 +214,53 @@ static CAMediaTimingFunction* timingFunctionWithControlPoints(float controlPoint
         } else {
           [view setValue:value forKeyPath:property];
         }
-      } completion: nil];
+      };
+
+      switch (timing.curve.type) {
+        case MDMMotionCurveTypeInstant:
+          animations();
+          break;
+
+        case MDMMotionCurveTypeDefault:
+        case MDMMotionCurveTypeBezier:
+          [UIView animateWithDuration:timing.duration
+                                delay:timing.delay
+                              options:0
+                           animations:animations
+                           completion:nil];
+          break;
+
+        case MDMMotionCurveTypeSpring: {
+
+          // A spring exhibits the following characteristics:
+          //
+          // critically damped when friction / sqrt(4 * tension) = 1
+          //      under damped when friction / sqrt(4 * tension) < 1
+          //       over damped when friction / sqrt(4 * tension) > 1
+          //
+          // iOS' UIView spring API seems to model its damping parameter off of these
+          // characteristics, so we'll attempt to calculate a reasonable damping value based on the
+          // friction/tension parameters.
+          CGFloat friction = timing.curve.data[MDMSpringMotionCurveDataIndexFriction];
+          CGFloat tension = timing.curve.data[MDMSpringMotionCurveDataIndexTension];
+          CGFloat divisor = sqrt(4 * tension);
+          CGFloat damping;
+          if (fabs(divisor) > 0.00001) {
+            damping = friction / divisor;
+          } else {
+            damping = 0;
+          }
+
+          [UIView animateWithDuration:timing.duration
+                                delay:timing.delay
+               usingSpringWithDamping:damping
+                initialSpringVelocity:0
+                              options:0
+                           animations:animations
+                           completion:nil];
+          break;
+        }
+      }
     };
   }
   return nil;
@@ -208,7 +285,7 @@ static CAMediaTimingFunction* timingFunctionWithControlPoints(float controlPoint
     if (keyedOptions) {
       timing = [keyedOptions timingForProperty:property];
 
-      if (timing.duration == MDMMotionTimingNone.duration) {
+      if (timing.duration == MDMMotionTimingDefault.duration) {
         timing = self.defaultTiming;
       }
 

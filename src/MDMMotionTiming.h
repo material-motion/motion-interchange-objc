@@ -16,6 +16,50 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSUInteger, MDMMotionCurveType) {
+  MDMMotionCurveTypeDefault,
+  MDMMotionCurveTypeBezier,
+  MDMMotionCurveTypeSpring,
+  MDMMotionCurveTypeInstant,
+} NS_SWIFT_NAME(MotionCurveType);
+
+struct MDMMotionCurve {
+  MDMMotionCurveType type;
+  CGFloat data[4];
+} NS_SWIFT_NAME(MotionCurve);
+typedef struct MDMMotionCurve MDMMotionCurve;
+
+typedef NS_ENUM(NSUInteger, MDMBezierMotionCurveDataIndex) {
+  MDMSpringMotionCurveDataIndexP1X,
+  MDMSpringMotionCurveDataIndexP1Y,
+  MDMSpringMotionCurveDataIndexP2X,
+  MDMSpringMotionCurveDataIndexP2Y
+} NS_SWIFT_NAME(BezierMotionCurveDataIndex);
+
+typedef NS_ENUM(NSUInteger, MDMSpringMotionCurveDataIndex) {
+  MDMSpringMotionCurveDataIndexMass,
+  MDMSpringMotionCurveDataIndexTension,
+  MDMSpringMotionCurveDataIndexFriction
+} NS_SWIFT_NAME(SpringMotionCurveDataIndex);
+
+/**
+ The second and third control points of a standard cubic bezier curve.
+
+ See the documentation for CAMediaTimingFunction for more information.
+
+ The values in the array correspond to [c1x, c1y, c2x, c2y].
+ */
+FOUNDATION_EXTERN MDMMotionCurve MDMMotionCurveMakeBezier(float p1x, float p1y, float p2x, float p2y)
+NS_SWIFT_NAME(MotionCurveMakeBezier(p1x:p1y:p2x:p2y:));
+
+FOUNDATION_EXTERN MDMMotionCurve MDMMotionCurveMakeSpring(float mass, float tension, float friction)
+NS_SWIFT_NAME(MotionCurveMakeSpring(mass:tension:friction:));
+
+#define _MDMBezier(p1x, p1y, p2x, p2y) (MDMMotionCurve){ \
+  .type = MDMMotionCurveTypeBezier, \
+  .data = {p1x, p1y, p2x, p2y} \
+}
+
 /**
  A representation of timing for a simple tween animation.
  */
@@ -30,13 +74,6 @@ struct MDMMotionTiming {
    */
   CFTimeInterval duration;
 
-  /**
-   The second and third control points of a standard cubic bezier curve.
-
-   See the documentation for CAMediaTimingFunction for more information.
-
-   The values in the array correspond to [c1x, c1y, c2x, c2y].
-   */
-  float controlPoints[4];
+  MDMMotionCurve curve;
 } NS_SWIFT_NAME(MotionTiming);
 typedef struct MDMMotionTiming MDMMotionTiming;

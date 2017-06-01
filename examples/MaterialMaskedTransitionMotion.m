@@ -16,23 +16,23 @@
 
 #import "MaterialMaskedTransitionMotion.h"
 
-#define easeInEaseOut {0.4f, 0.0f, 0.2f, 1.0f}
+#define easeInEaseOut _MDMBezier(0.4f, 0.0f, 0.2f, 1.0f)
 
 const MaterialMaskedTransitionMotion cardExpansion = {
   .floodColorTransformation = {
-    .delay = 0.075, .duration = 0.075, .controlPoints = easeInEaseOut,
+    .delay = 0.075, .duration = 0.075, .curve = easeInEaseOut
   },
   .maskTransformation = {
-    .delay = 0.045, .duration = 0.255, .controlPoints = easeInEaseOut,
+    .delay = 0.045, .duration = 0.255, .curve = easeInEaseOut,
   }
 };
 
 const MaterialMaskedTransitionMotion cardCollapse = {
   .floodColorTransformation = {
-    .delay = 0.060, .duration = 0.150, .controlPoints = easeInEaseOut,
+    .delay = 0.060, .duration = 0.150, .curve = easeInEaseOut,
   },
   .maskTransformation = {
-    .delay = 0.000, .duration = 0.180, .controlPoints = easeInEaseOut,
+    .delay = 0.000, .duration = 0.180, .curve = easeInEaseOut,
   }
 };
 
@@ -60,7 +60,7 @@ const MaterialMaskedTransitionMotion cardCollapse = {
     return _spec.maskTransformation;
   }
 
-  return MDMMotionTimingNone;
+  return MDMMotionTimingDefault;
 }
 
 @end

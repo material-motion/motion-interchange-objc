@@ -27,7 +27,7 @@ NS_SWIFT_NAME(MotionTimingInstantaneous);
 /**
  A timing structure that indicates that no timing is provided - equivalent to "nil".
  */
-extern const MDMMotionTiming MDMMotionTimingNone
+extern const MDMMotionTiming MDMMotionTimingDefault
 NS_SWIFT_NAME(MotionTimingNone);
 
 typedef NSString* MDMMotionProperty;
@@ -42,7 +42,7 @@ NS_SWIFT_NAME(AnimationConfigurator)
 /**
  Asks the receiver to return a timing structure for the given property.
  
- If MDMMotionTimingNone is returned, then default timing will be used.
+ If MDMMotionTimingDefault is returned, then default timing will be used.
  */
 - (MDMMotionTiming)timingForProperty:(nonnull MDMMotionProperty)property;
 
