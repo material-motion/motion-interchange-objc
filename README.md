@@ -2,8 +2,8 @@
 
 > A standard format for representing motion specifications in Objective-C and Swift.
 
-[![Build Status](https://travis-ci.org/material-motion/motion-timing-objc.svg?branch=develop)](https://travis-ci.org/material-motion/motion-timing-objc)
-[![codecov](https://codecov.io/gh/material-motion/motion-timing-objc/branch/develop/graph/badge.svg)](https://codecov.io/gh/material-motion/motion-timing-objc)
+[![Build Status](https://travis-ci.org/material-motion/motion-interchange-objc.svg?branch=develop)](https://travis-ci.org/material-motion/motion-interchange-objc)
+[![codecov](https://codecov.io/gh/material-motion/motion-interchange-objc/branch/develop/graph/badge.svg)](https://codecov.io/gh/material-motion/motion-interchange-objc)
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/MotionInterchange.svg)](https://cocoapods.org/pods/MotionInterchange)
 [![Platform](https://img.shields.io/cocoapods/p/MotionInterchange.svg)](http://cocoadocs.org/docsets/MotionInterchange)
 [![Docs](https://img.shields.io/cocoapods/metrics/doc-percent/MotionInterchange.svg)](http://cocoadocs.org/docsets/MotionInterchange)
@@ -40,8 +40,8 @@ You will now have access to all of the APIs.
 Check out a local copy of the repo to access the Catalog application by running the following
 commands:
 
-    git clone https://github.com/material-motion/motion-timing-objc.git
-    cd motion-timing-objc
+    git clone https://github.com/material-motion/motion-interchange-objc.git
+    cd motion-interchange-objc
     pod install
     open MotionInterchange.xcworkspace
 
@@ -149,7 +149,7 @@ MDCMaskedTransitionMotionTiming timing = isExpanding ? fullscreen.expansion : fu
 
 We welcome contributions!
 
-Check out our [upcoming milestones](https://github.com/material-motion/motion-timing-objc/milestones).
+Check out our [upcoming milestones](https://github.com/material-motion/motion-interchange-objc/milestones).
 
 Learn more about [our team](https://material-motion.github.io/material-motion/team/),
 [our community](https://material-motion.github.io/material-motion/team/community/), and
