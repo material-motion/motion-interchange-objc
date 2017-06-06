@@ -1,17 +1,17 @@
 workspace 'MotionInterchange.xcworkspace'
 use_frameworks!
 
-target "Catalog" do
+target "MotionInterchangeCatalog" do
   pod 'CatalogByConvention'
   pod 'MotionInterchange', :path => './'
 
-  project 'examples/apps/Catalog/Catalog.xcodeproj'
+  project 'examples/apps/Catalog/MotionInterchangeCatalog.xcodeproj'
 end
 
 target "UnitTests" do
   pod 'MotionInterchange', :path => './'
 
-  project 'examples/apps/Catalog/Catalog.xcodeproj'
+  project 'examples/apps/Catalog/MotionInterchangeCatalog.xcodeproj'
 end
 
 post_install do |installer|

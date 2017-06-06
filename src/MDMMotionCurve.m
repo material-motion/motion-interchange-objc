@@ -14,6 +14,12 @@
  limitations under the License.
  */
 
-// MARK: Catalog by convention
+#import "MDMMotionCurve.h"
 
-// Note: this library does not include examples because it is solely a data format.
+MDMMotionCurve MDMMotionCurveMakeBezier(float p1x, float p1y, float p2x, float p2y) {
+  return _MDMBezier(p1x, p1y, p2x, p2y);
+}
+
+MDMMotionCurve MDMMotionCurveMakeSpring(float mass, float tension, float friction) {
+  return _MDMSpring(mass, tension, friction);
+}
