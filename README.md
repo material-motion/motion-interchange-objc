@@ -1,5 +1,7 @@
 # Motion Interchange
 
+> A standard format for representing motion specifications in Objective-C and Swift.
+
 [![Build Status](https://travis-ci.org/material-motion/motion-timing-objc.svg?branch=develop)](https://travis-ci.org/material-motion/motion-timing-objc)
 [![codecov](https://codecov.io/gh/material-motion/motion-timing-objc/branch/develop/graph/badge.svg)](https://codecov.io/gh/material-motion/motion-timing-objc)
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/MotionInterchange.svg)](https://cocoapods.org/pods/MotionInterchange)
