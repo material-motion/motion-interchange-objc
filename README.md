@@ -82,7 +82,8 @@ MDMMotionTiming timing = (MDMMotionTiming){
 
 Motion timing structs can be used to represent complex multi-element and multi-property motion
 specifications. An example of a common complex motion spec is a transition which has both an
-expansion and a collapse variant:
+expansion and a collapse variant. If we wanted to represent such a transition we might create a
+set of structures like this:
 
 ```objc
 struct MDCMaskedTransitionMotionTiming {
@@ -104,10 +105,40 @@ struct MDCMaskedTransitionMotionSpec {
 typedef struct MDCMaskedTransitionMotionSpec MDCMaskedTransitionMotionSpec;
 ```
 
+We can then implement a spec like so:
+
+```objc
+#define MDMEightyForty _MDMBezier(0.4f, 0.0f, 0.2f, 1.0f)
+#define MDMFortyOut _MDMBezier(0.4f, 0.0f, 1.0f, 1.0f)
+
+struct MDCMaskedTransitionMotionSpec fullscreen = {
+  .expansion = {
+    .contentFade = {
+      .delay = 0.150, .duration = 0.225, .curve = MDMEightyForty,
+    },
+    .floodBackgroundColor = {
+      .delay = 0.000, .duration = 0.075, .curve = MDMEightyForty,
+    },
+    .maskTransformation = {
+      .delay = 0.000, .duration = 0.105, .curve = MDMFortyOut,
+    },
+    .horizontalMovement = {.curve = { .type = MDMMotionCurveTypeInstant }},
+    .verticalMovement = {
+      .delay = 0.045, .duration = 0.330, .curve = MDMEightyForty,
+    },
+    .scrimFade = {
+      .delay = 0.000, .duration = 0.150, .curve = MDMEightyForty,
+    }
+  },
+  .shouldSlideWhenCollapsed = true,
+  .isCentered = false
+};
+```
+
 We can then use this motion spec to implement our animations in a transition like so:
 
 ```objc
-MDCMaskedTransitionMotionTiming timing = isExpanding ? spec.expansion : spec.collapse;
+MDCMaskedTransitionMotionTiming timing = isExpanding ? fullscreen.expansion : fullscreen.collapse;
 
 // Can now use timing's properties to associate animations with views.
 ```
