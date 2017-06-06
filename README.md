@@ -1,4 +1,4 @@
-# Motion Timing
+# Motion Interchange
 
 [![Build Status](https://travis-ci.org/material-motion/motion-timing-objc.svg?branch=develop)](https://travis-ci.org/material-motion/motion-timing-objc)
 [![codecov](https://codecov.io/gh/material-motion/motion-timing-objc/branch/develop/graph/badge.svg)](https://codecov.io/gh/material-motion/motion-timing-objc)
@@ -46,11 +46,71 @@ commands:
 ## Guides
 
 1. [Architecture](#architecture)
-2. [How to ...](#how-to-...)
+2. [How to create a cubic bezier animation](#how-to-create-a-cubic-bezier-animation)
+3. [How to create a spring animation](#how-to-create-a-spring-animation)
+4. [How to define a motion spec](#how-to-define-a-motion-spec)
 
 ### Architecture
 
-### How to ...
+This library defines a format for representing motion in Objective-C and Swift applications. The
+primary data type, `MotionTiming`, allows you to describe the duration, delay, timing curve, and
+repetition for an animation.
+
+### How to define a cubic bezier animation
+
+In Objective-C:
+
+```objc
+MDMMotionTiming timing = (MDMMotionTiming){
+  .delay = 0.150,
+  .duration = 0.225,
+  .curve = _MDMBezier(0.4f, 0.0f, 0.2f, 1.0f)
+}
+```
+
+### How to define a spring animation
+
+In Objective-C:
+
+```objc
+MDMMotionTiming timing = (MDMMotionTiming){
+  .curve = _MDMSpring(1, 100, 10)
+}
+```
+
+### How to define a motion spec
+
+Motion timing structs can be used to represent complex multi-element and multi-property motion
+specifications. An example of a common complex motion spec is a transition which has both an
+expansion and a collapse variant:
+
+```objc
+struct MDCMaskedTransitionMotionTiming {
+  MDMMotionTiming contentFade;
+  MDMMotionTiming floodBackgroundColor;
+  MDMMotionTiming maskTransformation;
+  MDMMotionTiming horizontalMovement;
+  MDMMotionTiming verticalMovement;
+  MDMMotionTiming scrimFade;
+};
+typedef struct MDCMaskedTransitionMotionTiming MDCMaskedTransitionMotionTiming;
+
+struct MDCMaskedTransitionMotionSpec {
+  MDCMaskedTransitionMotionTiming expansion;
+  MDCMaskedTransitionMotionTiming collapse;
+  BOOL shouldSlideWhenCollapsed;
+  BOOL isCentered;
+};
+typedef struct MDCMaskedTransitionMotionSpec MDCMaskedTransitionMotionSpec;
+```
+
+We can then use this motion spec to implement our animations in a transition like so:
+
+```objc
+MDCMaskedTransitionMotionTiming timing = isExpanding ? spec.expansion : spec.collapse;
+
+// Can now use timing's properties to associate animations with views.
+```
 
 ## Contributing
 
