@@ -14,8 +14,8 @@
  limitations under the License.
  */
 
-#import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
+#import <Foundation/Foundation.h>
 
 /**
  The possible kinds of motion curves that can be used to describe an animation.
@@ -71,8 +71,10 @@ typedef struct MDMMotionCurve MDMMotionCurve;
 
  See the documentation for CAMediaTimingFunction for more information.
  */
+// clang-format off
 FOUNDATION_EXTERN MDMMotionCurve MDMMotionCurveMakeBezier(float p1x, float p1y, float p2x, float p2y)
-NS_SWIFT_NAME(MotionCurveMakeBezier(p1x:p1y:p2x:p2y:));
+    NS_SWIFT_NAME(MotionCurveMakeBezier(p1x:p1y:p2x:p2y:));
+// clang-format on
 
 /**
  Creates a spring curve with the provided configuration.
@@ -81,8 +83,10 @@ NS_SWIFT_NAME(MotionCurveMakeBezier(p1x:p1y:p2x:p2y:));
 
  See the documentation for CASpringAnimation for more information.
  */
+// clang-format off
 FOUNDATION_EXTERN MDMMotionCurve MDMMotionCurveMakeSpring(float mass, float tension, float friction)
-NS_SWIFT_NAME(MotionCurveMakeSpring(mass:tension:friction:));
+    NS_SWIFT_NAME(MotionCurveMakeSpring(mass:tension:friction:));
+// clang-format on
 
 /**
  Named indices for the bezier motion curve's data array.
@@ -105,12 +109,19 @@ typedef NS_ENUM(NSUInteger, MDMSpringMotionCurveDataIndex) {
 
 // Objective-C-specific macros
 
-#define _MDMBezier(p1x, p1y, p2x, p2y) (MDMMotionCurve){ \
-  .type = MDMMotionCurveTypeBezier, \
-  .data = {p1x, p1y, p2x, p2y} \
-}
+#define _MDMBezier(p1x, p1y, p2x, p2y) \
+  (MDMMotionCurve) {                   \
+    .type = MDMMotionCurveTypeBezier,  \
+    .data = { p1x,                     \
+              p1y,                     \
+              p2x,                     \
+              p2y }                    \
+  }
 
-#define _MDMSpring(mass, tension, friction) (MDMMotionCurve){ \
-  .type = MDMMotionCurveTypeSpring, \
-  .data = {mass, tension, friction} \
-}
+#define _MDMSpring(mass, tension, friction) \
+  (MDMMotionCurve) {                        \
+    .type = MDMMotionCurveTypeSpring,       \
+    .data = { mass,                         \
+              tension,                      \
+              friction }                    \
+  }

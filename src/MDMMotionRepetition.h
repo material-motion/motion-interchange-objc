@@ -14,8 +14,8 @@
  limitations under the License.
  */
 
-#import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
+#import <Foundation/Foundation.h>
 
 /**
  The possible kinds of repetition that can be used to describe an animation.
@@ -42,7 +42,6 @@ typedef NS_ENUM(NSUInteger, MDMMotionRepetitionType) {
  A generalized representation of a motion curve.
  */
 struct MDMMotionRepetition {
-
   /**
    The type defines how to interpret the amount.
    */
@@ -63,8 +62,9 @@ typedef struct MDMMotionRepetition MDMMotionRepetition;
 
 // Objective-C-specific macros
 
-#define _MDMNoRepetition (MDMMotionRepetition){ \
-  .type = MDMMotionRepetitionTypeNone, \
-  .amount = 0, \
-  .autoreverses = false \
-}
+#define _MDMNoRepetition                 \
+  (MDMMotionRepetition) {                \
+    .type = MDMMotionRepetitionTypeNone, \
+    .amount = 0,                         \
+    .autoreverses = false                \
+  }

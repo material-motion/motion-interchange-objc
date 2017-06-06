@@ -14,8 +14,8 @@
  limitations under the License.
  */
 
-#import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
+#import <Foundation/Foundation.h>
 
 #import "MDMMotionCurve.h"
 #import "MDMMotionRepetition.h"
@@ -24,7 +24,6 @@
  A representation of timing for an animation.
  */
 struct MDMMotionTiming {
-
   /**
    The amount of time, in seconds, before this animation's value interpolation should begin.
    */
