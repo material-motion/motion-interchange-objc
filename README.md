@@ -46,8 +46,8 @@ commands:
 ## Guides
 
 1. [Architecture](#architecture)
-2. [How to create a cubic bezier animation](#how-to-create-a-cubic-bezier-animation)
-3. [How to create a spring animation](#how-to-create-a-spring-animation)
+2. [How to define a cubic bezier animation](#how-to-define-a-cubic-bezier-animation)
+3. [How to define a spring animation](#how-to-define-a-spring-animation)
 4. [How to define a motion spec](#how-to-define-a-motion-spec)
 
 ### Architecture
