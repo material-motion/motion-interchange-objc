@@ -76,6 +76,11 @@ FOUNDATION_EXTERN MDMMotionCurve MDMMotionCurveMakeBezier(float p1x, float p1y, 
     NS_SWIFT_NAME(MotionCurveMakeBezier(p1x:p1y:p2x:p2y:));
 // clang-format on
 
+// clang-format off
+FOUNDATION_EXTERN MDMMotionCurve MDMMotionCurveFromTimingFunction(CAMediaTimingFunction * _Nonnull timingFunction)
+    NS_SWIFT_NAME(MotionCurve(fromTimingFunction:));
+// clang-format on
+
 /**
  Creates a spring curve with the provided configuration.
 
