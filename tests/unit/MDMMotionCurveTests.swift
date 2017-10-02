@@ -27,6 +27,15 @@ class MDMMotionCurveTests: XCTestCase {
     XCTAssertEqualWithAccuracy(curve.data.3, 0.4, accuracy: 0.001)
   }
 
+  func testBezierCurveFromTimingFunction() {
+    let timingFunction = CAMediaTimingFunction(controlPoints: 0.1, 0.2, 0.3, 0.4)
+    let curve = MotionCurve(fromTimingFunction: timingFunction)
+    XCTAssertEqualWithAccuracy(curve.data.0, 0.1, accuracy: 0.001)
+    XCTAssertEqualWithAccuracy(curve.data.1, 0.2, accuracy: 0.001)
+    XCTAssertEqualWithAccuracy(curve.data.2, 0.3, accuracy: 0.001)
+    XCTAssertEqualWithAccuracy(curve.data.3, 0.4, accuracy: 0.001)
+  }
+
   func testSpringCurveData() {
     let curve = MotionCurveMakeSpring(mass: 0.1, tension: 0.2, friction: 0.3)
     XCTAssertEqualWithAccuracy(curve.data.0, 0.1, accuracy: 0.001) // mass
