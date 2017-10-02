@@ -16,6 +16,7 @@
 
 #import <CoreGraphics/CoreGraphics.h>
 #import <Foundation/Foundation.h>
+#import <QuartzCore/QuartzCore.h>
 
 /**
  The possible kinds of motion curves that can be used to describe an animation.
