@@ -23,3 +23,11 @@ MDMMotionCurve MDMMotionCurveMakeBezier(float p1x, float p1y, float p2x, float p
 MDMMotionCurve MDMMotionCurveMakeSpring(float mass, float tension, float friction) {
   return _MDMSpring(mass, tension, friction);
 }
+
+MDMMotionCurve MDMMotionCurveFromTimingFunction(CAMediaTimingFunction *timingFunction) {
+  float pt1[2];
+  float pt2[2];
+  [timingFunction getControlPointAtIndex:1 values:pt1];
+  [timingFunction getControlPointAtIndex:2 values:pt2];
+  return MDMMotionCurveMakeBezier(pt1[0], pt1[1], pt2[0], pt2[1]);
+}
