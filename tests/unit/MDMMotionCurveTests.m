@@ -24,7 +24,7 @@
 @implementation MDMMotionCurveTests
 
 - (void)testBezierCurveData {
-  MDMMotionCurve curve = MDMMotionCurveMakeBezier(0.1, 0.2, 0.3, 0.4);
+  MDMMotionCurve curve = MDMMotionCurveMakeBezier(0.1f, 0.2f, 0.3f, 0.4f);
   XCTAssertEqualWithAccuracy(curve.data[MDMBezierMotionCurveDataIndexP1X], 0.1, 0.001);
   XCTAssertEqualWithAccuracy(curve.data[MDMBezierMotionCurveDataIndexP1Y], 0.2, 0.001);
   XCTAssertEqualWithAccuracy(curve.data[MDMBezierMotionCurveDataIndexP2X], 0.3, 0.001);
@@ -32,7 +32,7 @@
 }
 
 - (void)testSpringCurveData {
-  MDMMotionCurve curve = MDMMotionCurveMakeSpring(0.1, 0.2, 0.3);
+  MDMMotionCurve curve = MDMMotionCurveMakeSpring(0.1f, 0.2f, 0.3f);
   XCTAssertEqualWithAccuracy(curve.data[MDMSpringMotionCurveDataIndexMass], 0.1, 0.001);
   XCTAssertEqualWithAccuracy(curve.data[MDMSpringMotionCurveDataIndexTension], 0.2, 0.001);
   XCTAssertEqualWithAccuracy(curve.data[MDMSpringMotionCurveDataIndexFriction], 0.3, 0.001);
