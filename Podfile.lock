@@ -8,12 +8,12 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   MotionInterchange:
-    :path: "./"
+    :path: ./
 
 SPEC CHECKSUMS:
   CatalogByConvention: c3a5319de04250a7cd4649127fcfca5fe3322a43
   MotionInterchange: b600100244df56c4f462bdacbcd11c44e6305d05
 
-PODFILE CHECKSUM: '09090d12db5aab00a13fe82da94f338ebd03f5dc'
+PODFILE CHECKSUM: 09090d12db5aab00a13fe82da94f338ebd03f5dc
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.3.1
