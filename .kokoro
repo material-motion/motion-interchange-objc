@@ -3,6 +3,9 @@
 # Fail on any error.
 set -e
 
+# Display commands to stderr.
+set -x
+
 if [ ! -d .kokoro-ios-runner ]; then
   git clone https://github.com/material-foundation/kokoro-ios-runner.git .kokoro-ios-runner
 fi
@@ -12,13 +15,23 @@ git fetch > /dev/null
 git checkout v3.0.0 > /dev/null
 popd
 
+if [ -z "$KOKORO_BUILD_NUMBER" ]; then
+  : # Local run - nothing to do.
+else
+  # Move into our cloned repo
+  pushd github/repo
+fi
+
 # Fixes a bug in bazel where objc_library targets have a _ prefix.
 find tests/unit -type f -name '*.swift' -exec sed -i '' -E "s/import Motion(.+)/import _Motion\1/" {} +
 
+if [ -z "$KOKORO_BUILD_NUMBER" ]; then
+  : # Local run - nothing to do.
+else
+  popd
+fi
+
 ./.kokoro-ios-runner/bazel.sh build //:MotionInterchange
 ./.kokoro-ios-runner/bazel.sh test //:UnitTests
-
-# Undo our source modifications.
-find tests/unit -type f -name '*.swift' -exec sed -i '' -E "s/import _Motion(.+)/import Motion\1/" {} +
 
 echo "Success!"
