@@ -16,25 +16,18 @@ git checkout origin/testerrors > /dev/null
 popd
 
 if [ -z "$KOKORO_BUILD_NUMBER" ]; then
-  : # Local run - nothing to do.
+  tests_dir_prefix=""
 else
-  # Move into our cloned repo
-  pushd github/repo
+  tests_dir_prefix="github/repo"
 fi
 
 # Fixes a bug in bazel where objc_library targets have a _ prefix.
-find tests/unit -type f -name '*.swift' -exec sed -i '' -E "s/import Motion(.+)/import _Motion\1/" {} +
+find ${tests_dir_prefix}tests/unit -type f -name '*.swift' -exec sed -i '' -E "s/import Motion(.+)/import _Motion\1/" {} +
 reset_imports() {
   # Undoes our source changes from above.
-  find tests/unit -type f -name '*.swift' -exec sed -i '' -E "s/import _Motion(.+)/import Motion\1/" {} +
+  find ${tests_dir_prefix}tests/unit -type f -name '*.swift' -exec sed -i '' -E "s/import _Motion(.+)/import Motion\1/" {} +
 }
 trap reset_imports EXIT
-
-if [ -z "$KOKORO_BUILD_NUMBER" ]; then
-  : # Local run - nothing to do.
-else
-  popd
-fi
 
 ./.kokoro-ios-runner/bazel.sh build //:MotionInterchange 8.0.0
 # TODO: Enable once the test runner is able to support multiple xcode runs.
