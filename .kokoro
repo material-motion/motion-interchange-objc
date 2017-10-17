@@ -30,8 +30,8 @@ reset_imports() {
 }
 trap reset_imports EXIT
 
-./.kokoro-ios-runner/bazel.sh build //:MotionInterchange 8.1.0
+./.kokoro-ios-runner/bazel.sh build //:MotionInterchange 8.0.0
 # TODO: Enable once the test runner is able to support multiple xcode runs.
-./.kokoro-ios-runner/bazel.sh test //:UnitTests 8.1.0
+./.kokoro-ios-runner/bazel.sh test //:UnitTests 8.0.0
 
 echo "Success!"
