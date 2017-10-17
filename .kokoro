@@ -18,7 +18,7 @@ popd
 if [ -z "$KOKORO_BUILD_NUMBER" ]; then
   tests_dir_prefix=""
 else
-  tests_dir_prefix="github/repo"
+  tests_dir_prefix="github/repo/"
 fi
 
 # Fixes a bug in bazel where objc_library targets have a _ prefix.
