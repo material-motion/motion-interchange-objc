@@ -12,7 +12,7 @@ fi
 
 pushd .kokoro-ios-runner
 git fetch > /dev/null
-git checkout v3.0.0 > /dev/null
+git checkout origin/develop > /dev/null
 popd
 
 if [ -z "$KOKORO_BUILD_NUMBER" ]; then
@@ -31,7 +31,7 @@ else
   popd
 fi
 
-./.kokoro-ios-runner/bazel.sh build //:MotionInterchange
-./.kokoro-ios-runner/bazel.sh test //:UnitTests
+./.kokoro-ios-runner/bazel.sh build //:MotionInterchange 8.0.0
+./.kokoro-ios-runner/bazel.sh test //:UnitTests 8.0.0
 
 echo "Success!"
