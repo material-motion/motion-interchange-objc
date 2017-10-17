@@ -12,7 +12,7 @@ fi
 
 pushd .kokoro-ios-runner
 git fetch > /dev/null
-git checkout origin/develop > /dev/null
+git checkout origin/testerrors > /dev/null
 popd
 
 if [ -z "$KOKORO_BUILD_NUMBER" ]; then
@@ -33,5 +33,8 @@ fi
 
 ./.kokoro-ios-runner/bazel.sh build //:MotionInterchange 8.0.0
 ./.kokoro-ios-runner/bazel.sh test //:UnitTests 8.0.0
+
+# Undoes our source changes from above.
+find tests/unit -type f -name '*.swift' -exec sed -i '' -E "s/import _Motion(.+)/import Motion\1/" {} +
 
 echo "Success!"
