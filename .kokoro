@@ -38,6 +38,6 @@ fi
 
 ./.kokoro-ios-runner/bazel.sh build //:MotionInterchange 8.0.0
 # TODO: Enable once the test runner is able to support multiple xcode runs.
-#./.kokoro-ios-runner/bazel.sh test //:UnitTests 8.0.0
+./.kokoro-ios-runner/bazel.sh build //:UnitTests 8.0.0
 
 echo "Success!"
