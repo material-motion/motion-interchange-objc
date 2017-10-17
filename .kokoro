@@ -24,6 +24,11 @@ fi
 
 # Fixes a bug in bazel where objc_library targets have a _ prefix.
 find tests/unit -type f -name '*.swift' -exec sed -i '' -E "s/import Motion(.+)/import _Motion\1/" {} +
+reset_imports() {
+  # Undoes our source changes from above.
+  find tests/unit -type f -name '*.swift' -exec sed -i '' -E "s/import _Motion(.+)/import Motion\1/" {} +
+}
+trap reset_imports EXIT
 
 if [ -z "$KOKORO_BUILD_NUMBER" ]; then
   : # Local run - nothing to do.
@@ -32,9 +37,7 @@ else
 fi
 
 ./.kokoro-ios-runner/bazel.sh build //:MotionInterchange 8.0.0
-./.kokoro-ios-runner/bazel.sh test //:UnitTests 8.0.0
-
-# Undoes our source changes from above.
-find tests/unit -type f -name '*.swift' -exec sed -i '' -E "s/import _Motion(.+)/import Motion\1/" {} +
+# TODO: Enable once the test runner is able to support multiple xcode runs.
+#./.kokoro-ios-runner/bazel.sh test //:UnitTests 8.0.0
 
 echo "Success!"
