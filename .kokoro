@@ -12,7 +12,7 @@ fi
 
 pushd .kokoro-ios-runner
 git fetch > /dev/null
-git checkout origin/testerrors > /dev/null
+git checkout v3.1.0 > /dev/null
 popd
 
 if [ -z "$KOKORO_BUILD_NUMBER" ]; then
