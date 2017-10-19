@@ -12,7 +12,8 @@ fi
 
 pushd .kokoro-ios-runner
 git fetch > /dev/null
-git checkout v3.1.0 > /dev/null
+TAG=$(git tag -l "v3*" | sort | tail -n1)
+git checkout $TAG > /dev/null
 popd
 
 if [ -z "$KOKORO_BUILD_NUMBER" ]; then

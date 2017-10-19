@@ -5,7 +5,9 @@ licenses(["notice"])  # Apache 2.0
 
 exports_files(["LICENSE"])
 
-objc_library(
+load("@bazel_ios_warnings//:strict_warnings_objc_library.bzl", "strict_warnings_objc_library")
+
+strict_warnings_objc_library(
     name = "MotionInterchange",
     srcs = glob([
         "src/*.m",
@@ -18,25 +20,6 @@ objc_library(
     enable_modules = 1,
     includes = ["src"],
     visibility = ["//visibility:public"],
-    copts = [
-        "-Wall",  # Standard known-to-be-bugs warnings.
-        "-Wcast-align",  # Casting a pointer such that alignment is broken.
-        "-Wconversion",  # Numeric conversion warnings.
-        "-Wdocumentation",  # Documentation checks.
-        "-Werror",  # All warnings as errors.
-        "-Wextra",  # Many useful extra warnings.
-        "-Wimplicit-atomic-properties",  # Dynamic properties should be non-atomic.
-        "-Wmissing-prototypes",  # Global function is defined without a previous prototype.
-        "-Wno-error=deprecated",  # Deprecation warnings are never errors.
-        "-Wno-error=deprecated-implementations",  # Deprecation warnings are never errors.
-        "-Wno-sign-conversion",  # Do not warn on sign conversions.
-        "-Wno-unused-parameter",  # Do not warn on unused parameters.
-        "-Woverlength-strings",  # Strings longer than the C maximum.
-        "-Wshadow",  # Local variable shadows another variable, parameter, etc.
-        "-Wstrict-selector-match",  # Compiler can't figure out the right selector.
-        "-Wundeclared-selector",  # Compiler doesn't see a selector.
-        "-Wunreachable-code",  # Code will never be reached.
-    ]
 )
 
 load("@build_bazel_rules_apple//apple:swift.bzl", "swift_library")
