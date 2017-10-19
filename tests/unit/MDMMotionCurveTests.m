@@ -16,7 +16,7 @@
 
 #import <XCTest/XCTest.h>
 
-@import MotionInterchange;
+#import "MotionInterchange.h"
 
 @interface MDMMotionCurveTests : XCTestCase
 @end
