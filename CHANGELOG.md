@@ -1,7 +1,18 @@
-# #develop#
+# 1.1.1
 
- TODO: Enumerate changes.
+This patch release migrates the project's continuous integration pipeline from arc to bazel and
+kokoro.
 
+## New features
+
+Continuous integration can now be run locally by executing `./.kokoro` from the root of the git
+repo. Requires [bazel](http://bazel.io/).
+
+## Source changes
+
+* [Replace arc with bazel and Kokoro continuous integration. (#9)](https://github.com/material-motion/motion-interchange-objc/commit/2ef4dfbf95a7beb3f0e323e259576b6797420202) (featherless)
+* [Fix warning in unit tests. (#8)](https://github.com/material-motion/motion-interchange-objc/commit/d3203a2857648f74d478525514c0f10cb6552b19) (featherless)
+* [Add missing import.](https://github.com/material-motion/motion-interchange-objc/commit/445091dbbd68cd0a75e4dd86195cb431b0717e71) (Jeff Verkoeyen)
 
 # 1.1.0
 
