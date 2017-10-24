@@ -94,6 +94,11 @@ FOUNDATION_EXTERN MDMMotionCurve MDMMotionCurveMakeSpring(float mass, float tens
     NS_SWIFT_NAME(MotionCurveMakeSpring(mass:tension:friction:));
 // clang-format on
 
+// clang-format off
+FOUNDATION_EXTERN MDMMotionCurve MDMMotionCurveReversed(MDMMotionCurve timingCurve)
+    NS_SWIFT_NAME(MotionCurveReversed(timingCureve:));
+// clang-format on
+
 /**
  Named indices for the bezier motion curve's data array.
  */
