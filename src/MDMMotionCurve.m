@@ -35,10 +35,10 @@ MDMMotionCurve MDMMotionCurveFromTimingFunction(CAMediaTimingFunction *timingFun
 MDMMotionCurve MDMMotionCurveReversed(MDMMotionCurve timingCurve) {
   MDMMotionCurve reversed = timingCurve;
   if (timingCurve.type == MDMMotionCurveTypeBezier) {
-    reversed.data[0] = 1 - reversed.data[2];
-    reversed.data[1] = 1 - reversed.data[3];
-    reversed.data[2] = 1 - reversed.data[0];
-    reversed.data[3] = 1 - reversed.data[1];
+    reversed.data[0] = 1 - timingCurve.data[2];
+    reversed.data[1] = 1 - timingCurve.data[3];
+    reversed.data[2] = 1 - timingCurve.data[0];
+    reversed.data[3] = 1 - timingCurve.data[1];
   }
   return reversed;
 }

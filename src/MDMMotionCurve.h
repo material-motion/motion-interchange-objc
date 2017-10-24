@@ -96,7 +96,7 @@ FOUNDATION_EXTERN MDMMotionCurve MDMMotionCurveMakeSpring(float mass, float tens
 
 // clang-format off
 FOUNDATION_EXTERN MDMMotionCurve MDMMotionCurveReversed(MDMMotionCurve timingCurve)
-    NS_SWIFT_NAME(MotionCurveReversed(timingCureve:));
+    NS_SWIFT_NAME(MotionCurveReversed(fromTimingCurve:));
 // clang-format on
 
 /**
