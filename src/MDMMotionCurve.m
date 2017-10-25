@@ -31,3 +31,14 @@ MDMMotionCurve MDMMotionCurveFromTimingFunction(CAMediaTimingFunction *timingFun
   [timingFunction getControlPointAtIndex:2 values:pt2];
   return MDMMotionCurveMakeBezier(pt1[0], pt1[1], pt2[0], pt2[1]);
 }
+
+MDMMotionCurve MDMMotionCurveReversedBezier(MDMMotionCurve motionCurve) {
+  MDMMotionCurve reversed = motionCurve;
+  if (motionCurve.type == MDMMotionCurveTypeBezier) {
+    reversed.data[0] = 1 - motionCurve.data[2];
+    reversed.data[1] = 1 - motionCurve.data[3];
+    reversed.data[2] = 1 - motionCurve.data[0];
+    reversed.data[3] = 1 - motionCurve.data[1];
+  }
+  return reversed;
+}

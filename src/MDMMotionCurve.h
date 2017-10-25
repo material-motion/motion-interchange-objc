@@ -95,6 +95,15 @@ FOUNDATION_EXTERN MDMMotionCurve MDMMotionCurveMakeSpring(float mass, float tens
 // clang-format on
 
 /**
+ For cubic bezier curves, returns a reversed cubic bezier curve. For all other curve types, a copy
+ of the original curve is returned.
+ */
+// clang-format off
+FOUNDATION_EXTERN MDMMotionCurve MDMMotionCurveReversedBezier(MDMMotionCurve motionCurve)
+    NS_SWIFT_NAME(MotionCurveReversedBezier(fromMotionCurve:));
+// clang-format on
+
+/**
  Named indices for the bezier motion curve's data array.
  */
 typedef NS_ENUM(NSUInteger, MDMBezierMotionCurveDataIndex) {
