@@ -53,45 +53,4 @@
   XCTAssertEqualWithAccuracy(curve.data[MDMSpringMotionCurveDataIndexFriction], 0.3, 0.001);
 }
 
-- (void)testSystemModalMovementTimingCurveMatchesModalMovementTiming {
-  UIWindow *window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-  window.rootViewController = [[UIViewController alloc] initWithNibName:nil bundle:nil];
-  [window makeKeyAndVisible];
-
-  UIViewController *presentedViewController = [[UIViewController alloc] initWithNibName:nil
-                                                                                 bundle:nil];
-  XCTestExpectation *didComplete =
-      [[XCTestExpectation alloc] initWithDescription:@"Animation completed."];
-  [window.rootViewController presentViewController:presentedViewController
-                                          animated:YES
-                                        completion:^{
-                                          [didComplete fulfill];
-                                        }];
-
-  XCTestExpectation *didExtractAnimationValues =
-      [[XCTestExpectation alloc] initWithDescription:@"Extracted animation values."];
-  dispatch_async(dispatch_get_main_queue(), ^{
-    CAAnimation *animation = [presentedViewController.view.layer animationForKey:@"position"];
-    XCTAssertTrue([animation isKindOfClass:[CASpringAnimation class]]);
-    CASpringAnimation *springAnimation = (CASpringAnimation *)animation;
-
-    MDMMotionTiming timing = MDMModalMovementTiming;
-    XCTAssertEqualWithAccuracy(timing.curve.data[MDMSpringMotionCurveDataIndexMass],
-                               springAnimation.mass,
-                               0.001);
-    XCTAssertEqualWithAccuracy(timing.curve.data[MDMSpringMotionCurveDataIndexTension],
-                               springAnimation.stiffness,
-                               0.001);
-    XCTAssertEqualWithAccuracy(timing.curve.data[MDMSpringMotionCurveDataIndexFriction]
-                               , springAnimation.damping,
-                               0.001);
-
-    [didExtractAnimationValues fulfill];
-  });
-
-  XCTWaiterResult result = [XCTWaiter waitForExpectations:@[didComplete, didExtractAnimationValues]
-                                                  timeout:1];
-  XCTAssertEqual(result, XCTWaiterResultCompleted);
-}
-
 @end
