@@ -144,6 +144,6 @@ typedef NS_ENUM(NSUInteger, MDMSpringMotionCurveDataIndex) {
 /**
  Timing information for an iOS modal presentation slide animation.
  */
-#define MDMModalMovementTiming { \
+#define MDMModalMovementTiming (MDMMotionTiming){ \
   .delay = 0.000, .duration = 0.500, .curve = _MDMSpring(3, 1000, 500) \
 }
