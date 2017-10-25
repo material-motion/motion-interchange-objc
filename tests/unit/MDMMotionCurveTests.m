@@ -55,10 +55,11 @@
 
 - (void)testSystemModalMovementTimingCurveMatchesModalMovementTiming {
   UIWindow *window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-  window.rootViewController = [[UIViewController alloc] init];
+  window.rootViewController = [[UIViewController alloc] initWithNibName:nil bundle:nil];
   [window makeKeyAndVisible];
 
-  UIViewController *presentedViewController = [[UIViewController alloc] init];
+  UIViewController *presentedViewController = [[UIViewController alloc] initWithNibName:nil
+                                                                                 bundle:nil];
   XCTestExpectation *didComplete =
       [[XCTestExpectation alloc] initWithDescription:@"Animation completed."];
   [window.rootViewController presentViewController:presentedViewController
