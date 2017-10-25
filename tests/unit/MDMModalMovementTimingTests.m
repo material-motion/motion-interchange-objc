@@ -79,8 +79,8 @@
   XCTAssertEqualWithAccuracy(timing.curve.data[MDMSpringMotionCurveDataIndexTension],
                              springAnimation.stiffness,
                              0.001);
-  XCTAssertEqualWithAccuracy(timing.curve.data[MDMSpringMotionCurveDataIndexFriction]
-                             , springAnimation.damping,
+  XCTAssertEqualWithAccuracy(timing.curve.data[MDMSpringMotionCurveDataIndexFriction],
+                             springAnimation.damping,
                              0.001);
 }
 
