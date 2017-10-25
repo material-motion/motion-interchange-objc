@@ -65,7 +65,7 @@
                                                [didComplete fulfill];
                                              }];
 
-  [self waitForExpectations:@[didComplete] timeout:1];
+  [self waitForExpectationsWithTimeout:1 handler:nil];
 
   XCTAssertTrue([presentedViewController.presentationPositionAnimation
                  isKindOfClass:[CASpringAnimation class]]);
