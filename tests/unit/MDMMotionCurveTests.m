@@ -66,6 +66,7 @@
                                         completion:^{
                                           [didComplete fulfill];
                                         }];
+
   XCTestExpectation *didExtractAnimationValues =
       [[XCTestExpectation alloc] initWithDescription:@"Extracted animation values."];
   dispatch_async(dispatch_get_main_queue(), ^{
