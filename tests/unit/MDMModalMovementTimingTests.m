@@ -44,9 +44,9 @@
 - (void)setUp {
   [super setUp];
 
-  _window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-  _window.rootViewController = [[UIViewController alloc] initWithNibName:nil bundle:nil];
-  [_window makeKeyAndVisible];
+  self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+  self.window.rootViewController = [[UIViewController alloc] initWithNibName:nil bundle:nil];
+  [self.window makeKeyAndVisible];
 }
 
 - (void)tearDown {
@@ -59,11 +59,11 @@
   ModalPresentationExtractionViewController *presentedViewController =
       [[ModalPresentationExtractionViewController alloc] initWithNibName:nil bundle:nil];
   XCTestExpectation *didComplete = [self expectationWithDescription:@"Animation completed"];
-  [_window.rootViewController presentViewController:presentedViewController
-                                           animated:YES
-                                         completion:^{
-                                           [didComplete fulfill];
-                                         }];
+  [self.window.rootViewController presentViewController:presentedViewController
+                                               animated:YES
+                                             completion:^{
+                                               [didComplete fulfill];
+                                             }];
 
   [self waitForExpectations:@[didComplete] timeout:1];
 
