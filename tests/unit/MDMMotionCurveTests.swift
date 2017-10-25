@@ -46,10 +46,20 @@ class MDMMotionCurveTests: XCTestCase {
 
   func testReversedBezierCurve() {
     let curve = MotionCurveMakeBezier(p1x: 0.1, p1y: 0.2, p2x: 0.3, p2y: 0.4)
-    let reversed = MotionCurveReversed(fromTimingCurve: curve)
+    let reversed = MotionCurveReversedBezier(fromMotionCurve: curve)
     XCTAssertEqualWithAccuracy(curve.data.0, 1 - reversed.data.2, accuracy: 0.001)
     XCTAssertEqualWithAccuracy(curve.data.1, 1 - reversed.data.3, accuracy: 0.001)
     XCTAssertEqualWithAccuracy(curve.data.2, 1 - reversed.data.0, accuracy: 0.001)
     XCTAssertEqualWithAccuracy(curve.data.3, 1 - reversed.data.1, accuracy: 0.001)
+  }
+
+  func testReversingBezierCurveTwiceGivesSameResult() {
+    let curve = MotionCurveMakeBezier(p1x: 0.1, p1y: 0.2, p2x: 0.3, p2y: 0.4)
+    let reversed = MotionCurveReversedBezier(fromMotionCurve: curve)
+    let reversedAgain = MotionCurveReversedBezier(fromMotionCurve: reversed)
+    XCTAssertEqualWithAccuracy(curve.data.0, reversedAgain.data.0, accuracy: 0.001)
+    XCTAssertEqualWithAccuracy(curve.data.1, reversedAgain.data.1, accuracy: 0.001)
+    XCTAssertEqualWithAccuracy(curve.data.2, reversedAgain.data.2, accuracy: 0.001)
+    XCTAssertEqualWithAccuracy(curve.data.3, reversedAgain.data.3, accuracy: 0.001)
   }
 }
