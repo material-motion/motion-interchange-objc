@@ -50,7 +50,7 @@
 }
 
 - (void)tearDown {
-  _window = nil;
+  self.window = nil;
 
   [super tearDown];
 }
