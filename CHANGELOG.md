@@ -1,3 +1,29 @@
+# 1.2.0
+
+This minor release introduces a new API for reversing cubic beziers and a unit test for
+`MDMModalMovementTiming`.
+
+## New features
+
+`MDMMotionCurveReversedBezier` reverses cubic bezier curves. Intended for use when building mirrored
+bi-directional transitions.
+
+## Source changes
+
+* [Add a unit test for MDMModalMovementTiming. (#12)](https://github.com/material-motion/motion-interchange-objc/commit/a0c3566ad52a45365657e0591701afa7989eb822) (featherless)
+* [Add MDMMotionCurveReversed for reversing timing curves. (#11)](https://github.com/material-motion/motion-interchange-objc/commit/a54a5ffa49052a198b4bb5beedce737bb61ebc91) (featherless)
+
+## API changes
+
+### MDMMotionCurveReversedBezier
+
+**new** function: `MDMMotionCurveReversedBezier`.
+
+## Non-source changes
+
+* [Standardize the kokoro and bazel files. (#13)](https://github.com/material-motion/motion-interchange-objc/commit/a009d3f7d08d8b2d087891a86eb1e298714198b4) (featherless)
+* [Use the v1.0.0 tag for bazel_ios_warnings. (#10)](https://github.com/material-motion/motion-interchange-objc/commit/545b6a448ddb235279318dc262f051d653a48ed4) (featherless)
+
 # 1.1.1
 
 This patch release migrates the project's continuous integration pipeline from arc to bazel and
