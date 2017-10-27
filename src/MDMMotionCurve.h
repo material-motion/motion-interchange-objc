@@ -43,7 +43,7 @@ typedef NS_ENUM(NSUInteger, MDMMotionCurveType) {
   /**
    The default curve will be used.
    */
-  MDMMotionCurveTypeDefault,
+  MDMMotionCurveTypeDefault __deprecated_enum_msg("Use MDMMotionCurveTypeBezier instead."),
 
 } NS_SWIFT_NAME(MotionCurveType);
 
