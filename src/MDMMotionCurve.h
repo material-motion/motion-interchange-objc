@@ -119,7 +119,16 @@ typedef NS_ENUM(NSUInteger, MDMBezierMotionCurveDataIndex) {
 typedef NS_ENUM(NSUInteger, MDMSpringMotionCurveDataIndex) {
   MDMSpringMotionCurveDataIndexMass,
   MDMSpringMotionCurveDataIndexTension,
-  MDMSpringMotionCurveDataIndexFriction
+  MDMSpringMotionCurveDataIndexFriction,
+
+  /**
+   The initial velocity of the animation, in units per second.
+
+   A value of zero indicates no initial velocity.
+   A positive value indicates movement toward the destination.
+   A negative value indicates movement away from the destination.
+   */
+  MDMSpringMotionCurveDataIndexInitialVelocity
 } NS_SWIFT_NAME(SpringMotionCurveDataIndex);
 
 // Objective-C-specific macros
