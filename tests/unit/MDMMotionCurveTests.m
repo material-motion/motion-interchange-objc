@@ -23,6 +23,25 @@
 
 @implementation MDMMotionCurveTests
 
+- (void)testLinearCurveConstantMatchesSystemLinearCurve {
+  MDMMotionCurve curve = MDMLinearMotionCurve;
+  CAMediaTimingFunction *linearTimingFunction =
+      [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+  MDMMotionCurve systemLinearCurve = MDMMotionCurveFromTimingFunction(linearTimingFunction);
+  XCTAssertEqualWithAccuracy(curve.data[MDMBezierMotionCurveDataIndexP1X],
+                             systemLinearCurve.data[MDMBezierMotionCurveDataIndexP1X],
+                             0.001);
+  XCTAssertEqualWithAccuracy(curve.data[MDMBezierMotionCurveDataIndexP1Y],
+                             systemLinearCurve.data[MDMBezierMotionCurveDataIndexP1Y],
+                             0.001);
+  XCTAssertEqualWithAccuracy(curve.data[MDMBezierMotionCurveDataIndexP2X],
+                             systemLinearCurve.data[MDMBezierMotionCurveDataIndexP2X],
+                             0.001);
+  XCTAssertEqualWithAccuracy(curve.data[MDMBezierMotionCurveDataIndexP2Y],
+                             systemLinearCurve.data[MDMBezierMotionCurveDataIndexP2Y],
+                             0.001);
+}
+
 - (void)testBezierCurveData {
   MDMMotionCurve curve = MDMMotionCurveMakeBezier(0.1f, 0.2f, 0.3f, 0.4f);
   XCTAssertEqualWithAccuracy(curve.data[MDMBezierMotionCurveDataIndexP1X], 0.1, 0.001);
