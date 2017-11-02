@@ -142,6 +142,11 @@ typedef NS_ENUM(NSUInteger, MDMSpringMotionCurveDataIndex) {
   }
 
 /**
+ A linear bezier motion curve.
+ */
+#define MDMLinearMotionCurve _MDMBezier(0, 0, 1, 1)
+
+/**
  Timing information for an iOS modal presentation slide animation.
  */
 #define MDMModalMovementTiming { \
