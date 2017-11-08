@@ -1,3 +1,34 @@
+# 1.3.0
+
+This minor releases introduces new APIs for defining motion curves.
+
+## New deprecations
+
+`MDMMotionCurveTypeDefault` is now deprecated. Use `MDMMotionCurveTypeBezier` instead.
+
+## New features
+
+The new `MDMLinearMotionCurve` macro allows you to define linear easing curves in specs.
+
+Spring curve specs can now define initial velocity. This value can be read using the new
+`MDMSpringMotionCurveDataIndexInitialVelocity` enum value for `MDMSpringMotionCurveDataIndex`.
+
+## Source changes
+
+* [Document and define the initial velocity parameter of spring curves (#17)](https://github.com/material-motion/motion-interchange-objc/commit/7eb5e2f79229c3b7cdada7b8df3e1e66b7e229e5) (featherless)
+* [Add a linear curve constant. (#16)](https://github.com/material-motion/motion-interchange-objc/commit/0aa4f8caff7314310c3cbd721814305ee6f53601) (featherless)
+* [Deprecate MDMMotionCurveTypeDefault in favor of MDMMotionCurveTypeBezier. (#15)](https://github.com/material-motion/motion-interchange-objc/commit/f5a7f3b4a63d4643700403930e2cafd7d4482013) (featherless)
+
+## API changes
+
+### MDMSpringMotionCurveDataIndexInitialVelocity
+
+**new** enum: `MDMSpringMotionCurveDataIndexInitialVelocity`.
+
+### MDMLinearMotionCurve
+
+**new** constant/macro: `MDMLinearMotionCurve`.
+
 # 1.2.0
 
 This minor release introduces a new API for reversing cubic beziers and a unit test for
