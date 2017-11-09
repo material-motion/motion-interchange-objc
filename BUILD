@@ -33,6 +33,11 @@ strict_warnings_objc_library(
         "src/*.h",
         "src/private/*.h",
     ]),
+    sdk_frameworks = [
+        "CoreGraphics",
+        "Foundation",
+        "QuartzCore",
+    ],
     enable_modules = 1,
     includes = ["src"],
     visibility = ["//visibility:public"],
