@@ -151,30 +151,30 @@ typedef NS_ENUM(NSUInteger, MDMSpringMotionCurveDataIndex) {
 // Objective-C-specific macros
 
 #define _MDMBezier(p1x, p1y, p2x, p2y) \
-  (MDMMotionCurve) {                   \
+  ((MDMMotionCurve) {                   \
     .type = MDMMotionCurveTypeBezier,  \
     .data = { p1x,                     \
               p1y,                     \
               p2x,                     \
               p2y }                    \
-  }
+  })
 
 #define _MDMSpring(mass, tension, friction) \
-  (MDMMotionCurve) {                        \
+  ((MDMMotionCurve) {                        \
     .type = MDMMotionCurveTypeSpring,       \
     .data = { mass,                         \
               tension,                      \
               friction }                    \
-  }
+  })
 
 #define _MDMSpringWithInitialVelocity(mass, tension, friction, initialVelocity) \
-  (MDMMotionCurve) {                        \
+  ((MDMMotionCurve) {                        \
     .type = MDMMotionCurveTypeSpring,       \
     .data = { mass,                         \
               tension,                      \
               friction,                     \
               initialVelocity }             \
-  }
+  })
 
 /**
  A linear bezier motion curve.
