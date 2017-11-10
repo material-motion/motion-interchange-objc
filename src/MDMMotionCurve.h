@@ -95,6 +95,21 @@ FOUNDATION_EXTERN MDMMotionCurve MDMMotionCurveMakeSpring(float mass, float tens
 // clang-format on
 
 /**
+ Creates a spring curve with the provided configuration.
+
+ Tension and friction map to Core Animation's stiffness and damping, respectively.
+
+ See the documentation for CASpringAnimation for more information.
+ */
+// clang-format off
+FOUNDATION_EXTERN MDMMotionCurve MDMMotionCurveMakeSpringWithInitialVelocity(float mass,
+                                                                             float tension,
+                                                                             float friction,
+                                                                             float initialVelocity)
+    NS_SWIFT_NAME(MotionCurveMakeSpring(mass:tension:friction:initialVelocity:));
+// clang-format on
+
+/**
  For cubic bezier curves, returns a reversed cubic bezier curve. For all other curve types, a copy
  of the original curve is returned.
  */
@@ -136,21 +151,30 @@ typedef NS_ENUM(NSUInteger, MDMSpringMotionCurveDataIndex) {
 // Objective-C-specific macros
 
 #define _MDMBezier(p1x, p1y, p2x, p2y) \
-  (MDMMotionCurve) {                   \
+  ((MDMMotionCurve) {                   \
     .type = MDMMotionCurveTypeBezier,  \
     .data = { p1x,                     \
               p1y,                     \
               p2x,                     \
               p2y }                    \
-  }
+  })
 
 #define _MDMSpring(mass, tension, friction) \
-  (MDMMotionCurve) {                        \
+  ((MDMMotionCurve) {                        \
     .type = MDMMotionCurveTypeSpring,       \
     .data = { mass,                         \
               tension,                      \
               friction }                    \
-  }
+  })
+
+#define _MDMSpringWithInitialVelocity(mass, tension, friction, initialVelocity) \
+  ((MDMMotionCurve) {                        \
+    .type = MDMMotionCurveTypeSpring,       \
+    .data = { mass,                         \
+              tension,                      \
+              friction,                     \
+              initialVelocity }             \
+  })
 
 /**
  A linear bezier motion curve.
