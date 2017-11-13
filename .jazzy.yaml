@@ -1,0 +1,8 @@
+module: MotionInterchange
+module_version: 1.4.0
+sdk: iphonesimulator
+umbrella_header: src/MotionInterchange.h
+objc: true
+github_url: https://github.com/material-motion/motion-interchange-objc
+github_file_prefix: https://github.com/material-motion/motion-interchange-objc/tree/v1.4.0
+
