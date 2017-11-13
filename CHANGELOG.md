@@ -1,7 +1,30 @@
-# #develop#
+# 1.4.0
 
- TODO: Enumerate changes.
+This minor release introduces new APIs for creating springs that have an initial velocity.
 
+## New features
+
+Added new APIs for creating springs with initial velocity:
+`MDMMotionCurveMakeSpringWithInitialVelocity` and `_MDMSpringWithInitialVelocity`.
+
+## Source changes
+
+* [Add new APIs for creating springs with initial velocity. (#19)](https://github.com/material-motion/motion-interchange-objc/commit/326180f9f5f99e7d5e9e23131de8c24abe2e1dbf) (featherless)
+
+## API changes
+
+### MDMMotionCurveMakeSpringWithInitialVelocity
+
+**new** function: `MDMMotionCurveMakeSpringWithInitialVelocity`
+
+### _MDMSpringWithInitialVelocity
+
+**new** macro: `_MDMSpringWithInitialVelocity`
+
+## Non-source changes
+
+* [Add sdk_frameworks dependencies to the BUILD file. (#18)](https://github.com/material-motion/motion-interchange-objc/commit/a601fb65166426bc708d84c0e29d89913c445d04) (featherless)
+* [Add jazzy yaml.](https://github.com/material-motion/motion-interchange-objc/commit/130e9760bbb8c0e2179f820cc14f1278c9465b84) (Jeff Verkoeyen)
 
 # 1.3.0
 
