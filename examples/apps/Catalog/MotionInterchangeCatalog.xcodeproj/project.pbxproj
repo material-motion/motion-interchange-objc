@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		660248AE1FD1EE78004C0147 /* MDMTimingCurveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660248AC1FD1EE78004C0147 /* MDMTimingCurveTests.swift */; };
+		660248AF1FD1EE78004C0147 /* MDMTimingCurveTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 660248AD1FD1EE78004C0147 /* MDMTimingCurveTests.m */; };
 		6619E1D91FA0ED0300F3AB25 /* MDMModalMovementTimingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6619E1D81FA0ED0300F3AB25 /* MDMModalMovementTimingTests.m */; };
 		663ED7C51EDF1F0C0096B2A9 /* ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663ED7C01EDF1F0C0096B2A9 /* ExampleViewController.swift */; };
 		663ED7C61EDF1F0C0096B2A9 /* ExampleViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663ED7C11EDF1F0C0096B2A9 /* ExampleViews.swift */; };
@@ -47,6 +49,8 @@
 		09CEA5DEA01BA723D08D84E6 /* Pods-UnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.release.xcconfig"; path = "../../../Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests.release.xcconfig"; sourceTree = "<group>"; };
 		2DE76D4D35953D836F578CDE /* Pods-MotionInterchangeCatalog.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MotionInterchangeCatalog.debug.xcconfig"; path = "../../../Pods/Target Support Files/Pods-MotionInterchangeCatalog/Pods-MotionInterchangeCatalog.debug.xcconfig"; sourceTree = "<group>"; };
 		4AAB8EBB088513D48896641A /* Pods-MotionInterchangeCatalog.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MotionInterchangeCatalog.release.xcconfig"; path = "../../../Pods/Target Support Files/Pods-MotionInterchangeCatalog/Pods-MotionInterchangeCatalog.release.xcconfig"; sourceTree = "<group>"; };
+		660248AC1FD1EE78004C0147 /* MDMTimingCurveTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDMTimingCurveTests.swift; sourceTree = "<group>"; };
+		660248AD1FD1EE78004C0147 /* MDMTimingCurveTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDMTimingCurveTests.m; sourceTree = "<group>"; };
 		6619E1D81FA0ED0300F3AB25 /* MDMModalMovementTimingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MDMModalMovementTimingTests.m; sourceTree = "<group>"; };
 		663ED7C01EDF1F0C0096B2A9 /* ExampleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleViewController.swift; sourceTree = "<group>"; };
 		663ED7C11EDF1F0C0096B2A9 /* ExampleViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleViews.swift; sourceTree = "<group>"; };
@@ -165,6 +169,8 @@
 				663ED8001EE628BA0096B2A9 /* MDMMotionCurveTests.swift */,
 				663ED8021EE6299A0096B2A9 /* MDMMotionCurveTests.m */,
 				6619E1D81FA0ED0300F3AB25 /* MDMModalMovementTimingTests.m */,
+				660248AD1FD1EE78004C0147 /* MDMTimingCurveTests.m */,
+				660248AC1FD1EE78004C0147 /* MDMTimingCurveTests.swift */,
 			);
 			name = tests;
 			path = ../../../tests/unit;
@@ -480,6 +486,8 @@
 			files = (
 				663ED8031EE6299A0096B2A9 /* MDMMotionCurveTests.m in Sources */,
 				663ED8011EE628BA0096B2A9 /* MDMMotionCurveTests.swift in Sources */,
+				660248AE1FD1EE78004C0147 /* MDMTimingCurveTests.swift in Sources */,
+				660248AF1FD1EE78004C0147 /* MDMTimingCurveTests.m in Sources */,
 				6619E1D91FA0ED0300F3AB25 /* MDMModalMovementTimingTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

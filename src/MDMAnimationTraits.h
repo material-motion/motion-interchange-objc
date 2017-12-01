@@ -17,13 +17,13 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import <Foundation/Foundation.h>
 
-#import "MDMMotionCurve.h"
-#import "MDMMotionRepetition.h"
+#import "MDMRepetitionTraits.h"
+#import "MDMTimingCurve.h"
 
 /**
- A representation of timing for an animation.
+ A generic representation of animation traits.
  */
-struct MDMMotionTiming {
+typedef struct MDMAnimationTraits {
   /**
    The amount of time, in seconds, before this animation's value interpolation should begin.
    */
@@ -37,12 +37,16 @@ struct MDMMotionTiming {
   /**
    The velocity and acceleration of the animation over time.
    */
-  MDMMotionCurve curve;
+  MDMTimingCurve timingCurve;
 
   /**
    The repetition characteristics of the animation.
    */
-  MDMMotionRepetition repetition;
+  MDMRepetitionTraits repetition;
 
-} NS_SWIFT_NAME(MotionTiming);
-typedef struct MDMMotionTiming MDMMotionTiming;
+} NS_SWIFT_NAME(AnimationTraits) MDMAnimationTraits;
+
+/**
+ Animation traits for an iOS modal presentation slide animation.
+ */
+FOUNDATION_EXPORT const MDMAnimationTraits MDMAnimationTraitsSystemModalMovement;

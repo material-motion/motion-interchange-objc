@@ -15,5 +15,9 @@
  */
 
 #import "MDMAnimationTraits.h"
-#import "MDMRepetitionTraits.h"
-#import "MDMTimingCurve.h"
+
+const MDMAnimationTraits MDMAnimationTraitsSystemModalMovement = {
+  .duration = 0.500, .timingCurve = {
+    .type = MDMTimingCurveTypeSpring, .data = { 3, 1000, 500, 0 }
+  }
+};

@@ -14,6 +14,12 @@
  limitations under the License.
  */
 
-#import "MDMAnimationTraits.h"
-#import "MDMRepetitionTraits.h"
-#import "MDMTimingCurve.h"
+// This macro is introduced in Xcode 9.
+#ifndef CF_TYPED_ENUM // What follows is backwards compat for Xcode 8 and below.
+#if __has_attribute(swift_wrapper)
+#define CF_TYPED_ENUM __attribute__((swift_wrapper(enum)))
+#else
+#define CF_TYPED_ENUM
+#endif
+#endif
+

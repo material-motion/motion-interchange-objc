@@ -18,34 +18,34 @@
 #import <Foundation/Foundation.h>
 
 /**
- The possible kinds of repetition that can be used to describe an animation.
+ The possible repetition types that can be used to describe an animation.
  */
-typedef NS_ENUM(NSUInteger, MDMMotionRepetitionType) {
+typedef NS_ENUM(NSUInteger, MDMRepetitionType) {
   /**
    The animation will be not be repeated.
    */
-  MDMMotionRepetitionTypeNone,
+  MDMRepetitionTypeNone,
 
   /**
    The animation will be repeated a given number of times.
    */
-  MDMMotionRepetitionTypeCount,
+  MDMRepetitionTypeCount,
 
   /**
    The animation will be repeated for a given number of seconds.
    */
-  MDMMotionRepetitionTypeDuration,
+  MDMRepetitionTypeDuration,
 
-} NS_SWIFT_NAME(MotionReptitionType);
+} NS_SWIFT_NAME(RepetitionType);
 
 /**
- A generalized representation of a motion curve.
+ A generalized representation of a repetition traits.
  */
-struct MDMMotionRepetition {
+typedef struct MDMRepetitionTraits {
   /**
    The type defines how to interpret the amount.
    */
-  MDMMotionRepetitionType type;
+  MDMRepetitionType type;
 
   /**
    The amount of repetition.
@@ -57,14 +57,5 @@ struct MDMMotionRepetition {
    */
   BOOL autoreverses;
 
-} NS_SWIFT_NAME(MotionRepetition);
-typedef struct MDMMotionRepetition MDMMotionRepetition;
+} NS_SWIFT_NAME(RepetitionTraits) MDMRepetitionTraits;
 
-// Objective-C-specific macros
-
-#define _MDMNoRepetition                 \
-  (MDMMotionRepetition) {                \
-    .type = MDMMotionRepetitionTypeNone, \
-    .amount = 0,                         \
-    .autoreverses = false                \
-  }

@@ -55,7 +55,7 @@
   [super tearDown];
 }
 
-- (void)testSystemModalMovementTimingCurveMatchesModalMovementTiming {
+- (void)testSystemModalMovementTimingCurveMatchesModalMovementTimingOldAPI {
   ModalPresentationExtractionViewController *presentedViewController =
       [[ModalPresentationExtractionViewController alloc] initWithNibName:nil bundle:nil];
   XCTestExpectation *didComplete = [self expectationWithDescription:@"Animation completed"];
@@ -80,6 +80,35 @@
                              springAnimation.stiffness,
                              0.001);
   XCTAssertEqualWithAccuracy(timing.curve.data[MDMSpringMotionCurveDataIndexFriction],
+                             springAnimation.damping,
+                             0.001);
+}
+
+- (void)testSystemModalMovementTimingCurveMatchesModalMovementTiming {
+  ModalPresentationExtractionViewController *presentedViewController =
+  [[ModalPresentationExtractionViewController alloc] initWithNibName:nil bundle:nil];
+  XCTestExpectation *didComplete = [self expectationWithDescription:@"Animation completed"];
+  [self.window.rootViewController presentViewController:presentedViewController
+                                               animated:YES
+                                             completion:^{
+                                               [didComplete fulfill];
+                                             }];
+
+  [self waitForExpectationsWithTimeout:1 handler:nil];
+
+  XCTAssertTrue([presentedViewController.presentationPositionAnimation
+                 isKindOfClass:[CASpringAnimation class]]);
+  CASpringAnimation *springAnimation =
+  (CASpringAnimation *)presentedViewController.presentationPositionAnimation;
+
+  MDMAnimationTraits traits = MDMAnimationTraitsSystemModalMovement;
+  XCTAssertEqualWithAccuracy(traits.curve.data[MDMSpringMotionCurveDataIndexMass],
+                             springAnimation.mass,
+                             0.001);
+  XCTAssertEqualWithAccuracy(traits.curve.data[MDMSpringMotionCurveDataIndexTension],
+                             springAnimation.stiffness,
+                             0.001);
+  XCTAssertEqualWithAccuracy(traits.curve.data[MDMSpringMotionCurveDataIndexFriction],
                              springAnimation.damping,
                              0.001);
 }
