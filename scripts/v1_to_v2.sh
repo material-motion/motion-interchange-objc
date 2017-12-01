@@ -32,6 +32,7 @@ replace_all() {
 replace_all "s/MDMBezierTimingCurveDataIndex/MDMTimingCurveBezierDataIndex/g"
 replace_all "s/MDMSpringTimingCurveDataIndex/MDMTimingCurveSpringDataIndex/g"
 replace_all "s/MotionCurveMakeSpring(mass/TimingCurve(springWithMass/g"
+replace_all "s/TimingCurveMakeBezier(p1x/TimingCurve(bezierWithP1x/g"
 replace_all "s/MDMLinearTimingCurve/MDMTimingCurveLinear/g"
 replace_all "s/MDMModalMovementTiming/MDMAnimationTraitsSystemModalMovement/g"
 replace_all "s/timing.curve/traits.timingCurve/g"
