@@ -18,7 +18,7 @@
 
 #import "MotionInterchange.h"
 
-@interface MDMModalMovementTimingTests : XCTestCase
+@interface MDMAnimationTraitsSystemModalMovementTests : XCTestCase
 @property(nonatomic, strong) UIWindow *window;
 @end
 
@@ -39,7 +39,7 @@
 
 @end
 
-@implementation MDMModalMovementTimingTests
+@implementation MDMAnimationTraitsSystemModalMovementTests
 
 - (void)setUp {
   [super setUp];
@@ -72,14 +72,14 @@
   CASpringAnimation *springAnimation =
       (CASpringAnimation *)presentedViewController.presentationPositionAnimation;
 
-  MDMMotionTiming timing = MDMModalMovementTiming;
-  XCTAssertEqualWithAccuracy(timing.curve.data[MDMSpringMotionCurveDataIndexMass],
+  MDMAnimationTraits traits = MDMAnimationTraitsSystemModalMovement;
+  XCTAssertEqualWithAccuracy(traits.timingCurve.data[MDMTimingCurveSpringDataIndexMass],
                              springAnimation.mass,
                              0.001);
-  XCTAssertEqualWithAccuracy(timing.curve.data[MDMSpringMotionCurveDataIndexTension],
+  XCTAssertEqualWithAccuracy(traits.timingCurve.data[MDMTimingCurveSpringDataIndexTension],
                              springAnimation.stiffness,
                              0.001);
-  XCTAssertEqualWithAccuracy(timing.curve.data[MDMSpringMotionCurveDataIndexFriction],
+  XCTAssertEqualWithAccuracy(traits.timingCurve.data[MDMTimingCurveSpringDataIndexFriction],
                              springAnimation.damping,
                              0.001);
 }
@@ -102,13 +102,13 @@
   (CASpringAnimation *)presentedViewController.presentationPositionAnimation;
 
   MDMAnimationTraits traits = MDMAnimationTraitsSystemModalMovement;
-  XCTAssertEqualWithAccuracy(traits.curve.data[MDMSpringMotionCurveDataIndexMass],
+  XCTAssertEqualWithAccuracy(traits.timingCurve.data[MDMTimingCurveSpringDataIndexMass],
                              springAnimation.mass,
                              0.001);
-  XCTAssertEqualWithAccuracy(traits.curve.data[MDMSpringMotionCurveDataIndexTension],
+  XCTAssertEqualWithAccuracy(traits.timingCurve.data[MDMTimingCurveSpringDataIndexTension],
                              springAnimation.stiffness,
                              0.001);
-  XCTAssertEqualWithAccuracy(traits.curve.data[MDMSpringMotionCurveDataIndexFriction],
+  XCTAssertEqualWithAccuracy(traits.timingCurve.data[MDMTimingCurveSpringDataIndexFriction],
                              springAnimation.damping,
                              0.001);
 }
