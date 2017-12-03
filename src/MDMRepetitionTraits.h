@@ -24,17 +24,17 @@ typedef NS_ENUM(NSUInteger, MDMRepetitionType) {
   /**
    The animation will be not be repeated.
    */
-  MDMRepetitionTypeNone,
+  MDMRepetitionTypeNone = 0,
 
   /**
    The animation will be repeated a given number of times.
    */
-  MDMRepetitionTypeCount,
+  MDMRepetitionTypeCount = 1,
 
   /**
    The animation will be repeated for a given number of seconds.
    */
-  MDMRepetitionTypeDuration,
+  MDMRepetitionTypeDuration = 2,
 
 } NS_SWIFT_NAME(RepetitionType);
 

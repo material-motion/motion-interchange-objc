@@ -25,12 +25,12 @@ typedef NS_ENUM(NSUInteger, MDMTimingCurveType) {
   /**
    The value will be instantly set with no animation.
    */
-  MDMTimingCurveTypeInstant,
+  MDMTimingCurveTypeInstant = 0,
 
   /**
    The value will be animated using a cubic bezier curve to model its velocity.
    */
-  MDMTimingCurveTypeBezier,
+  MDMTimingCurveTypeBezier = 1,
 
   /**
    The value will be animated using a spring simulation.
@@ -38,7 +38,7 @@ typedef NS_ENUM(NSUInteger, MDMTimingCurveType) {
    A spring will treat the duration property of the traits as a suggestion and may choose to
    ignore it altogether.
    */
-  MDMTimingCurveTypeSpring,
+  MDMTimingCurveTypeSpring = 2,
 
 } NS_SWIFT_NAME(TimingCurveType);
 
@@ -60,9 +60,10 @@ typedef struct MDMTimingCurve {
 /**
  Creates a bezier traits curve with the provided control points.
 
- A cubic bezier has four control points in total. We assume that the first control point is 0, 0 and
- the last control point is 1, 1. This method requires that you provide the second and third control
- points.
+ A cubic bezier has four control points in total. We assume that the first control point (p0) is
+ 0, 0 and the last control point (p3) is 1, 1. This method requires that you provide the second (p1)
+ and third (p2) control points, resulting in the following cubic bezier points:
+ `[(0, 0), p1, p2, (1, 1)]`.
 
  See the documentation for CAMediaTimingFunction for more information.
  */
@@ -120,19 +121,19 @@ FOUNDATION_EXTERN MDMTimingCurve MDMTimingCurveReversedBezier(MDMTimingCurve tra
  Named indices for the bezier traits curve's data array.
  */
 typedef NS_ENUM(NSUInteger, MDMTimingCurveBezierDataIndex) {
-  MDMTimingCurveBezierDataIndexP1X,
-  MDMTimingCurveBezierDataIndexP1Y,
-  MDMTimingCurveBezierDataIndexP2X,
-  MDMTimingCurveBezierDataIndexP2Y
+  MDMTimingCurveBezierDataIndexP1X = 0,
+  MDMTimingCurveBezierDataIndexP1Y = 1,
+  MDMTimingCurveBezierDataIndexP2X = 2,
+  MDMTimingCurveBezierDataIndexP2Y = 3
 } NS_SWIFT_NAME(TimingCurveBezierDataIndex);
 
 /**
  Named indices for the spring traits curve's data array.
  */
 typedef NS_ENUM(NSUInteger, MDMTimingCurveSpringDataIndex) {
-  MDMTimingCurveSpringDataIndexMass,
-  MDMTimingCurveSpringDataIndexTension,
-  MDMTimingCurveSpringDataIndexFriction,
+  MDMTimingCurveSpringDataIndexMass = 0,
+  MDMTimingCurveSpringDataIndexTension = 1,
+  MDMTimingCurveSpringDataIndexFriction = 2,
 
   /**
    The initial velocity of the animation.
