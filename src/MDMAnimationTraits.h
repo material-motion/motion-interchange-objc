@@ -49,4 +49,6 @@ typedef struct MDMAnimationTraits {
 /**
  Animation traits for an iOS modal presentation slide animation.
  */
-FOUNDATION_EXPORT const MDMAnimationTraits MDMAnimationTraitsSystemModalMovement;
+FOUNDATION_EXPORT
+const MDMAnimationTraits MDMAnimationTraitsSystemModalMovement
+    NS_SWIFT_NAME(AnimationTraitsSystemModalMovement);
