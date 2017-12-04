@@ -40,6 +40,12 @@ following:
 Within this library you will find simple data types for storing and representing animation
 traits so that the lost magic numbers for animation your code can find a place to call home.
 
+```objc
+MDMAnimationTraits *animationTraits =
+    [[MDMAnimationTraits alloc] initWithDuration:0.230
+                              timingFunctionName:kCAMediaTimingFunctionEaseInEaseOut];
+```
+
 Welcome home, lost numbers.
 
 ## Sibling library: Motion Animator
@@ -47,6 +53,13 @@ Welcome home, lost numbers.
 While it is possible to use the Motion Interchange as a standalone library, the Motion Animator
 is designed to be the primary consumer of Motion Interchange data types. Consider using these
 libraries together, with MotionAnimator as your primary dependency.
+
+```swift
+MDMMotionAnimator *animator = [[MDMMotionAnimator alloc] init];
+[animator animateWithTraits:animationTraits animations:^{
+  view.alpha = 0;
+}];
+```
 
 To learn more, visit the MotionAnimator GitHub page:
 
