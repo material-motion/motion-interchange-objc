@@ -18,7 +18,7 @@
 
 #import "MotionInterchange.h"
 
-@interface MDMModalMovementTimingTests : XCTestCase
+@interface MDMAnimationTraitsSystemModalMovementTests : XCTestCase
 @property(nonatomic, strong) UIWindow *window;
 @end
 
@@ -39,7 +39,7 @@
 
 @end
 
-@implementation MDMModalMovementTimingTests
+@implementation MDMAnimationTraitsSystemModalMovementTests
 
 - (void)setUp {
   [super setUp];
@@ -72,16 +72,19 @@
   CASpringAnimation *springAnimation =
       (CASpringAnimation *)presentedViewController.presentationPositionAnimation;
 
-  MDMMotionTiming timing = MDMModalMovementTiming;
-  XCTAssertEqualWithAccuracy(timing.curve.data[MDMSpringMotionCurveDataIndexMass],
-                             springAnimation.mass,
-                             0.001);
-  XCTAssertEqualWithAccuracy(timing.curve.data[MDMSpringMotionCurveDataIndexTension],
-                             springAnimation.stiffness,
-                             0.001);
-  XCTAssertEqualWithAccuracy(timing.curve.data[MDMSpringMotionCurveDataIndexFriction],
-                             springAnimation.damping,
-                             0.001);
+  MDMAnimationTraits *traits = [MDMAnimationTraits systemModalMovement];
+  XCTAssertTrue([traits.timingCurve isKindOfClass:[MDMSpringTimingCurve class]],
+                @"Expected the system timing curve to be a %@ type, but it was '%@' instead.",
+                NSStringFromClass([MDMSpringTimingCurve class]),
+                NSStringFromClass([traits.timingCurve class]));
+  if ([traits.timingCurve isKindOfClass:[MDMSpringTimingCurve class]]) {
+    MDMSpringTimingCurve *spring = (MDMSpringTimingCurve *)traits.timingCurve;
+
+    XCTAssertEqualWithAccuracy(spring.mass, springAnimation.mass, 0.001);
+    XCTAssertEqualWithAccuracy(spring.tension, springAnimation.stiffness, 0.001);
+    XCTAssertEqualWithAccuracy(spring.friction, springAnimation.damping, 0.001);
+    XCTAssertEqualWithAccuracy(spring.initialVelocity, springAnimation.initialVelocity, 0.001);
+  }
 }
 
 @end

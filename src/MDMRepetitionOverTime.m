@@ -14,10 +14,29 @@
  limitations under the License.
  */
 
-#import "CAMediaTimingFunction+MDMTimingCurve.h"
-#import "MDMAnimationTraits.h"
-#import "MDMRepetitionTraits.h"
-#import "MDMRepetition.h"
 #import "MDMRepetitionOverTime.h"
-#import "MDMTimingCurve.h"
-#import "MDMSpringTimingCurve.h"
+
+@implementation MDMRepetitionOverTime
+
+@synthesize autoreverses = _autoreverses;
+
+- (instancetype)init {
+  [self doesNotRecognizeSelector:_cmd];
+  return nil;
+}
+
+- (instancetype)initWithDuration:(double)duration {
+  return [self initWithDuration:duration autoreverses:NO];
+}
+
+- (instancetype)initWithDuration:(double)duration autoreverses:(BOOL)autoreverses {
+  self = [super init];
+  if (self) {
+    _duration = duration;
+    _autoreverses = autoreverses;
+  }
+  return self;
+}
+
+@end
+

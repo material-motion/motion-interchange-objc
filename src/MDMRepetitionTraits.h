@@ -14,10 +14,17 @@
  limitations under the License.
  */
 
-#import "CAMediaTimingFunction+MDMTimingCurve.h"
-#import "MDMAnimationTraits.h"
-#import "MDMRepetitionTraits.h"
-#import "MDMRepetition.h"
-#import "MDMRepetitionOverTime.h"
-#import "MDMTimingCurve.h"
-#import "MDMSpringTimingCurve.h"
+#import <Foundation/Foundation.h>
+
+/**
+ A generalized representation of a repetition traits.
+ */
+@protocol MDMRepetitionTraits <NSObject>
+
+/**
+ Whether the animation should animate backwards after animating forwards.
+ */
+@property(nonatomic, assign, readonly) BOOL autoreverses;
+
+@end
+
