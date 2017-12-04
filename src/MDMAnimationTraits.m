@@ -16,8 +16,19 @@
 
 #import "MDMAnimationTraits.h"
 
+static const CGFloat MDMAnimationTraitsSystemModalMovementMass = 3;
+static const CGFloat MDMAnimationTraitsSystemModalMovementTension = 1000;
+static const CGFloat MDMAnimationTraitsSystemModalMovementFriction = 500;
+static const CGFloat MDMAnimationTraitsSystemModalMovementInitialVelocity = 0;
+
 const MDMAnimationTraits MDMAnimationTraitsSystemModalMovement = {
   .duration = 0.500, .timingCurve = {
-    .type = MDMTimingCurveTypeSpring, .data = { 3, 1000, 500, 0 }
+    .type = MDMTimingCurveTypeSpring,
+    .data = {
+      MDMAnimationTraitsSystemModalMovementMass,
+      MDMAnimationTraitsSystemModalMovementTension,
+      MDMAnimationTraitsSystemModalMovementFriction,
+      MDMAnimationTraitsSystemModalMovementInitialVelocity,
+    }
   }
 };

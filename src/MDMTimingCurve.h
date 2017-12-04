@@ -29,6 +29,16 @@ typedef NS_ENUM(NSUInteger, MDMTimingCurveType) {
 
   /**
    The value will be animated using a cubic bezier curve to model its velocity.
+
+   The associated data values are interpreted as follows:
+
+   data[0] = p1.x
+   data[1] = p1.y
+   data[2] = p2.x
+   data[3] = p2.y
+
+   as part of a four point cubic bezier where the first point is (0, 0) and the last is (1, 1):
+   [(0, 0), p1, p2, (1, 1)]
    */
   MDMTimingCurveTypeBezier = 1,
 
@@ -37,6 +47,13 @@ typedef NS_ENUM(NSUInteger, MDMTimingCurveType) {
 
    A spring will treat the duration property of the traits as a suggestion and may choose to
    ignore it altogether.
+
+   The associated data values are interpreted as follows:
+
+   data[0] = mass
+   data[1] = tension
+   data[2] = friction
+   data[3] = initial velocity
    */
   MDMTimingCurveTypeSpring = 2,
 
