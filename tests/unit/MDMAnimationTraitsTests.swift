@@ -36,7 +36,7 @@ class MDMAnimationTraitsTests: XCTestCase {
   }
 
   func testInitializerValuesWithDurationDelay() {
-    let traits = MDMAnimationTraits(duration: 0.5, delay: 0.2)
+    let traits = MDMAnimationTraits(delay: 0.2, duration: 0.5)
 
     XCTAssertEqualWithAccuracy(traits.duration, 0.5, accuracy: 0.001)
     XCTAssertEqualWithAccuracy(traits.delay, 0.2, accuracy: 0.001)
@@ -52,7 +52,7 @@ class MDMAnimationTraitsTests: XCTestCase {
   }
 
   func testInitializerValuesWithDurationDelayNilTimingCurve() {
-    let traits = MDMAnimationTraits(duration: 0.5, delay: 0.2, timingCurve: nil)
+    let traits = MDMAnimationTraits(delay: 0.2, duration: 0.5, timingCurve: nil)
 
     XCTAssertEqualWithAccuracy(traits.duration, 0.5, accuracy: 0.001)
     XCTAssertEqualWithAccuracy(traits.delay, 0.2, accuracy: 0.001)
@@ -62,7 +62,7 @@ class MDMAnimationTraitsTests: XCTestCase {
 
   func testInitializerValuesWithDurationDelayLinearTimingCurve() {
     let linear = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
-    let traits = MDMAnimationTraits(duration: 0.5, delay: 0.2, timingCurve: linear)
+    let traits = MDMAnimationTraits(delay: 0.2, duration: 0.5, timingCurve: linear)
 
     XCTAssertEqualWithAccuracy(traits.duration, 0.5, accuracy: 0.001)
     XCTAssertEqualWithAccuracy(traits.delay, 0.2, accuracy: 0.001)
@@ -78,7 +78,7 @@ class MDMAnimationTraitsTests: XCTestCase {
 
   func testInitializerValuesWithDurationDelaySpringTimingCurve() {
     let spring = MDMSpringTimingCurve(mass: 0.7, tension: 0.8, friction: 0.9)
-    let traits = MDMAnimationTraits(duration: 0.5, delay: 0.2, timingCurve: spring)
+    let traits = MDMAnimationTraits(delay: 0.2, duration: 0.5, timingCurve: spring)
 
     XCTAssertEqualWithAccuracy(traits.duration, 0.5, accuracy: 0.001)
     XCTAssertEqualWithAccuracy(traits.delay, 0.2, accuracy: 0.001)
@@ -95,8 +95,8 @@ class MDMAnimationTraitsTests: XCTestCase {
 
   func testInitializerValuesWithDurationDelayNilTimingCurveRepetition() {
     let repetition = MDMRepetition(numberOfRepetitions: 5)
-    let traits = MDMAnimationTraits(duration: 0.5,
-                                    delay: 0.2,
+    let traits = MDMAnimationTraits(delay: 0.2,
+                                    duration: 0.5,
                                     timingCurve: nil,
                                     repetition: repetition)
 
