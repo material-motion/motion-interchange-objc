@@ -16,19 +16,56 @@
 
 #import "MDMAnimationTraits.h"
 
-static const CGFloat MDMAnimationTraitsSystemModalMovementMass = 3;
-static const CGFloat MDMAnimationTraitsSystemModalMovementTension = 1000;
-static const CGFloat MDMAnimationTraitsSystemModalMovementFriction = 500;
-static const CGFloat MDMAnimationTraitsSystemModalMovementInitialVelocity = 0;
+#import "CAMediaTimingFunction+MDMTimingCurve.h"
+#import "MDMSpringTimingCurve.h"
 
-const MDMAnimationTraits MDMAnimationTraitsSystemModalMovement = {
-  .duration = 0.500, .timingCurve = {
-    .type = MDMTimingCurveTypeSpring,
-    .data = {
-      MDMAnimationTraitsSystemModalMovementMass,
-      MDMAnimationTraitsSystemModalMovementTension,
-      MDMAnimationTraitsSystemModalMovementFriction,
-      MDMAnimationTraitsSystemModalMovementInitialVelocity,
-    }
+@implementation MDMAnimationTraits
+
+- (instancetype)init {
+  [self doesNotRecognizeSelector:_cmd];
+  return nil;
+}
+
+- (nonnull instancetype)initWithDuration:(NSTimeInterval)duration {
+  return [self initWithDuration:duration delay:0];
+}
+
+- (instancetype)initWithDuration:(NSTimeInterval)duration delay:(NSTimeInterval)delay {
+  CAMediaTimingFunction *easeInOut =
+      [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+  return [self initWithDuration:duration delay:delay timingCurve:easeInOut];
+}
+
+- (instancetype)initWithDuration:(NSTimeInterval)duration
+                           delay:(NSTimeInterval)delay
+                     timingCurve:(id<MDMTimingCurve>)timingCurve {
+  return [self initWithDuration:duration delay:delay timingCurve:timingCurve repetition:nil];
+}
+
+- (instancetype)initWithDuration:(NSTimeInterval)duration
+                           delay:(NSTimeInterval)delay
+                     timingCurve:(id<MDMTimingCurve>)timingCurve
+                      repetition:(id<MDMRepetitionTraits>)repetition {
+  self = [super init];
+  if (self) {
+    _duration = duration;
+    _delay = delay;
+    _timingCurve = timingCurve;
+    _repetition = repetition;
   }
-};
+  return self;
+}
+
+@end
+
+@implementation MDMAnimationTraits (SystemTraits)
+
++ (MDMAnimationTraits *)systemModalMovement {
+  MDMSpringTimingCurve *timingCurve = [[MDMSpringTimingCurve alloc] initWithMass:3
+                                                                         tension:1000
+                                                                        friction:500];
+  return [[MDMAnimationTraits alloc] initWithDuration:0.500 delay:0 timingCurve:timingCurve];
+}
+
+@end
+

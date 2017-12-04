@@ -55,7 +55,7 @@
   [super tearDown];
 }
 
-- (void)testSystemModalMovementTimingCurveMatchesModalMovementTimingOldAPI {
+- (void)testSystemModalMovementTimingCurveMatchesModalMovementTiming {
   ModalPresentationExtractionViewController *presentedViewController =
       [[ModalPresentationExtractionViewController alloc] initWithNibName:nil bundle:nil];
   XCTestExpectation *didComplete = [self expectationWithDescription:@"Animation completed"];
@@ -72,45 +72,19 @@
   CASpringAnimation *springAnimation =
       (CASpringAnimation *)presentedViewController.presentationPositionAnimation;
 
-  MDMAnimationTraits traits = MDMAnimationTraitsSystemModalMovement;
-  XCTAssertEqualWithAccuracy(traits.timingCurve.data[MDMTimingCurveSpringDataIndexMass],
-                             springAnimation.mass,
-                             0.001);
-  XCTAssertEqualWithAccuracy(traits.timingCurve.data[MDMTimingCurveSpringDataIndexTension],
-                             springAnimation.stiffness,
-                             0.001);
-  XCTAssertEqualWithAccuracy(traits.timingCurve.data[MDMTimingCurveSpringDataIndexFriction],
-                             springAnimation.damping,
-                             0.001);
-}
+  MDMAnimationTraits *traits = [MDMAnimationTraits systemModalMovement];
+  XCTAssertTrue([traits.timingCurve isKindOfClass:[MDMSpringTimingCurve class]],
+                @"Expected the system timing curve to be a %@ type, but it was '%@' instead.",
+                NSStringFromClass([MDMSpringTimingCurve class]),
+                NSStringFromClass([traits.timingCurve class]));
+  if ([traits.timingCurve isKindOfClass:[MDMSpringTimingCurve class]]) {
+    MDMSpringTimingCurve *spring = (MDMSpringTimingCurve *)traits.timingCurve;
 
-- (void)testSystemModalMovementTimingCurveMatchesModalMovementTiming {
-  ModalPresentationExtractionViewController *presentedViewController =
-  [[ModalPresentationExtractionViewController alloc] initWithNibName:nil bundle:nil];
-  XCTestExpectation *didComplete = [self expectationWithDescription:@"Animation completed"];
-  [self.window.rootViewController presentViewController:presentedViewController
-                                               animated:YES
-                                             completion:^{
-                                               [didComplete fulfill];
-                                             }];
-
-  [self waitForExpectationsWithTimeout:1 handler:nil];
-
-  XCTAssertTrue([presentedViewController.presentationPositionAnimation
-                 isKindOfClass:[CASpringAnimation class]]);
-  CASpringAnimation *springAnimation =
-  (CASpringAnimation *)presentedViewController.presentationPositionAnimation;
-
-  MDMAnimationTraits traits = MDMAnimationTraitsSystemModalMovement;
-  XCTAssertEqualWithAccuracy(traits.timingCurve.data[MDMTimingCurveSpringDataIndexMass],
-                             springAnimation.mass,
-                             0.001);
-  XCTAssertEqualWithAccuracy(traits.timingCurve.data[MDMTimingCurveSpringDataIndexTension],
-                             springAnimation.stiffness,
-                             0.001);
-  XCTAssertEqualWithAccuracy(traits.timingCurve.data[MDMTimingCurveSpringDataIndexFriction],
-                             springAnimation.damping,
-                             0.001);
+    XCTAssertEqualWithAccuracy(spring.mass, springAnimation.mass, 0.001);
+    XCTAssertEqualWithAccuracy(spring.tension, springAnimation.stiffness, 0.001);
+    XCTAssertEqualWithAccuracy(spring.friction, springAnimation.damping, 0.001);
+    XCTAssertEqualWithAccuracy(spring.initialVelocity, springAnimation.initialVelocity, 0.001);
+  }
 }
 
 @end

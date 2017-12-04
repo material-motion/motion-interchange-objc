@@ -14,17 +14,29 @@
  limitations under the License.
  */
 
-#import <Foundation/Foundation.h>
+#import "MDMRepetitionOverTime.h"
 
-/**
- A generalized representation of a repetition traits.
- */
-@protocol MDMRepetitionTraits <NSObject>
+@implementation MDMRepetitionOverTime
 
-/**
- Whether the animation should animate backwards after animating forwards.
- */
-@property(nonatomic, assign, readonly) BOOL autoreverses;
+@synthesize autoreverses = _autoreverses;
+
+- (instancetype)init {
+  [self doesNotRecognizeSelector:_cmd];
+  return nil;
+}
+
+- (instancetype)initWithDuration:(double)duration {
+  return [self initWithDuration:duration autoreverses:NO];
+}
+
+- (instancetype)initWithDuration:(double)duration autoreverses:(BOOL)autoreverses {
+  self = [super init];
+  if (self) {
+    _duration = duration;
+    _autoreverses = autoreverses;
+  }
+  return self;
+}
 
 @end
 

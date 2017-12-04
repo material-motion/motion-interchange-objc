@@ -14,17 +14,31 @@
  limitations under the License.
  */
 
+#import <QuartzCore/QuartzCore.h>
 #import <Foundation/Foundation.h>
 
-/**
- A generalized representation of a repetition traits.
- */
-@protocol MDMRepetitionTraits <NSObject>
+#import "MDMTimingCurve.h"
+
+// A CAMediaTimingFunction is a timing curve - we simply define its conformity to our protocol here.
+@interface CAMediaTimingFunction () <MDMTimingCurve>
+@end
+
+@interface CAMediaTimingFunction (MotionInterchangeExtension)
 
 /**
- Whether the animation should animate backwards after animating forwards.
+ Returns a instance of the timing function with its control points reversed.
  */
-@property(nonatomic, assign, readonly) BOOL autoreverses;
+- (nonnull CAMediaTimingFunction *)mdm_reversed;
+
+/**
+ Returns the first control point of the timing function.
+ */
+@property(nonatomic, assign, readonly) CGPoint mdm_point1;
+
+/**
+ Returns the second control point of the timing function.
+ */
+@property(nonatomic, assign, readonly) CGPoint mdm_point2;
 
 @end
 

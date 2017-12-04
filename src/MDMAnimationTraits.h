@@ -23,32 +23,92 @@
 /**
  A generic representation of animation traits.
  */
-typedef struct MDMAnimationTraits {
-  /**
-   The amount of time, in seconds, before this animation's value interpolation should begin.
-   */
-  CFTimeInterval delay;
+@interface MDMAnimationTraits: NSObject
 
-  /**
-   The amount of time, in seconds, over which this animation should interpolate between its values.
-   */
-  CFTimeInterval duration;
+/**
+ Initializes the instance with the provided duration and default iOS ease in/out cubic bezier.
 
-  /**
-   The velocity and acceleration of the animation over time.
-   */
-  MDMTimingCurve timingCurve;
+ @param duration The animation will occur over this length of time, in seconds.
+ */
+- (nonnull instancetype)initWithDuration:(NSTimeInterval)duration;
 
-  /**
-   The repetition characteristics of the animation.
-   */
-  MDMRepetitionTraits repetition;
+/**
+ Initializes the instance with the provided duration, delay, and default iOS ease in/out cubic
+ bezier.
 
-} NS_SWIFT_NAME(AnimationTraits) MDMAnimationTraits;
+ @param duration The animation will occur over this length of time, in seconds, after the delay time
+ has passed.
+ @param delay The amount of time, in seconds, to wait before starting the animation.
+ */
+- (nonnull instancetype)initWithDuration:(NSTimeInterval)duration delay:(NSTimeInterval)delay;
+
+/**
+ Initializes the instance with the provided duration, delay, and timing curve.
+
+ @param duration The animation will occur over this length of time, in seconds, after the delay time
+ has passed.
+ @param delay The amount of time, in seconds, to wait before starting the animation.
+ @param timingCurve If provided, defines the acceleration timing for the animation. If nil, the
+ animation will be treated as instant and the duration/delay will be ignored.
+ */
+- (nonnull instancetype)initWithDuration:(NSTimeInterval)duration
+                                   delay:(NSTimeInterval)delay
+                             timingCurve:(nullable id<MDMTimingCurve>)timingCurve;
+
+/**
+ Initializes an animation trait with the provided timing curve, duration, delay, and repetition.
+
+ @param duration The animation will occur over this length of time, in seconds, after the delay time
+ has passed.
+ @param delay The amount of time, in seconds, to wait before starting the animation.
+ @param timingCurve If provided, defines the acceleration timing for the animation. If nil, the
+ animation will be treated as instant and the duration/delay will be ignored.
+ @param repetition The repetition traits of the animation. Most often an instance of MDMRepetition
+ or MDMRepetitionOverTime. If nil, the animation will not repeat.
+ */
+- (nonnull instancetype)initWithDuration:(NSTimeInterval)duration
+                                   delay:(NSTimeInterval)delay
+                             timingCurve:(nullable id<MDMTimingCurve>)timingCurve
+                              repetition:(nullable id<MDMRepetitionTraits>)repetition
+    NS_DESIGNATED_INITIALIZER;
+
+#pragma mark - Traits
+
+/**
+ The amount of time, in seconds, before this animation's value interpolation should begin.
+ */
+@property(nonatomic, assign, readonly) NSTimeInterval delay;
+
+/**
+ The amount of time, in seconds, over which this animation should interpolate between its values.
+ */
+@property(nonatomic, assign, readonly) NSTimeInterval duration;
+
+/**
+ The velocity and acceleration of the animation over time.
+ */
+@property(nonatomic, strong, nullable, readonly) id<MDMTimingCurve> timingCurve;
+
+/**
+ The repetition characteristics of the animation.
+ */
+@property(nonatomic, strong, nullable, readonly) id<MDMRepetitionTraits> repetition;
+
+#pragma mark - Unavailable
+
+/**
+ Unavailable.
+ */
+- (nonnull instancetype)init NS_UNAVAILABLE;
+
+@end
+
+@interface MDMAnimationTraits (SystemTraits)
 
 /**
  Animation traits for an iOS modal presentation slide animation.
  */
-FOUNDATION_EXPORT
-const MDMAnimationTraits MDMAnimationTraitsSystemModalMovement
-    NS_SWIFT_NAME(AnimationTraitsSystemModalMovement);
+@property(nonatomic, class, strong, nonnull, readonly) MDMAnimationTraits *systemModalMovement;
+
+@end
+

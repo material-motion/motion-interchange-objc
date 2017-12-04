@@ -14,17 +14,20 @@
  limitations under the License.
  */
 
-#import <Foundation/Foundation.h>
+import XCTest
+import MotionInterchange
 
-/**
- A generalized representation of a repetition traits.
- */
-@protocol MDMRepetitionTraits <NSObject>
+class MDMRepetitionTests: XCTestCase {
 
-/**
- Whether the animation should animate backwards after animating forwards.
- */
-@property(nonatomic, assign, readonly) BOOL autoreverses;
+  func testInitializationWithNumberOfRepetitions() {
+    let repetition = MDMRepetition(numberOfRepetitions: 5.5)
+    XCTAssertEqualWithAccuracy(repetition.numberOfRepetitions, 5.5, accuracy: 0.001)
+    XCTAssertFalse(repetition.autoreverses)
+  }
 
-@end
-
+  func testInitializationWithNumberOfRepetitionsAndAutoreversed() {
+    let repetition = MDMRepetition(numberOfRepetitions: 5.5, autoreverses: true)
+    XCTAssertEqualWithAccuracy(repetition.numberOfRepetitions, 5.5, accuracy: 0.001)
+    XCTAssertTrue(repetition.autoreverses)
+  }
+}

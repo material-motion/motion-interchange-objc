@@ -14,6 +14,10 @@
  limitations under the License.
  */
 
+#import "CAMediaTimingFunction+MDMTimingCurve.h"
 #import "MDMAnimationTraits.h"
 #import "MDMRepetitionTraits.h"
+#import "MDMRepetition.h"
+#import "MDMRepetitionOverTime.h"
 #import "MDMTimingCurve.h"
+#import "MDMSpringTimingCurve.h"
