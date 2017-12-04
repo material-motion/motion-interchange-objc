@@ -6,7 +6,51 @@
 [![codecov](https://codecov.io/gh/material-motion/motion-interchange-objc/branch/develop/graph/badge.svg)](https://codecov.io/gh/material-motion/motion-interchange-objc)
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/MotionInterchange.svg)](https://cocoapods.org/pods/MotionInterchange)
 [![Platform](https://img.shields.io/cocoapods/p/MotionInterchange.svg)](http://cocoadocs.org/docsets/MotionInterchange)
-[![Docs](https://img.shields.io/cocoapods/metrics/doc-percent/MotionInterchange.svg)](http://cocoadocs.org/docsets/MotionInterchange)
+
+"Magic numbers" — those lonely, abandoned values without a home — are often one of the first things
+targeted in code review for cleanup. And yet, numbers related to animations often go unnoticed and
+left behind, scattered throughout a code base with little to no organizational diligence. These
+forgotten metrics form the backbone of mobile interactions and are often the ones needing the most
+care - so why are we ok leaving them scattered throughout a code base?
+
+```objc
+// Let's play "find the magic number": how many magic numbers are hidden in this code?
+[UIView animateWithDuration:0.230
+                      delay:0
+                      options:UIViewAnimationOptionCurveEaseOut
+                      animations:^{
+                        myButton.position = updatedPosition;
+                      }
+                      completion:nil];
+// Hint: the answer is not "one, the number 0.230".
+```
+
+The challenge with extracting animation magic numbers is that we often don't have a clear
+definition of *what an animation is composed of*. An animation is not simply determined by its
+duration, in the same way that a color is not simply determined by how red it is.
+
+The traits of an animation — like the red, green, and blue components of a color — include the
+following:
+
+- Delay.
+- Duration.
+- Timing curve.
+- Repetition.
+
+Within this library you will find simple data types for storing and representing animation
+traits so that the lost magic numbers for animation your code can find a place to call home.
+
+Welcome home, lost numbers.
+
+## Sibling library: Motion Animator
+
+While it is possible to use the Motion Interchange as a standalone library, the Motion Animator
+is designed to be the primary consumer of Motion Interchange data types. Consider using these
+libraries together, with MotionAnimator as your primary dependency.
+
+To learn more, visit the MotionAnimator GitHub page:
+
+https://github.com/material-motion/motion-animator-objc
 
 ## Installation
 
