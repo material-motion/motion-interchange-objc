@@ -33,19 +33,11 @@ replace_swift() {
 }
 
 replace_all() {
-  replace_objc $1
-  replace_swift $1
+  replace_objc "$1"
+  replace_swift "$1"
 }
 
-# replace_all "s/MotionCurveMakeSpring(mass/TimingCurve(springWithMass/g"
-# replace_all "s/TimingCurveMakeBezier(p1x/TimingCurve(bezierWithP1x/g"
-# replace_all "s/MDMLinearTimingCurve/MDMTimingCurveLinear/g"
-# replace_all "s/MDMModalMovementTiming/MDMAnimationTraitsSystemModalMovement/g"
 replace_all "s/timing.curve/traits.timingCurve/g"
 replace_all "s/traits.curve/traits.timingCurve/g"
-# replace_all "s/\.curve/.timingCurve/g"
-# replace_all "s/MotionCurve/TimingCurve/g"
-# replace_all "s/MotionRepetition/RepetitionTraits/g"
-# replace_all "s/MotionTiming timing/AnimationTraits traits/g"
 replace_objc "s/MDMMotionTiming/MDMAnimationTraits */g"
 replace_swift "s/MotionTiming/MDMAnimationTraits/g"
