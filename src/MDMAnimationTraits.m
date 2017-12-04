@@ -30,6 +30,11 @@
   return [self initWithDelay:0 duration:duration];
 }
 
+- (instancetype)initWithDuration:(NSTimeInterval)duration
+              timingFunctionName:(NSString *)timingFunctionName {
+  return [self initWithDelay:0 duration:duration timingFunctionName:timingFunctionName];
+}
+
 - (instancetype)initWithDelay:(NSTimeInterval)delay duration:(NSTimeInterval)duration {
   return [self initWithDelay:delay
                     duration:duration
