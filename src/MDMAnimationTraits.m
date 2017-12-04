@@ -27,25 +27,25 @@
 }
 
 - (nonnull instancetype)initWithDuration:(NSTimeInterval)duration {
-  return [self initWithDuration:duration delay:0];
+  return [self initWithDelay:0 duration:duration];
 }
 
-- (instancetype)initWithDuration:(NSTimeInterval)duration delay:(NSTimeInterval)delay {
+- (instancetype)initWithDelay:(NSTimeInterval)delay duration:(NSTimeInterval)duration {
   CAMediaTimingFunction *easeInOut =
-      [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-  return [self initWithDuration:duration delay:delay timingCurve:easeInOut];
+  [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+  return [self initWithDelay:delay duration:duration timingCurve:easeInOut];
 }
 
-- (instancetype)initWithDuration:(NSTimeInterval)duration
-                           delay:(NSTimeInterval)delay
-                     timingCurve:(id<MDMTimingCurve>)timingCurve {
-  return [self initWithDuration:duration delay:delay timingCurve:timingCurve repetition:nil];
+- (instancetype)initWithDelay:(NSTimeInterval)delay
+                     duration:(NSTimeInterval)duration
+                  timingCurve:(id<MDMTimingCurve>)timingCurve {
+  return [self initWithDelay:delay duration:duration timingCurve:timingCurve repetition:nil];
 }
 
-- (instancetype)initWithDuration:(NSTimeInterval)duration
-                           delay:(NSTimeInterval)delay
-                     timingCurve:(id<MDMTimingCurve>)timingCurve
-                      repetition:(id<MDMRepetitionTraits>)repetition {
+- (instancetype)initWithDelay:(NSTimeInterval)delay
+                     duration:(NSTimeInterval)duration
+                  timingCurve:(id<MDMTimingCurve>)timingCurve
+                   repetition:(id<MDMRepetitionTraits>)repetition {
   self = [super init];
   if (self) {
     _duration = duration;
@@ -64,7 +64,7 @@
   MDMSpringTimingCurve *timingCurve = [[MDMSpringTimingCurve alloc] initWithMass:3
                                                                          tension:1000
                                                                         friction:500];
-  return [[MDMAnimationTraits alloc] initWithDuration:0.500 delay:0 timingCurve:timingCurve];
+  return [[MDMAnimationTraits alloc] initWithDelay:0 duration:0.500 timingCurve:timingCurve];
 }
 
 @end

@@ -23,21 +23,29 @@ fi
 
 search_path="$1"
 
-replace_all() {
+replace_objc() {
   find "$search_path" -type f -name "*.h" | xargs sed -i '' "$1"
   find "$search_path" -type f -name "*.m" | xargs sed -i '' "$1"
+}
+
+replace_swift() {
   find "$search_path" -type f -name "*.swift" | xargs sed -i '' "$1"
 }
 
-replace_all "s/MDMBezierTimingCurveDataIndex/MDMTimingCurveBezierDataIndex/g"
-replace_all "s/MDMSpringTimingCurveDataIndex/MDMTimingCurveSpringDataIndex/g"
-replace_all "s/MotionCurveMakeSpring(mass/TimingCurve(springWithMass/g"
-replace_all "s/TimingCurveMakeBezier(p1x/TimingCurve(bezierWithP1x/g"
-replace_all "s/MDMLinearTimingCurve/MDMTimingCurveLinear/g"
-replace_all "s/MDMModalMovementTiming/MDMAnimationTraitsSystemModalMovement/g"
+replace_all() {
+  replace_objc $1
+  replace_swift $1
+}
+
+# replace_all "s/MotionCurveMakeSpring(mass/TimingCurve(springWithMass/g"
+# replace_all "s/TimingCurveMakeBezier(p1x/TimingCurve(bezierWithP1x/g"
+# replace_all "s/MDMLinearTimingCurve/MDMTimingCurveLinear/g"
+# replace_all "s/MDMModalMovementTiming/MDMAnimationTraitsSystemModalMovement/g"
 replace_all "s/timing.curve/traits.timingCurve/g"
-replace_all "s/\.curve/.timingCurve/g"
-replace_all "s/MotionCurve/TimingCurve/g"
-replace_all "s/MotionRepetition/RepetitionTraits/g"
-replace_all "s/MotionTiming timing/AnimationTraits traits/g"
-replace_all "s/MotionTiming/AnimationTraits/g"
+replace_all "s/traits.curve/traits.timingCurve/g"
+# replace_all "s/\.curve/.timingCurve/g"
+# replace_all "s/MotionCurve/TimingCurve/g"
+# replace_all "s/MotionRepetition/RepetitionTraits/g"
+# replace_all "s/MotionTiming timing/AnimationTraits traits/g"
+replace_objc "s/MDMMotionTiming/MDMAnimationTraits */g"
+replace_swift "s/MotionTiming/MDMAnimationTraits/g"

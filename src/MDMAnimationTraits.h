@@ -36,24 +36,24 @@
  Initializes the instance with the provided duration, delay, and default iOS ease in/out cubic
  bezier.
 
+ @param delay The amount of time, in seconds, to wait before starting the animation.
  @param duration The animation will occur over this length of time, in seconds, after the delay time
  has passed.
- @param delay The amount of time, in seconds, to wait before starting the animation.
  */
-- (nonnull instancetype)initWithDuration:(NSTimeInterval)duration delay:(NSTimeInterval)delay;
+- (nonnull instancetype)initWithDelay:(NSTimeInterval)delay duration:(NSTimeInterval)duration;
 
 /**
  Initializes the instance with the provided duration, delay, and timing curve.
 
+ @param delay The amount of time, in seconds, to wait before starting the animation.
  @param duration The animation will occur over this length of time, in seconds, after the delay time
  has passed.
- @param delay The amount of time, in seconds, to wait before starting the animation.
  @param timingCurve If provided, defines the acceleration timing for the animation. If nil, the
  animation will be treated as instant and the duration/delay will be ignored.
  */
-- (nonnull instancetype)initWithDuration:(NSTimeInterval)duration
-                                   delay:(NSTimeInterval)delay
-                             timingCurve:(nullable id<MDMTimingCurve>)timingCurve;
+- (nonnull instancetype)initWithDelay:(NSTimeInterval)delay
+                             duration:(NSTimeInterval)duration
+                          timingCurve:(nullable id<MDMTimingCurve>)timingCurve;
 
 /**
  Initializes an animation trait with the provided timing curve, duration, delay, and repetition.
@@ -66,10 +66,10 @@
  @param repetition The repetition traits of the animation. Most often an instance of MDMRepetition
  or MDMRepetitionOverTime. If nil, the animation will not repeat.
  */
-- (nonnull instancetype)initWithDuration:(NSTimeInterval)duration
-                                   delay:(NSTimeInterval)delay
-                             timingCurve:(nullable id<MDMTimingCurve>)timingCurve
-                              repetition:(nullable id<MDMRepetitionTraits>)repetition
+- (nonnull instancetype)initWithDelay:(NSTimeInterval)delay
+                             duration:(NSTimeInterval)duration
+                          timingCurve:(nullable id<MDMTimingCurve>)timingCurve
+                           repetition:(nullable id<MDMRepetitionTraits>)repetition
     NS_DESIGNATED_INITIALIZER;
 
 #pragma mark - Traits
