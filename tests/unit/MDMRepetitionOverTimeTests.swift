@@ -25,7 +25,7 @@ class MDMRepetitionOverTimeTests: XCTestCase {
     XCTAssertFalse(repetition.autoreverses)
   }
 
-  func testInitializationWithNumberOfRepetitionsAndAutoreversed() {
+  func testInitializationWithDurationAndAutoreversed() {
     let repetition = MDMRepetitionOverTime(duration: 5.5, autoreverses: true)
     XCTAssertEqualWithAccuracy(repetition.duration, 5.5, accuracy: 0.001)
     XCTAssertTrue(repetition.autoreverses)

@@ -32,7 +32,7 @@
 
 - (instancetype)initWithDelay:(NSTimeInterval)delay duration:(NSTimeInterval)duration {
   CAMediaTimingFunction *easeInOut =
-  [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+      [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
   return [self initWithDelay:delay duration:duration timingCurve:easeInOut];
 }
 

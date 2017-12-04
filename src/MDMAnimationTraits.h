@@ -26,15 +26,16 @@
 @interface MDMAnimationTraits: NSObject
 
 /**
- Initializes the instance with the provided duration and default iOS ease in/out cubic bezier.
+ Initializes the instance with the provided duration and kCAMediaTimingFunctionEaseInEaseOut timing
+ curve.
 
  @param duration The animation will occur over this length of time, in seconds.
  */
 - (nonnull instancetype)initWithDuration:(NSTimeInterval)duration;
 
 /**
- Initializes the instance with the provided duration, delay, and default iOS ease in/out cubic
- bezier.
+ Initializes the instance with the provided duration, delay, and
+ kCAMediaTimingFunctionEaseInEaseOut timing curve.
 
  @param delay The amount of time, in seconds, to wait before starting the animation.
  @param duration The animation will occur over this length of time, in seconds, after the delay time
