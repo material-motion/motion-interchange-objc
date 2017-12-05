@@ -34,6 +34,15 @@
 - (nonnull instancetype)initWithDuration:(NSTimeInterval)duration;
 
 /**
+ Initializes the instance with the provided duration and named bezier timing curve.
+
+ @param duration The animation will occur over this length of time, in seconds.
+ @param timingFunctionName A kCAMediaTimingFunction name representing a cubic bezier timing curve.
+ */
+- (nonnull instancetype)initWithDuration:(NSTimeInterval)duration
+                      timingFunctionName:(nonnull NSString *)timingFunctionName;
+
+/**
  Initializes the instance with the provided duration, delay, and
  kCAMediaTimingFunctionEaseInEaseOut timing curve.
 
@@ -42,6 +51,21 @@
  has passed.
  */
 - (nonnull instancetype)initWithDelay:(NSTimeInterval)delay duration:(NSTimeInterval)duration;
+
+/**
+ Initializes the instance with the provided duration, delay, and named bezier timing curve.
+
+ This is a convenience API for defining a timing curve using the Core Animation timing function
+ names. See the documentation for CAMediaTimingFunction for more details.
+
+ @param delay The amount of time, in seconds, to wait before starting the animation.
+ @param duration The animation will occur over this length of time, in seconds, after the delay time
+ has passed.
+ @param timingFunctionName A kCAMediaTimingFunction name representing a cubic bezier timing curve.
+ */
+- (nonnull instancetype)initWithDelay:(NSTimeInterval)delay
+                             duration:(NSTimeInterval)duration
+                   timingFunctionName:(nonnull NSString *)timingFunctionName;
 
 /**
  Initializes the instance with the provided duration, delay, and timing curve.

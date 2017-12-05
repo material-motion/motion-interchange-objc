@@ -30,10 +30,22 @@
   return [self initWithDelay:0 duration:duration];
 }
 
+- (instancetype)initWithDuration:(NSTimeInterval)duration
+              timingFunctionName:(NSString *)timingFunctionName {
+  return [self initWithDelay:0 duration:duration timingFunctionName:timingFunctionName];
+}
+
 - (instancetype)initWithDelay:(NSTimeInterval)delay duration:(NSTimeInterval)duration {
-  CAMediaTimingFunction *easeInOut =
-      [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-  return [self initWithDelay:delay duration:duration timingCurve:easeInOut];
+  return [self initWithDelay:delay
+                    duration:duration
+          timingFunctionName:kCAMediaTimingFunctionEaseInEaseOut];
+}
+
+- (instancetype)initWithDelay:(NSTimeInterval)delay
+                     duration:(NSTimeInterval)duration
+           timingFunctionName:(NSString *)timingFunctionName {
+  CAMediaTimingFunction *timingCurve = [CAMediaTimingFunction functionWithName:timingFunctionName];
+  return [self initWithDelay:delay duration:duration timingCurve:timingCurve];
 }
 
 - (instancetype)initWithDelay:(NSTimeInterval)delay
