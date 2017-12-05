@@ -1,4 +1,4 @@
-# Motion Interchange
+![Motion Interchange Banner](img/motion-interchange-banner.gif)
 
 > A standard format for representing motion specifications in Objective-C and Swift.
 
