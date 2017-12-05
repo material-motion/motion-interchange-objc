@@ -8,7 +8,7 @@
 [![Platform](https://img.shields.io/cocoapods/p/MotionInterchange.svg)](http://cocoadocs.org/docsets/MotionInterchange)
 
 "Magic numbers" — those lonely, abandoned values without a home — are often one of the first things
-targeted in code review for cleanup. And yet, numbers related to animations often go unnoticed and
+targeted in code review for cleanup. And yet, numbers related to animations may go unnoticed and
 left behind, scattered throughout a code base with little to no organizational diligence. These
 forgotten metrics form the backbone of mobile interactions and are often the ones needing the most
 care - so why are we ok leaving them scattered throughout a code base?
