@@ -1,6 +1,6 @@
 ![Motion Interchange Banner](img/motion-interchange-banner.gif)
 
-> A standard format for representing motion specifications in Objective-C and Swift.
+> A standard format for animation traits in Objective-C and Swift.
 
 [![Build Status](https://travis-ci.org/material-motion/motion-interchange-objc.svg?branch=develop)](https://travis-ci.org/material-motion/motion-interchange-objc)
 [![codecov](https://codecov.io/gh/material-motion/motion-interchange-objc/branch/develop/graph/badge.svg)](https://codecov.io/gh/material-motion/motion-interchange-objc)
