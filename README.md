@@ -38,7 +38,7 @@ following:
 - Repetition.
 
 Within this library you will find simple data types for storing and representing animation
-traits so that the lost magic numbers for animation your code can find a place to call home.
+traits so that the magic numbers that define your animations can find a place to call home.
 
 Welcome home, lost numbers.
 
