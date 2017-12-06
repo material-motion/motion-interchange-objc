@@ -102,102 +102,75 @@ commands:
 
 ## Guides
 
-1. [Architecture](#architecture)
-2. [How to define a cubic bezier animation](#how-to-define-a-cubic-bezier-animation)
-3. [How to define a spring animation](#how-to-define-a-spring-animation)
-4. [How to define a motion spec](#how-to-define-a-motion-spec)
+1. [Animation traits](#animation-traits)
+2. [Timing curves](#timing-curves)
+3. [How to define a motion spec](#how-to-define-a-motion-spec)
 
-### Architecture
+### Animation traits
 
-This library defines a format for representing motion in Objective-C and Swift applications. The
-primary data type, `MotionTiming`, allows you to describe the duration, delay, timing curve, and
-repetition for an animation.
+The primary data type you'll make use of is `MDMAnimationTraits`. This class can store all of
+the necessary traits that make up an animation, including:
 
-### How to define a cubic bezier animation
+- Delay.
+- Duration.
+- Timing curve.
+- Repetition.
 
-In Objective-C:
+In Objective-C, you initialize a simple ease in/out cubic bezier instance like so:
 
 ```objc
-MDMMotionTiming timing = (MDMMotionTiming){
-  .delay = 0.150,
-  .duration = 0.225,
-  .curve = _MDMBezier(0.4f, 0.0f, 0.2f, 1.0f)
-}
+MDMAnimationTraits *traits = [[MDMAnimationTraits alloc] initWithDuration:0.5];
 ```
 
-### How to define a spring animation
+And in Swift:
 
-In Objective-C:
-
-```objc
-MDMMotionTiming timing = (MDMMotionTiming){
-  .curve = _MDMSpring(1, 100, 10)
-}
+```swift
+let traits = MDMAnimationTraits(duration: 0.5)
 ```
 
-### How to define a motion spec
+There are many more ways to initialize animation traits. Read the
+[header documentation](src/MDMAnimationTraits.h) to see all of the available initializers.
 
-Motion timing structs can be used to represent complex multi-element and multi-property motion
-specifications. An example of a common complex motion spec is a transition which has both an
-expansion and a collapse variant. If we wanted to represent such a transition we might create a
-set of structures like this:
+### Timing curves
+
+A timing curve describes how quickly an animation progresses over time. Two types of timing
+curves are supported by Core Animation, and therefore by the MotionInterchange:
+
+- Cubic bezier
+- Spring
+
+**Cubic beziers** are represented by the CAMediaTimingFunction object. To define an
+animation trait with a cubic bezier curve in Objective-C:
 
 ```objc
-struct MDCMaskedTransitionMotionTiming {
-  MDMMotionTiming contentFade;
-  MDMMotionTiming floodBackgroundColor;
-  MDMMotionTiming maskTransformation;
-  MDMMotionTiming horizontalMovement;
-  MDMMotionTiming verticalMovement;
-  MDMMotionTiming scrimFade;
-};
-typedef struct MDCMaskedTransitionMotionTiming MDCMaskedTransitionMotionTiming;
-
-struct MDCMaskedTransitionMotionSpec {
-  MDCMaskedTransitionMotionTiming expansion;
-  MDCMaskedTransitionMotionTiming collapse;
-  BOOL shouldSlideWhenCollapsed;
-  BOOL isCentered;
-};
-typedef struct MDCMaskedTransitionMotionSpec MDCMaskedTransitionMotionSpec;
+CAMediaTimingFunction *timingCurve =
+    [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+MDMAnimationTraits *traits =
+    [[MDMAnimationTraits alloc] initWithDelay:0 duration:0.5 timingCurve:timingCurve];
 ```
 
-We can then implement a spec like so:
+And in Swift:
 
-```objc
-#define MDMEightyForty _MDMBezier(0.4f, 0.0f, 0.2f, 1.0f)
-#define MDMFortyOut _MDMBezier(0.4f, 0.0f, 1.0f, 1.0f)
-
-struct MDCMaskedTransitionMotionSpec fullscreen = {
-  .expansion = {
-    .contentFade = {
-      .delay = 0.150, .duration = 0.225, .curve = MDMEightyForty,
-    },
-    .floodBackgroundColor = {
-      .delay = 0.000, .duration = 0.075, .curve = MDMEightyForty,
-    },
-    .maskTransformation = {
-      .delay = 0.000, .duration = 0.105, .curve = MDMFortyOut,
-    },
-    .horizontalMovement = {.curve = { .type = MDMMotionCurveTypeInstant }},
-    .verticalMovement = {
-      .delay = 0.045, .duration = 0.330, .curve = MDMEightyForty,
-    },
-    .scrimFade = {
-      .delay = 0.000, .duration = 0.150, .curve = MDMEightyForty,
-    }
-  },
-  .shouldSlideWhenCollapsed = true,
-  .isCentered = false
-};
+```swift
+let timingCurve = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+let traits = MDMAnimationTraits(delay: 0, duration: 0.5, timingCurve: timingCurve)
 ```
 
-We can then use this motion spec to implement our animations in a transition like so:
+**Springs** are represented with the custom `MDMSpringTimingCurve` type. To define an
+animation trait with a spring curve in Objective-C:
 
 ```objc
-MDCMaskedTransitionMotionTiming timing = isExpanding ? fullscreen.expansion : fullscreen.collapse;
+MDMSpringTimingCurve *timingCurve =
+    [[MDMSpringTimingCurve alloc] initWithMass:1 tension:100 friction:10];
+MDMAnimationTraits *traits =
+    [[MDMAnimationTraits alloc] initWithDelay:0 duration:0.5 timingCurve:timingCurve];
+```
 
-// Can now use timing's properties to associate animations with views.
+And in Swift:
+
+```swift
+let timingCurve = MDMSpringTimingCurve(mass: 1, tension: 100, friction: 10)
+let traits = MDMAnimationTraits(delay: 0, duration: 0.5, timingCurve: timingCurve)
 ```
 
 ## Contributing
