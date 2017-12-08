@@ -35,6 +35,22 @@ class MDMAnimationTraitsTests: XCTestCase {
     XCTAssertNil(traits.repetition)
   }
 
+  func testInitializerValuesWithDurationAndEaseInCurve() {
+    let traits = MDMAnimationTraits(duration: 0.5, animationCurve: .easeIn)
+
+    XCTAssertEqualWithAccuracy(traits.duration, 0.5, accuracy: 0.001)
+    XCTAssertEqualWithAccuracy(traits.delay, 0, accuracy: 0.001)
+    XCTAssertTrue(traits.timingCurve is CAMediaTimingFunction)
+    if let timingCurve = traits.timingCurve as? CAMediaTimingFunction {
+      let easeInOut = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
+      XCTAssertEqualWithAccuracy(timingCurve.mdm_point1.x, easeInOut.mdm_point1.x, accuracy: 0.001)
+      XCTAssertEqualWithAccuracy(timingCurve.mdm_point1.y, easeInOut.mdm_point1.y, accuracy: 0.001)
+      XCTAssertEqualWithAccuracy(timingCurve.mdm_point2.x, easeInOut.mdm_point2.x, accuracy: 0.001)
+      XCTAssertEqualWithAccuracy(timingCurve.mdm_point2.y, easeInOut.mdm_point2.y, accuracy: 0.001)
+    }
+    XCTAssertNil(traits.repetition)
+  }
+
   func testInitializerValuesWithDurationDelay() {
     let traits = MDMAnimationTraits(delay: 0.2, duration: 0.5)
 

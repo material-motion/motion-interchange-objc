@@ -31,20 +31,32 @@
 }
 
 - (instancetype)initWithDuration:(NSTimeInterval)duration
-              timingFunctionName:(NSString *)timingFunctionName {
-  return [self initWithDelay:0 duration:duration timingFunctionName:timingFunctionName];
+                  animationCurve:(UIViewAnimationCurve)animationCurve {
+  return [self initWithDelay:0 duration:duration animationCurve:animationCurve];
 }
 
 - (instancetype)initWithDelay:(NSTimeInterval)delay duration:(NSTimeInterval)duration {
-  return [self initWithDelay:delay
-                    duration:duration
-          timingFunctionName:kCAMediaTimingFunctionEaseInEaseOut];
+  return [self initWithDelay:delay duration:duration animationCurve:UIViewAnimationCurveEaseInOut];
 }
 
 - (instancetype)initWithDelay:(NSTimeInterval)delay
                      duration:(NSTimeInterval)duration
-           timingFunctionName:(NSString *)timingFunctionName {
-  CAMediaTimingFunction *timingCurve = [CAMediaTimingFunction functionWithName:timingFunctionName];
+               animationCurve:(UIViewAnimationCurve)animationCurve {
+  CAMediaTimingFunction *timingCurve;
+  switch (animationCurve) {
+    case UIViewAnimationCurveEaseInOut:
+      timingCurve = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+      break;
+    case UIViewAnimationCurveEaseIn:
+      timingCurve = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+      break;
+    case UIViewAnimationCurveEaseOut:
+      timingCurve = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+      break;
+    case UIViewAnimationCurveLinear:
+      timingCurve = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+      break;
+  }
   return [self initWithDelay:delay duration:duration timingCurve:timingCurve];
 }
 
