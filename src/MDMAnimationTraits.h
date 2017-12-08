@@ -16,6 +16,7 @@
 
 #import <CoreGraphics/CoreGraphics.h>
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 #import "MDMRepetitionTraits.h"
 #import "MDMTimingCurve.h"
