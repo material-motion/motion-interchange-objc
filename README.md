@@ -104,7 +104,6 @@ commands:
 
 1. [Animation traits](#animation-traits)
 2. [Timing curves](#timing-curves)
-3. [How to define a motion spec](#how-to-define-a-motion-spec)
 
 ### Animation traits
 
