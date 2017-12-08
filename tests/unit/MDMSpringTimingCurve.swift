@@ -66,4 +66,20 @@ class MDMTimingCurveTests: XCTestCase {
       }
     }
   }
+
+  func testChangingInitialVelocityAffectsTheCoefficients() {
+    let curve = MDMSpringTimingCurve(duration: 0.5,
+                                     dampingRatio: 0.8,
+                                     initialVelocity: 0)
+
+    let originalMass = curve.mass
+    let originalTension = curve.tension
+    let originalFriction = curve.friction
+
+    curve.initialVelocity = 10
+
+    XCTAssertEqualWithAccuracy(curve.mass, originalMass, accuracy: 0.001)
+    XCTAssertNotEqualWithAccuracy(curve.tension, originalTension, 0.001)
+    XCTAssertNotEqualWithAccuracy(curve.friction, originalFriction, 0.001)
+  }
 }
