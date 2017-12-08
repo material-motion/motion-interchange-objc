@@ -111,6 +111,10 @@
  The initial velocity of the spring simulation.
 
  Measured in units of translation per second.
+
+ If this timing curve was initialized using a damping ratio then setting a new initial velocity
+ will also change the the mass/tension/friction values according to the new UIKit damping
+ coefficient calculation.
  */
 @property(nonatomic, assign) CGFloat initialVelocity;
 

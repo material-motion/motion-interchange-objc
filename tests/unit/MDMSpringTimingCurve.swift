@@ -67,7 +67,7 @@ class MDMTimingCurveTests: XCTestCase {
     }
   }
 
-  func testChangingInitialVelocityAffectsTheCoefficients() {
+  func testChangingInitialVelocityInvalidatesTheCoefficients() {
     let curve = MDMSpringTimingCurve(duration: 0.5,
                                      dampingRatio: 0.8,
                                      initialVelocity: 0)
@@ -78,8 +78,57 @@ class MDMTimingCurveTests: XCTestCase {
 
     curve.initialVelocity = 10
 
+    // UIKit never appears to change the mass.
     XCTAssertEqualWithAccuracy(curve.mass, originalMass, accuracy: 0.001)
     XCTAssertNotEqualWithAccuracy(curve.tension, originalTension, 0.001)
     XCTAssertNotEqualWithAccuracy(curve.friction, originalFriction, 0.001)
+  }
+
+  func testWithDampingRatioSettingMassKeepsTheNewMass() {
+    let curve = MDMSpringTimingCurve(duration: 0.5,
+                                     dampingRatio: 0.8,
+                                     initialVelocity: 0)
+
+    let originalMass = curve.mass
+    let originalTension = curve.tension
+    let originalFriction = curve.friction
+
+    curve.mass = originalMass + 1
+
+    XCTAssertEqualWithAccuracy(curve.mass, originalMass + 1, accuracy: 0.001)
+    XCTAssertEqualWithAccuracy(curve.tension, originalTension, accuracy: 0.001)
+    XCTAssertEqualWithAccuracy(curve.friction, originalFriction, accuracy: 0.001)
+  }
+
+  func testWithDampingRatioSettingTensionKeepsTheNewTension() {
+    let curve = MDMSpringTimingCurve(duration: 0.5,
+                                     dampingRatio: 0.8,
+                                     initialVelocity: 0)
+
+    let originalMass = curve.mass
+    let originalTension = curve.tension
+    let originalFriction = curve.friction
+
+    curve.tension = originalTension + 1
+
+    XCTAssertEqualWithAccuracy(curve.mass, originalMass, accuracy: 0.001)
+    XCTAssertEqualWithAccuracy(curve.tension, originalTension + 1, accuracy: 0.001)
+    XCTAssertEqualWithAccuracy(curve.friction, originalFriction, accuracy: 0.001)
+  }
+
+  func testWithDampingRatioSettingFrictionKeepsTheNewFriction() {
+    let curve = MDMSpringTimingCurve(duration: 0.5,
+                                     dampingRatio: 0.8,
+                                     initialVelocity: 0)
+
+    let originalMass = curve.mass
+    let originalTension = curve.tension
+    let originalFriction = curve.friction
+
+    curve.friction = originalFriction + 1
+
+    XCTAssertEqualWithAccuracy(curve.mass, originalMass, accuracy: 0.001)
+    XCTAssertEqualWithAccuracy(curve.tension, originalTension, accuracy: 0.001)
+    XCTAssertEqualWithAccuracy(curve.friction, originalFriction + 1, accuracy: 0.001)
   }
 }
