@@ -155,6 +155,19 @@ let timingCurve = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOu
 let traits = MDMAnimationTraits(delay: 0, duration: 0.5, timingCurve: timingCurve)
 ```
 
+You can also use the UIViewAnimationCurve type to initialize a timing curve in Objective-C:
+
+```objc
+MDMAnimationTraits *traits =
+    [[MDMAnimationTraits alloc] initWithDuration:0.5 animationCurve:UIViewAnimationCurveEaseIn];
+```
+
+And in Swift:
+
+```swift
+let traits = MDMAnimationTraits(duration: 0.5, animationCurve: .easeIn)
+```
+
 **Springs** are represented with the custom `MDMSpringTimingCurve` type. To define an
 animation trait with a spring curve in Objective-C:
 
