@@ -109,7 +109,7 @@
   // linking against the public API on iOS 9+.
 #pragma clang diagnostic ignored "-Wpartial-availability"
   CASpringAnimation *springAnimation =
-  (CASpringAnimation *)[view.layer animationForKey:animationKey];
+      (CASpringAnimation *)[view.layer animationForKey:animationKey];
   NSAssert([springAnimation isKindOfClass:[CASpringAnimation class]],
            @"Unable to extract animation timing curve: unexpected animation type.");
 #pragma clang diagnostic pop
