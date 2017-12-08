@@ -91,32 +91,27 @@
 
  Affects the animation's momentum. This is usually 1.
  */
-@property(nonatomic, assign, readonly) CGFloat mass;
+@property(nonatomic, assign) CGFloat mass;
 
 /**
  The tension of the spring simulation.
 
  Affects how quickly the animation moves toward its destination.
  */
-@property(nonatomic, assign, readonly) CGFloat tension;
+@property(nonatomic, assign) CGFloat tension;
 
 /**
  The friction of the spring simulation.
 
  Affects how quickly the animation starts and stops.
  */
-@property(nonatomic, assign, readonly) CGFloat friction;
+@property(nonatomic, assign) CGFloat friction;
 
 /**
  The initial velocity of the spring simulation.
 
  Measured in units of translation per second.
  */
-@property(nonatomic, assign, readonly) CGFloat initialVelocity;
-
-/**
- Unavailable.
- */
-- (nonnull instancetype)init NS_UNAVAILABLE;
+@property(nonatomic, assign) CGFloat initialVelocity;
 
 @end

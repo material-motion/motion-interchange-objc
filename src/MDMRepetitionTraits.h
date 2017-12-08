@@ -24,7 +24,7 @@
 /**
  Whether the animation should animate backwards after animating forwards.
  */
-@property(nonatomic, assign, readonly) BOOL autoreverses;
+@property(nonatomic, assign) BOOL autoreverses;
 
 @end
 

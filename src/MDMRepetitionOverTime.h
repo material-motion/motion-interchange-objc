@@ -44,7 +44,7 @@
 /**
  The amount of time, in seconds, that will pass before this animation stops repeating.
  */
-@property(nonatomic, assign, readonly) double duration;
+@property(nonatomic, assign) double duration;
 
 /**
  Unavailable.
