@@ -16,6 +16,8 @@
 
 #import "MDMSpringTimingCurve.h"
 
+#import <UIKit/UIKit.h>
+
 @implementation MDMSpringTimingCurve {
   CGFloat _duration;
   CGFloat _dampingRatio;

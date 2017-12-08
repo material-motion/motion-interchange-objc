@@ -37,6 +37,7 @@ strict_warnings_objc_library(
         "CoreGraphics",
         "Foundation",
         "QuartzCore",
+        "UIKit",
     ],
     enable_modules = 1,
     includes = ["src"],
