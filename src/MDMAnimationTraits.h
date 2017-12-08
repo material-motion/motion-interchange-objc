@@ -136,4 +136,3 @@
 @property(nonatomic, class, strong, nonnull, readonly) MDMAnimationTraits *systemModalMovement;
 
 @end
-
