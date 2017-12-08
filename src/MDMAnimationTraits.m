@@ -62,14 +62,14 @@
 
 - (instancetype)initWithDelay:(NSTimeInterval)delay
                      duration:(NSTimeInterval)duration
-                  timingCurve:(id<MDMTimingCurve>)timingCurve {
+                  timingCurve:(NSObject<MDMTimingCurve> *)timingCurve {
   return [self initWithDelay:delay duration:duration timingCurve:timingCurve repetition:nil];
 }
 
 - (instancetype)initWithDelay:(NSTimeInterval)delay
                      duration:(NSTimeInterval)duration
-                  timingCurve:(id<MDMTimingCurve>)timingCurve
-                   repetition:(id<MDMRepetitionTraits>)repetition {
+                  timingCurve:(NSObject<MDMTimingCurve> *)timingCurve
+                   repetition:(NSObject<MDMRepetitionTraits> *)repetition {
   self = [super init];
   if (self) {
     _duration = duration;
@@ -78,6 +78,15 @@
     _repetition = repetition;
   }
   return self;
+}
+
+#pragma mark - NSCopying
+
+- (id)copyWithZone:(NSZone *)zone {
+  return [[[self class] alloc] initWithDelay:self.delay
+                                    duration:self.duration
+                                 timingCurve:[self.timingCurve copy]
+                                  repetition:[self.repetition copy]];
 }
 
 @end

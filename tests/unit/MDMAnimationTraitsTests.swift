@@ -126,4 +126,38 @@ class MDMAnimationTraitsTests: XCTestCase {
       XCTAssertEqual(setRepetition.autoreverses, repetition.autoreverses)
     }
   }
+
+  func testModifyingACopyDoesNotModifyTheOriginal() {
+    let spring = MDMSpringTimingCurve(mass: 0.7, tension: 0.8, friction: 0.9)
+    let repetition = MDMRepetition(numberOfRepetitions: 5)
+    let traits = MDMAnimationTraits(delay: 0.2,
+                                    duration: 0.5,
+                                    timingCurve: spring,
+                                    repetition: repetition)
+
+    let copy = traits.copy() as! MDMAnimationTraits
+    copy.delay = copy.delay + 1
+    copy.duration = copy.duration + 1
+    if let springCopy = copy.timingCurve as? MDMSpringTimingCurve {
+      springCopy.friction = springCopy.friction + 1
+      springCopy.tension = springCopy.tension + 1
+      springCopy.mass = springCopy.mass + 1
+      springCopy.initialVelocity = springCopy.initialVelocity + 1
+
+      XCTAssertNotEqualWithAccuracy(springCopy.friction, spring.friction, 0.001)
+      XCTAssertNotEqualWithAccuracy(springCopy.tension, spring.tension, 0.001)
+      XCTAssertNotEqualWithAccuracy(springCopy.mass, spring.mass, 0.001)
+      XCTAssertNotEqualWithAccuracy(springCopy.initialVelocity, spring.initialVelocity, 0.001)
+    }
+    if let repetitionCopy = copy.repetition as? MDMRepetition {
+      repetitionCopy.autoreverses = !repetitionCopy.autoreverses
+      repetitionCopy.numberOfRepetitions = repetitionCopy.numberOfRepetitions + 1
+
+      XCTAssertNotEqual(repetitionCopy.autoreverses, repetition.autoreverses)
+      XCTAssertNotEqual(repetitionCopy.numberOfRepetitions, repetition.numberOfRepetitions)
+    }
+
+    XCTAssertNotEqualWithAccuracy(copy.duration, traits.duration, 0.001)
+    XCTAssertNotEqualWithAccuracy(copy.delay, traits.delay, 0.001)
+  }
 }

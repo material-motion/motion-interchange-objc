@@ -22,7 +22,7 @@
 /**
  A timing curve that represents the motion of a single-dimensional attached spring.
  */
-@interface MDMSpringTimingCurve: NSObject <MDMTimingCurve>
+@interface MDMSpringTimingCurve: NSObject <NSCopying, MDMTimingCurve>
 
 /**
  Initializes the timing curve with the given parameters and an initial velocity of zero.
