@@ -172,6 +172,22 @@ let timingCurve = MDMSpringTimingCurve(mass: 1, tension: 100, friction: 10)
 let traits = MDMAnimationTraits(delay: 0, duration: 0.5, timingCurve: timingCurve)
 ```
 
+Springs can also be initialized using UIKit's [damping ratio concept](https://developer.apple.com/documentation/uikit/uiview/1622594-animatewithduration):
+
+```objc
+MDMSpringTimingCurve *timingCurve =
+    [[MDMSpringTimingCurve alloc] initWithDuration:0.5 dampingRatio:0.5];
+MDMAnimationTraits *traits =
+    [[MDMAnimationTraits alloc] initWithDelay:0 duration:0.5 timingCurve:timingCurve];
+```
+
+And in Swift:
+
+```swift
+let timingCurve = MDMSpringTimingCurve(duration: 0.5, dampingRatio: 0.5)
+let traits = MDMAnimationTraits(delay: 0, duration: 0.5, timingCurve: timingCurve)
+```
+
 ## Contributing
 
 We welcome contributions!
