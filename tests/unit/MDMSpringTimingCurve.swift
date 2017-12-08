@@ -34,4 +34,36 @@ class MDMTimingCurveTests: XCTestCase {
     XCTAssertEqualWithAccuracy(curve.friction, 0.3, accuracy: 0.001)
     XCTAssertEqualWithAccuracy(curve.initialVelocity, 0.4, accuracy: 0.001)
   }
+
+  @available(iOS 9.0, *)
+  func testInitializerValuesWithDampingCoefficient() {
+    for duration in stride(from: TimeInterval(0.1), to: TimeInterval(3), by: TimeInterval(0.5)) {
+      for dampingRatio in stride(from: CGFloat(0.1), to: CGFloat(2), by: CGFloat(0.4)) {
+        for initialVelocity in stride(from: CGFloat(-2), to: CGFloat(2), by: CGFloat(0.8)) {
+          let curve = MDMSpringTimingCurve(duration: duration,
+                                           dampingRatio: dampingRatio,
+                                           initialVelocity: initialVelocity)
+          let view = UIView()
+
+          UIView.animate(withDuration: duration,
+                         delay: 0,
+                         usingSpringWithDamping: dampingRatio,
+                         initialSpringVelocity: initialVelocity,
+                         options: [],
+                         animations: {
+                          view.center = CGPoint(x: initialVelocity * 5, y: dampingRatio * 10)
+          }, completion: nil)
+
+          if let animationKey = view.layer.animationKeys()?.first,
+            let animation = view.layer.animation(forKey: animationKey) as? CASpringAnimation {
+
+            XCTAssertEqualWithAccuracy(curve.mass, animation.mass, accuracy: 0.001)
+            XCTAssertEqualWithAccuracy(curve.tension, animation.stiffness, accuracy: 0.001)
+            XCTAssertEqualWithAccuracy(curve.friction, animation.damping, accuracy: 0.001)
+            XCTAssertEqualWithAccuracy(curve.initialVelocity, animation.initialVelocity, accuracy: 0.001)
+          }
+        }
+      }
+    }
+  }
 }
