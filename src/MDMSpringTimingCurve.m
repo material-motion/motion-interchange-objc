@@ -16,8 +16,6 @@
 
 #import "MDMSpringTimingCurve.h"
 
-#import <UIKit/UIKit.h>
-
 @implementation MDMSpringTimingCurve
 
 - (instancetype)init {

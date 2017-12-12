@@ -18,6 +18,8 @@
 
 #import "MDMSpringTimingCurve.h"
 
+#import <UIKit/UIKit.h>
+
 @implementation MDMSpringTimingCurveGenerator
 
 - (instancetype)initWithDuration:(NSTimeInterval)duration dampingRatio:(CGFloat)dampingRatio {
