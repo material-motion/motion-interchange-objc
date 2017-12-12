@@ -62,14 +62,14 @@
 
 - (instancetype)initWithDelay:(NSTimeInterval)delay
                      duration:(NSTimeInterval)duration
-                  timingCurve:(NSObject<MDMTimingCurve> *)timingCurve {
+                  timingCurve:(id<MDMTimingCurve>)timingCurve {
   return [self initWithDelay:delay duration:duration timingCurve:timingCurve repetition:nil];
 }
 
 - (instancetype)initWithDelay:(NSTimeInterval)delay
                      duration:(NSTimeInterval)duration
-                  timingCurve:(NSObject<MDMTimingCurve> *)timingCurve
-                   repetition:(NSObject<MDMRepetitionTraits> *)repetition {
+                  timingCurve:(id<MDMTimingCurve>)timingCurve
+                   repetition:(id<MDMRepetitionTraits>)repetition {
   self = [super init];
   if (self) {
     _duration = duration;
@@ -85,8 +85,8 @@
 - (id)copyWithZone:(NSZone *)zone {
   return [[[self class] alloc] initWithDelay:self.delay
                                     duration:self.duration
-                                 timingCurve:[self.timingCurve copy]
-                                  repetition:[self.repetition copy]];
+                                 timingCurve:[self.timingCurve copyWithZone:nil]
+                                  repetition:[self.repetition copyWithZone:nil]];
 }
 
 @end

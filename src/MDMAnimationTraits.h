@@ -79,7 +79,7 @@
  */
 - (nonnull instancetype)initWithDelay:(NSTimeInterval)delay
                              duration:(NSTimeInterval)duration
-                          timingCurve:(nullable NSObject<MDMTimingCurve> *)timingCurve;
+                          timingCurve:(nullable id<MDMTimingCurve>)timingCurve;
 
 /**
  Initializes an animation trait with the provided timing curve, duration, delay, and repetition.
@@ -94,8 +94,8 @@
  */
 - (nonnull instancetype)initWithDelay:(NSTimeInterval)delay
                              duration:(NSTimeInterval)duration
-                          timingCurve:(nullable NSObject<MDMTimingCurve> *)timingCurve
-                           repetition:(nullable NSObject<MDMRepetitionTraits> *)repetition
+                          timingCurve:(nullable id<MDMTimingCurve>)timingCurve
+                           repetition:(nullable id<MDMRepetitionTraits>)repetition
     NS_DESIGNATED_INITIALIZER;
 
 #pragma mark - Traits
@@ -116,14 +116,14 @@
  If the timing curve is nil then the timing is assumed to be "instant", regardless of duration and
  delay.
  */
-@property(nonatomic, strong, nullable) NSObject<MDMTimingCurve> *timingCurve;
+@property(nonatomic, strong, nullable) id<MDMTimingCurve> timingCurve;
 
 /**
  The repetition characteristics of the animation.
 
  If the repetition is nil then no repetition should occur.
  */
-@property(nonatomic, strong, nullable) NSObject<MDMRepetitionTraits> *repetition;
+@property(nonatomic, strong, nullable) id<MDMRepetitionTraits> repetition;
 
 #pragma mark - Unavailable
 
