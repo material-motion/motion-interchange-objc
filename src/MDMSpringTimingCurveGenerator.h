@@ -21,6 +21,9 @@
 
 @class MDMSpringTimingCurve;
 
+/**
+ A spring timing curve generator based on UIKit duration/dampingRatio-based coefficients.
+ */
 @interface MDMSpringTimingCurveGenerator : NSObject <NSCopying, MDMTimingCurve>
 
 /**
