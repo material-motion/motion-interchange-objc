@@ -25,6 +25,11 @@
 @interface MDMSpringTimingCurve: NSObject <MDMTimingCurve>
 
 /**
+ Initializes a default spring timing curve with a duration of 0.35 and damping ratio of 1.
+ */
+- (nonnull instancetype)init;
+
+/**
  Initializes the timing curve with the given parameters and an initial velocity of zero.
 
  @param mass The mass of the spring simulation. Affects the animation's momentum.
