@@ -24,7 +24,7 @@
 /**
  A generic representation of animation traits.
  */
-@interface MDMAnimationTraits: NSObject
+@interface MDMAnimationTraits: NSObject <NSCopying>
 
 /**
  Initializes the instance with the provided duration and kCAMediaTimingFunctionEaseInEaseOut timing

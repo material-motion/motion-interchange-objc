@@ -20,5 +20,5 @@
 /**
  A generalized representation of a timing curve.
  */
-@protocol MDMTimingCurve <NSObject>
+@protocol MDMTimingCurve <NSObject, NSCopying>
 @end

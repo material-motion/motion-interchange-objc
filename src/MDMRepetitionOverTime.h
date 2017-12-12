@@ -21,7 +21,7 @@
 /**
  Represents repetition that repeats until a specific duration has passed.
  */
-@interface MDMRepetitionOverTime: NSObject <MDMRepetitionTraits>
+@interface MDMRepetitionOverTime: NSObject <NSCopying, MDMRepetitionTraits>
 
 /**
  Initializes the instance with the given duration.

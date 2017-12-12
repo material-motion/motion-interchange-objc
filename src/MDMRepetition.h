@@ -21,7 +21,7 @@
 /**
  Represents repetition that repeats a specific number of times.
  */
-@interface MDMRepetition: NSObject <MDMRepetitionTraits>
+@interface MDMRepetition: NSObject <NSCopying, MDMRepetitionTraits>
 
 /**
  Initializes the instance with the given number of repetitions.

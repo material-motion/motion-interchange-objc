@@ -19,7 +19,7 @@
 /**
  A generalized representation of a repetition traits.
  */
-@protocol MDMRepetitionTraits <NSObject>
+@protocol MDMRepetitionTraits <NSObject, NSCopying>
 
 /**
  Whether the animation should animate backwards after animating forwards.
