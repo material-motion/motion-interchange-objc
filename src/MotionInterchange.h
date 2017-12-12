@@ -21,3 +21,4 @@
 #import "MDMRepetitionOverTime.h"
 #import "MDMTimingCurve.h"
 #import "MDMSpringTimingCurve.h"
+#import "MDMSpringTimingCurveGenerator.h"
