@@ -49,7 +49,7 @@
 /**
  The number of repetitions that will occur before this animation stops repeating.
  */
-@property(nonatomic, assign, readonly) double numberOfRepetitions;
+@property(nonatomic, assign) double numberOfRepetitions;
 
 /**
  Unavailable.

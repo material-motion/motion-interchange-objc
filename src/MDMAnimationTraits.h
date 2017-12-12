@@ -103,22 +103,27 @@
 /**
  The amount of time, in seconds, before this animation's value interpolation should begin.
  */
-@property(nonatomic, assign, readonly) NSTimeInterval delay;
+@property(nonatomic, assign) NSTimeInterval delay;
 
 /**
  The amount of time, in seconds, over which this animation should interpolate between its values.
  */
-@property(nonatomic, assign, readonly) NSTimeInterval duration;
+@property(nonatomic, assign) NSTimeInterval duration;
 
 /**
  The velocity and acceleration of the animation over time.
+
+ If the timing curve is nil then the timing is assumed to be "instant", regardless of duration and
+ delay.
  */
-@property(nonatomic, strong, nullable, readonly) id<MDMTimingCurve> timingCurve;
+@property(nonatomic, strong, nullable) id<MDMTimingCurve> timingCurve;
 
 /**
  The repetition characteristics of the animation.
+
+ If the repetition is nil then no repetition should occur.
  */
-@property(nonatomic, strong, nullable, readonly) id<MDMRepetitionTraits> repetition;
+@property(nonatomic, strong, nullable) id<MDMRepetitionTraits> repetition;
 
 #pragma mark - Unavailable
 

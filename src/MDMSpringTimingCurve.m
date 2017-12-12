@@ -83,6 +83,12 @@
   return _friction;
 }
 
+- (void)setInitialVelocity:(CGFloat)initialVelocity {
+  _initialVelocity = initialVelocity;
+
+  _coefficientsAreInvalid = YES;
+}
+
 #pragma mark - Private
 
 - (void)recalculateCoefficientsIfNeeded {
