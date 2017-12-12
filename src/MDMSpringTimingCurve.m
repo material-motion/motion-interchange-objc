@@ -30,7 +30,8 @@
 @synthesize tension = _tension;
 
 - (instancetype)init {
-  return [self initWithDuration:0.35f dampingRatio:1.0f];
+  [self doesNotRecognizeSelector:_cmd];
+  return nil;
 }
 
 - (instancetype)initWithDuration:(NSTimeInterval)duration dampingRatio:(CGFloat)dampingRatio {
