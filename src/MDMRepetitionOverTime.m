@@ -40,7 +40,7 @@
 
 #pragma mark - NSCopying
 
-- (id)copyWithZone:(NSZone *)zone {
+- (id)copyWithZone:(__unused NSZone *)zone {
   return [[[self class] alloc] initWithDuration:self.duration autoreverses:self.autoreverses];
 }
 

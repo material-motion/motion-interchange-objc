@@ -85,8 +85,8 @@
 - (id)copyWithZone:(NSZone *)zone {
   return [[[self class] alloc] initWithDelay:self.delay
                                     duration:self.duration
-                                 timingCurve:[self.timingCurve copyWithZone:nil]
-                                  repetition:[self.repetition copyWithZone:nil]];
+                                 timingCurve:[self.timingCurve copyWithZone:zone]
+                                  repetition:[self.repetition copyWithZone:zone]];
 }
 
 @end

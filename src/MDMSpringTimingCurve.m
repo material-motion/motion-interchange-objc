@@ -92,10 +92,11 @@
 #pragma mark - NSCopying
 
 - (id)copyWithZone:(NSZone *)zone {
-  MDMSpringTimingCurve *copy = [[[self class] alloc] initWithMass:self.mass
-                                                          tension:self.tension
-                                                         friction:self.friction
-                                                  initialVelocity:self.initialVelocity];
+  MDMSpringTimingCurve *copy =
+      [[[self class] allocWithZone:zone] initWithMass:self.mass
+                                              tension:self.tension
+                                             friction:self.friction
+                                      initialVelocity:self.initialVelocity];
   copy->_coefficientsAreInvalid = _coefficientsAreInvalid;
   copy->_duration = _duration;
   copy->_dampingRatio = _dampingRatio;
