@@ -112,11 +112,16 @@
 
 /**
  The velocity and acceleration of the animation over time.
+
+ If the timing curve is nil then the timing is assumed to be "instant", regardless of duration and
+ delay.
  */
 @property(nonatomic, strong, nullable) id<MDMTimingCurve> timingCurve;
 
 /**
  The repetition characteristics of the animation.
+
+ If the repetition is nil then no repetition should occur.
  */
 @property(nonatomic, strong, nullable) id<MDMRepetitionTraits> repetition;
 
