@@ -17,10 +17,12 @@
 #import <Foundation/Foundation.h>
 
 #import "MDMRepetitionTraits.h"
+#import "MDMSubclassingRestricted.h"
 
 /**
  Represents repetition that repeats a specific number of times.
  */
+MDM_SUBCLASSING_RESTRICTED
 @interface MDMRepetition: NSObject <NSCopying, MDMRepetitionTraits>
 
 /**

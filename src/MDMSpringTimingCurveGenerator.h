@@ -17,6 +17,7 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import <Foundation/Foundation.h>
 
+#import "MDMSubclassingRestricted.h"
 #import "MDMTimingCurve.h"
 
 @class MDMSpringTimingCurve;
@@ -24,6 +25,7 @@
 /**
  A spring timing curve generator based on UIKit duration/dampingRatio-based coefficients.
  */
+MDM_SUBCLASSING_RESTRICTED
 @interface MDMSpringTimingCurveGenerator : NSObject <NSCopying, MDMTimingCurve>
 
 /**
