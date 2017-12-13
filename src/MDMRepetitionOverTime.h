@@ -17,7 +17,7 @@
 #import <Foundation/Foundation.h>
 
 #import "MDMRepetitionTraits.h"
-#import "MDMSwiftyObjectiveC.h"
+#import "MDMRestrictedSubclassing.h"
 
 /**
  Represents repetition that repeats until a specific duration has passed.
