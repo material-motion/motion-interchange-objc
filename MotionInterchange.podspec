@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name         = "MotionInterchange"
   s.summary      = "Motion interchange format."
-  s.version      = "1.4.0"
+  s.version      = "1.5.0"
   s.authors      = "The Material Motion Authors"
   s.license      = "Apache 2.0"
   s.homepage     = "https://github.com/material-motion/motion-interchange-objc"
