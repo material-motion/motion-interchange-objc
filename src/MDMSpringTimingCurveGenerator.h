@@ -17,7 +17,7 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import <Foundation/Foundation.h>
 
-#import "MDMRestrictedSubclassing.h"
+#import "MDMSubclassingRestricted.h"
 #import "MDMTimingCurve.h"
 
 @class MDMSpringTimingCurve;

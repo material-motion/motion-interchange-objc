@@ -17,7 +17,7 @@
 #import <Foundation/Foundation.h>
 
 #import "MDMRepetitionTraits.h"
-#import "MDMRestrictedSubclassing.h"
+#import "MDMSubclassingRestricted.h"
 
 /**
  Represents repetition that repeats a specific number of times.

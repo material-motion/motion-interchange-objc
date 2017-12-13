@@ -19,7 +19,7 @@
 #import <UIKit/UIKit.h>
 
 #import "MDMRepetitionTraits.h"
-#import "MDMRestrictedSubclassing.h"
+#import "MDMSubclassingRestricted.h"
 #import "MDMTimingCurve.h"
 
 /**
