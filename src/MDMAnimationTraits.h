@@ -18,6 +18,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+#import "MDMMotionTiming.h"
 #import "MDMRepetitionTraits.h"
 #import "MDMSubclassingRestricted.h"
 #import "MDMTimingCurve.h"
@@ -145,3 +146,13 @@ MDM_SUBCLASSING_RESTRICTED
 
 @end
 
+@interface MDMAnimationTraits (Legacy)
+
+/**
+ Initializes the instance with the provided legacy C-style animation trait structure.
+
+ @param timing A legacy C-style representation of animation traits.
+ */
+- (nonnull instancetype)initWithMotionTiming:(MDMMotionTiming)timing;
+
+@end

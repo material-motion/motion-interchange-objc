@@ -17,6 +17,8 @@
 #import "MDMAnimationTraits.h"
 
 #import "CAMediaTimingFunction+MDMTimingCurve.h"
+#import "MDMRepetition.h"
+#import "MDMRepetitionOverTime.h"
 #import "MDMSpringTimingCurve.h"
 
 @implementation MDMAnimationTraits
@@ -78,6 +80,53 @@
     _repetition = repetition;
   }
   return self;
+}
+
+- (nonnull instancetype)initWithMotionTiming:(MDMMotionTiming)timing {
+  id<MDMTimingCurve> timingCurve;
+  switch (timing.curve.type) {
+    case MDMMotionCurveTypeInstant:
+      timingCurve = nil;
+      break;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+    case MDMMotionCurveTypeDefault:
+#pragma clang diagnostic pop
+    case MDMMotionCurveTypeBezier:
+      timingCurve = [CAMediaTimingFunction functionWithControlPoints:(float)timing.curve.data[0]
+                                                                    :(float)timing.curve.data[1]
+                                                                    :(float)timing.curve.data[2]
+                                                                    :(float)timing.curve.data[3]];
+      break;
+    case MDMMotionCurveTypeSpring: {
+      CGFloat *data = timing.curve.data;
+      timingCurve =
+          [[MDMSpringTimingCurve alloc] initWithMass:data[MDMSpringMotionCurveDataIndexMass]
+                                             tension:data[MDMSpringMotionCurveDataIndexTension]
+                                            friction:data[MDMSpringMotionCurveDataIndexFriction]
+                                     initialVelocity:data[MDMSpringMotionCurveDataIndexInitialVelocity]];
+      break;
+    }
+  }
+  id<MDMRepetitionTraits> repetition;
+  switch (timing.repetition.type) {
+    case MDMMotionRepetitionTypeNone:
+      repetition = nil;
+      break;
+
+    case MDMMotionRepetitionTypeCount:
+      repetition = [[MDMRepetition alloc] initWithNumberOfRepetitions:timing.repetition.amount
+                                                         autoreverses:timing.repetition.autoreverses];
+      break;
+    case MDMMotionRepetitionTypeDuration:
+      repetition = [[MDMRepetitionOverTime alloc] initWithDuration:timing.repetition.amount
+                                                      autoreverses:timing.repetition.autoreverses];
+      break;
+  }
+  return [self initWithDelay:timing.delay
+                    duration:timing.duration
+                 timingCurve:timingCurve
+                  repetition:repetition];
 }
 
 #pragma mark - NSCopying
