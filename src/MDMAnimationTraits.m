@@ -98,12 +98,15 @@
                                                                     :(float)timing.curve.data[2]
                                                                     :(float)timing.curve.data[3]];
       break;
-    case MDMMotionCurveTypeSpring:
-      timingCurve = [[MDMSpringTimingCurve alloc] initWithMass:timing.curve.data[MDMSpringMotionCurveDataIndexMass]
-                                                       tension:timing.curve.data[MDMSpringMotionCurveDataIndexTension]
-                                                      friction:timing.curve.data[MDMSpringMotionCurveDataIndexFriction]
-                                               initialVelocity:timing.curve.data[MDMSpringMotionCurveDataIndexInitialVelocity]];
+    case MDMMotionCurveTypeSpring: {
+      CGFloat *data = timing.curve.data;
+      timingCurve =
+          [[MDMSpringTimingCurve alloc] initWithMass:data[MDMSpringMotionCurveDataIndexMass]
+                                             tension:data[MDMSpringMotionCurveDataIndexTension]
+                                            friction:data[MDMSpringMotionCurveDataIndexFriction]
+                                     initialVelocity:data[MDMSpringMotionCurveDataIndexInitialVelocity]];
       break;
+    }
   }
   id<MDMRepetitionTraits> repetition;
   switch (timing.repetition.type) {
