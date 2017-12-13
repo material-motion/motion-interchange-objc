@@ -1,10 +1,20 @@
-# #develop#
+# 1.5.0
 
-## Breaking changes
+This minor release introduces new Objective-C APIs for creating and storing animation traits.
 
 ## New deprecations
 
+All of the original C-style APIs for animation timing are now informally deprecated. We will remove these APIs in the future.
+
 ## New features
+
+New Objective-C APIs for storing animation traits.
+
+| Old API | New API | Rationale |
+|:------- |:-------- |:-----------|
+| MotionTiming | AnimationTraits | This structure is intended to describe animations only, not motion in general. |
+| MotionCurve | TimingCurve | This brings the API name closer to the similarly-purposed `CAMediaTimingFunction`. MotionCurve could also be easily confused with motion through x/y space rather than through time (e.g. ArcMove), which will be problematic as we start defining paths of motion through space. |
+| MotionRepetition | RepetitionTraits | This aligns the naming with AnimationTraits. |
 
 ## Source changes
 
