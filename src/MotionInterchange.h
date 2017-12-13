@@ -14,6 +14,7 @@
  limitations under the License.
  */
 
+// V2 APIs
 #import "CAMediaTimingFunction+MDMTimingCurve.h"
 #import "MDMAnimationTraits.h"
 #import "MDMRepetitionTraits.h"
@@ -22,3 +23,8 @@
 #import "MDMTimingCurve.h"
 #import "MDMSpringTimingCurve.h"
 #import "MDMSpringTimingCurveGenerator.h"
+
+// V1 APIs
+#import "MDMMotionCurve.h"
+#import "MDMMotionRepetition.h"
+#import "MDMMotionTiming.h"
