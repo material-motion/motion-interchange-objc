@@ -17,11 +17,13 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import <Foundation/Foundation.h>
 
+#import "MDMSwiftyObjectiveC.h"
 #import "MDMTimingCurve.h"
 
 /**
  A timing curve that represents the motion of a single-dimensional attached spring.
  */
+MDM_SUBCLASSING_RESTRICTED
 @interface MDMSpringTimingCurve: NSObject <NSCopying, MDMTimingCurve>
 
 /**

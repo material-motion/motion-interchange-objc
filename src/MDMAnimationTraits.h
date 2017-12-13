@@ -19,11 +19,13 @@
 #import <UIKit/UIKit.h>
 
 #import "MDMRepetitionTraits.h"
+#import "MDMSwiftyObjectiveC.h"
 #import "MDMTimingCurve.h"
 
 /**
  A generic representation of animation traits.
  */
+MDM_SUBCLASSING_RESTRICTED
 @interface MDMAnimationTraits: NSObject <NSCopying>
 
 /**
