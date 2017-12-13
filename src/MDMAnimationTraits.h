@@ -101,13 +101,6 @@ MDM_SUBCLASSING_RESTRICTED
                            repetition:(nullable id<MDMRepetitionTraits>)repetition
     NS_DESIGNATED_INITIALIZER;
 
-/**
- Initializes the instance with the provided legacy C-style animation trait structure.
-
- @param timing A legacy C-style representation of animation traits.
- */
-- (nonnull instancetype)initWithMotionTiming:(MDMMotionTiming)timing;
-
 #pragma mark - Traits
 
 /**
@@ -153,3 +146,13 @@ MDM_SUBCLASSING_RESTRICTED
 
 @end
 
+@interface MDMAnimationTraits (Legacy)
+
+/**
+ Initializes the instance with the provided legacy C-style animation trait structure.
+
+ @param timing A legacy C-style representation of animation traits.
+ */
+- (nonnull instancetype)initWithMotionTiming:(MDMMotionTiming)timing;
+
+@end
