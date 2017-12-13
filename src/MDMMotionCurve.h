@@ -73,12 +73,14 @@ typedef struct MDMMotionCurve MDMMotionCurve;
  See the documentation for CAMediaTimingFunction for more information.
  */
 // clang-format off
-FOUNDATION_EXTERN MDMMotionCurve MDMMotionCurveMakeBezier(float p1x, float p1y, float p2x, float p2y)
+FOUNDATION_EXTERN
+MDMMotionCurve MDMMotionCurveMakeBezier(CGFloat p1x, CGFloat p1y, CGFloat p2x, CGFloat p2y)
     NS_SWIFT_NAME(MotionCurveMakeBezier(p1x:p1y:p2x:p2y:));
 // clang-format on
 
 // clang-format off
-FOUNDATION_EXTERN MDMMotionCurve MDMMotionCurveFromTimingFunction(CAMediaTimingFunction * _Nonnull timingFunction)
+FOUNDATION_EXTERN
+MDMMotionCurve MDMMotionCurveFromTimingFunction(CAMediaTimingFunction * _Nonnull timingFunction)
     NS_SWIFT_NAME(MotionCurve(fromTimingFunction:));
 // clang-format on
 
@@ -90,7 +92,9 @@ FOUNDATION_EXTERN MDMMotionCurve MDMMotionCurveFromTimingFunction(CAMediaTimingF
  See the documentation for CASpringAnimation for more information.
  */
 // clang-format off
-FOUNDATION_EXTERN MDMMotionCurve MDMMotionCurveMakeSpring(float mass, float tension, float friction)
+FOUNDATION_EXTERN MDMMotionCurve MDMMotionCurveMakeSpring(CGFloat mass,
+                                                          CGFloat tension,
+                                                          CGFloat friction)
     NS_SWIFT_NAME(MotionCurveMakeSpring(mass:tension:friction:));
 // clang-format on
 
@@ -102,10 +106,11 @@ FOUNDATION_EXTERN MDMMotionCurve MDMMotionCurveMakeSpring(float mass, float tens
  See the documentation for CASpringAnimation for more information.
  */
 // clang-format off
-FOUNDATION_EXTERN MDMMotionCurve MDMMotionCurveMakeSpringWithInitialVelocity(float mass,
-                                                                             float tension,
-                                                                             float friction,
-                                                                             float initialVelocity)
+FOUNDATION_EXTERN
+MDMMotionCurve MDMMotionCurveMakeSpringWithInitialVelocity(CGFloat mass,
+                                                           CGFloat tension,
+                                                           CGFloat friction,
+                                                           CGFloat initialVelocity)
     NS_SWIFT_NAME(MotionCurveMakeSpring(mass:tension:friction:initialVelocity:));
 // clang-format on
 

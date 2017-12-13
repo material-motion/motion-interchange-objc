@@ -14,17 +14,13 @@
  limitations under the License.
  */
 
-// V2 APIs
-#import "CAMediaTimingFunction+MDMTimingCurve.h"
-#import "MDMAnimationTraits.h"
-#import "MDMRepetitionTraits.h"
-#import "MDMRepetition.h"
-#import "MDMRepetitionOverTime.h"
-#import "MDMTimingCurve.h"
-#import "MDMSpringTimingCurve.h"
-#import "MDMSpringTimingCurveGenerator.h"
+#import <Foundation/Foundation.h>
 
-// V1 APIs
-#import "MDMMotionCurve.h"
-#import "MDMMotionRepetition.h"
-#import "MDMMotionTiming.h"
+#ifndef MDM_SUBCLASSING_RESTRICTED
+#if defined(__has_attribute) && __has_attribute(objc_subclassing_restricted)
+#define MDM_SUBCLASSING_RESTRICTED __attribute__((objc_subclassing_restricted))
+#else
+#define MDM_SUBCLASSING_RESTRICTED
+#endif
+#endif  // #ifndef MDM_SUBCLASSING_RESTRICTED
+

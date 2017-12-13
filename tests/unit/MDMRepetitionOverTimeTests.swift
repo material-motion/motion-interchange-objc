@@ -14,17 +14,20 @@
  limitations under the License.
  */
 
-// V2 APIs
-#import "CAMediaTimingFunction+MDMTimingCurve.h"
-#import "MDMAnimationTraits.h"
-#import "MDMRepetitionTraits.h"
-#import "MDMRepetition.h"
-#import "MDMRepetitionOverTime.h"
-#import "MDMTimingCurve.h"
-#import "MDMSpringTimingCurve.h"
-#import "MDMSpringTimingCurveGenerator.h"
+import XCTest
+import MotionInterchange
 
-// V1 APIs
-#import "MDMMotionCurve.h"
-#import "MDMMotionRepetition.h"
-#import "MDMMotionTiming.h"
+class MDMRepetitionOverTimeTests: XCTestCase {
+
+  func testInitializationWithDuration() {
+    let repetition = MDMRepetitionOverTime(duration: 5.5)
+    XCTAssertEqualWithAccuracy(repetition.duration, 5.5, accuracy: 0.001)
+    XCTAssertFalse(repetition.autoreverses)
+  }
+
+  func testInitializationWithDurationAndAutoreversed() {
+    let repetition = MDMRepetitionOverTime(duration: 5.5, autoreverses: true)
+    XCTAssertEqualWithAccuracy(repetition.duration, 5.5, accuracy: 0.001)
+    XCTAssertTrue(repetition.autoreverses)
+  }
+}

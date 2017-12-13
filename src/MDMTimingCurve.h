@@ -14,17 +14,11 @@
  limitations under the License.
  */
 
-// V2 APIs
-#import "CAMediaTimingFunction+MDMTimingCurve.h"
-#import "MDMAnimationTraits.h"
-#import "MDMRepetitionTraits.h"
-#import "MDMRepetition.h"
-#import "MDMRepetitionOverTime.h"
-#import "MDMTimingCurve.h"
-#import "MDMSpringTimingCurve.h"
-#import "MDMSpringTimingCurveGenerator.h"
+#import <Foundation/Foundation.h>
+#import <QuartzCore/QuartzCore.h>
 
-// V1 APIs
-#import "MDMMotionCurve.h"
-#import "MDMMotionRepetition.h"
-#import "MDMMotionTiming.h"
+/**
+ A generalized representation of a timing curve.
+ */
+@protocol MDMTimingCurve <NSObject, NSCopying>
+@end

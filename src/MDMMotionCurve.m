@@ -16,18 +16,18 @@
 
 #import "MDMMotionCurve.h"
 
-MDMMotionCurve MDMMotionCurveMakeBezier(float p1x, float p1y, float p2x, float p2y) {
+MDMMotionCurve MDMMotionCurveMakeBezier(CGFloat p1x, CGFloat p1y, CGFloat p2x, CGFloat p2y) {
   return _MDMBezier(p1x, p1y, p2x, p2y);
 }
 
-MDMMotionCurve MDMMotionCurveMakeSpring(float mass, float tension, float friction) {
+MDMMotionCurve MDMMotionCurveMakeSpring(CGFloat mass, CGFloat tension, CGFloat friction) {
   return MDMMotionCurveMakeSpringWithInitialVelocity(mass, tension, friction, 0);
 }
 
-MDMMotionCurve MDMMotionCurveMakeSpringWithInitialVelocity(float mass,
-                                                           float tension,
-                                                           float friction,
-                                                           float initialVelocity) {
+MDMMotionCurve MDMMotionCurveMakeSpringWithInitialVelocity(CGFloat mass,
+                                                           CGFloat tension,
+                                                           CGFloat friction,
+                                                           CGFloat initialVelocity) {
   return _MDMSpringWithInitialVelocity(mass, tension, friction, initialVelocity);
 }
 

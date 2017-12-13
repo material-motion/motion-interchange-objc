@@ -7,14 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		660248AE1FD1EE78004C0147 /* MDMSpringTimingCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660248AC1FD1EE78004C0147 /* MDMSpringTimingCurve.swift */; };
 		6619E1D91FA0ED0300F3AB25 /* MDMModalMovementTimingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6619E1D81FA0ED0300F3AB25 /* MDMModalMovementTimingTests.m */; };
 		663ED7C51EDF1F0C0096B2A9 /* ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663ED7C01EDF1F0C0096B2A9 /* ExampleViewController.swift */; };
 		663ED7C61EDF1F0C0096B2A9 /* ExampleViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663ED7C11EDF1F0C0096B2A9 /* ExampleViews.swift */; };
 		663ED7C71EDF1F0C0096B2A9 /* HexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663ED7C21EDF1F0C0096B2A9 /* HexColor.swift */; };
 		663ED7C81EDF1F0C0096B2A9 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663ED7C31EDF1F0C0096B2A9 /* Layout.swift */; };
 		663ED7C91EDF1F0C0096B2A9 /* ModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663ED7C41EDF1F0C0096B2A9 /* ModalViewController.swift */; };
-		663ED8011EE628BA0096B2A9 /* MDMMotionCurveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663ED8001EE628BA0096B2A9 /* MDMMotionCurveTests.swift */; };
-		663ED8031EE6299A0096B2A9 /* MDMMotionCurveTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 663ED8021EE6299A0096B2A9 /* MDMMotionCurveTests.m */; };
+		664C8C531FD5A555004ED471 /* CAMediaTimingFunctionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664C8C521FD5A555004ED471 /* CAMediaTimingFunctionTests.swift */; };
+		664C8C551FD5A7B7004ED471 /* MDMRepetitionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664C8C541FD5A7B7004ED471 /* MDMRepetitionTests.swift */; };
+		664C8C571FD5A831004ED471 /* MDMRepetitionOverTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664C8C561FD5A831004ED471 /* MDMRepetitionOverTimeTests.swift */; };
+		664C8C591FD5A8AC004ED471 /* MDMAnimationTraitsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664C8C581FD5A8AC004ED471 /* MDMAnimationTraitsTests.swift */; };
 		666FAA841D384A6B000363DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666FAA831D384A6B000363DA /* AppDelegate.swift */; };
 		666FAA8B1D384A6B000363DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 666FAA8A1D384A6B000363DA /* Assets.xcassets */; };
 		666FAA8E1D384A6B000363DA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 666FAA8C1D384A6B000363DA /* LaunchScreen.storyboard */; };
@@ -22,6 +25,8 @@
 		667A3F491DEE269400CB3A99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 667A3F481DEE269400CB3A99 /* Assets.xcassets */; };
 		667A3F4C1DEE269400CB3A99 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 667A3F4A1DEE269400CB3A99 /* LaunchScreen.storyboard */; };
 		667A3F541DEE273000CB3A99 /* TableOfContents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667A3F531DEE273000CB3A99 /* TableOfContents.swift */; };
+		66C6FB9E1FE175CA0039F790 /* MDMMotionCurveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C6FB9A1FE175B80039F790 /* MDMMotionCurveTests.swift */; };
+		66C6FB9F1FE175D00039F790 /* MDMMotionCurveTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C6FB9B1FE175B80039F790 /* MDMMotionCurveTests.m */; };
 		8867B13812C3FF5D47DAB6A6 /* Pods_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7FF982F18E05B85C840EA24 /* Pods_UnitTests.framework */; };
 		A433D59338049BD05D945199 /* Pods_MotionInterchangeCatalog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB060E9F4ECA42A5E69FB42A /* Pods_MotionInterchangeCatalog.framework */; };
 /* End PBXBuildFile section */
@@ -47,14 +52,17 @@
 		09CEA5DEA01BA723D08D84E6 /* Pods-UnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.release.xcconfig"; path = "../../../Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests.release.xcconfig"; sourceTree = "<group>"; };
 		2DE76D4D35953D836F578CDE /* Pods-MotionInterchangeCatalog.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MotionInterchangeCatalog.debug.xcconfig"; path = "../../../Pods/Target Support Files/Pods-MotionInterchangeCatalog/Pods-MotionInterchangeCatalog.debug.xcconfig"; sourceTree = "<group>"; };
 		4AAB8EBB088513D48896641A /* Pods-MotionInterchangeCatalog.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MotionInterchangeCatalog.release.xcconfig"; path = "../../../Pods/Target Support Files/Pods-MotionInterchangeCatalog/Pods-MotionInterchangeCatalog.release.xcconfig"; sourceTree = "<group>"; };
+		660248AC1FD1EE78004C0147 /* MDMSpringTimingCurve.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDMSpringTimingCurve.swift; sourceTree = "<group>"; };
 		6619E1D81FA0ED0300F3AB25 /* MDMModalMovementTimingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MDMModalMovementTimingTests.m; sourceTree = "<group>"; };
 		663ED7C01EDF1F0C0096B2A9 /* ExampleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleViewController.swift; sourceTree = "<group>"; };
 		663ED7C11EDF1F0C0096B2A9 /* ExampleViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleViews.swift; sourceTree = "<group>"; };
 		663ED7C21EDF1F0C0096B2A9 /* HexColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HexColor.swift; sourceTree = "<group>"; };
 		663ED7C31EDF1F0C0096B2A9 /* Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
 		663ED7C41EDF1F0C0096B2A9 /* ModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalViewController.swift; sourceTree = "<group>"; };
-		663ED8001EE628BA0096B2A9 /* MDMMotionCurveTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDMMotionCurveTests.swift; sourceTree = "<group>"; };
-		663ED8021EE6299A0096B2A9 /* MDMMotionCurveTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDMMotionCurveTests.m; sourceTree = "<group>"; };
+		664C8C521FD5A555004ED471 /* CAMediaTimingFunctionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CAMediaTimingFunctionTests.swift; sourceTree = "<group>"; };
+		664C8C541FD5A7B7004ED471 /* MDMRepetitionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDMRepetitionTests.swift; sourceTree = "<group>"; };
+		664C8C561FD5A831004ED471 /* MDMRepetitionOverTimeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDMRepetitionOverTimeTests.swift; sourceTree = "<group>"; };
+		664C8C581FD5A8AC004ED471 /* MDMAnimationTraitsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDMAnimationTraitsTests.swift; sourceTree = "<group>"; };
 		666FAA801D384A6B000363DA /* MotionInterchangeCatalog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MotionInterchangeCatalog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		666FAA831D384A6B000363DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Catalog/AppDelegate.swift; sourceTree = "<group>"; };
 		666FAA8A1D384A6B000363DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -68,6 +76,8 @@
 		667A3F4B1DEE269400CB3A99 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		667A3F4D1DEE269400CB3A99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		667A3F531DEE273000CB3A99 /* TableOfContents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableOfContents.swift; sourceTree = "<group>"; };
+		66C6FB9A1FE175B80039F790 /* MDMMotionCurveTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDMMotionCurveTests.swift; sourceTree = "<group>"; };
+		66C6FB9B1FE175B80039F790 /* MDMMotionCurveTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDMMotionCurveTests.m; sourceTree = "<group>"; };
 		CF426CCC8068036D56265374 /* Pods-UnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.debug.xcconfig"; path = "../../../Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		EB060E9F4ECA42A5E69FB42A /* Pods_MotionInterchangeCatalog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MotionInterchangeCatalog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7FF982F18E05B85C840EA24 /* Pods_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -162,9 +172,14 @@
 		666FAA971D384A6B000363DA /* tests */ = {
 			isa = PBXGroup;
 			children = (
-				663ED8001EE628BA0096B2A9 /* MDMMotionCurveTests.swift */,
-				663ED8021EE6299A0096B2A9 /* MDMMotionCurveTests.m */,
+				664C8C521FD5A555004ED471 /* CAMediaTimingFunctionTests.swift */,
+				664C8C581FD5A8AC004ED471 /* MDMAnimationTraitsTests.swift */,
 				6619E1D81FA0ED0300F3AB25 /* MDMModalMovementTimingTests.m */,
+				664C8C541FD5A7B7004ED471 /* MDMRepetitionTests.swift */,
+				664C8C561FD5A831004ED471 /* MDMRepetitionOverTimeTests.swift */,
+				660248AC1FD1EE78004C0147 /* MDMSpringTimingCurve.swift */,
+				66C6FB9B1FE175B80039F790 /* MDMMotionCurveTests.m */,
+				66C6FB9A1FE175B80039F790 /* MDMMotionCurveTests.swift */,
 			);
 			name = tests;
 			path = ../../../tests/unit;
@@ -291,7 +306,7 @@
 				TargetAttributes = {
 					666FAA7F1D384A6B000363DA = {
 						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 0830;
+						LastSwiftMigration = 0920;
 					};
 					666FAA931D384A6B000363DA = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -478,9 +493,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				663ED8031EE6299A0096B2A9 /* MDMMotionCurveTests.m in Sources */,
-				663ED8011EE628BA0096B2A9 /* MDMMotionCurveTests.swift in Sources */,
+				664C8C531FD5A555004ED471 /* CAMediaTimingFunctionTests.swift in Sources */,
+				660248AE1FD1EE78004C0147 /* MDMSpringTimingCurve.swift in Sources */,
+				66C6FB9E1FE175CA0039F790 /* MDMMotionCurveTests.swift in Sources */,
 				6619E1D91FA0ED0300F3AB25 /* MDMModalMovementTimingTests.m in Sources */,
+				66C6FB9F1FE175D00039F790 /* MDMMotionCurveTests.m in Sources */,
+				664C8C571FD5A831004ED471 /* MDMRepetitionOverTimeTests.swift in Sources */,
+				664C8C591FD5A8AC004ED471 /* MDMAnimationTraitsTests.swift in Sources */,
+				664C8C551FD5A7B7004ED471 /* MDMRepetitionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
