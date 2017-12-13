@@ -1,6 +1,6 @@
 PODS:
   - CatalogByConvention (2.1.1)
-  - MotionInterchange (1.5.0)
+  - MotionInterchange (1.6.0)
 
 DEPENDENCIES:
   - CatalogByConvention
@@ -12,7 +12,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   CatalogByConvention: c3a5319de04250a7cd4649127fcfca5fe3322a43
-  MotionInterchange: 27bef5bbb1e7a59242c38cf2f1ccab83ca569f55
+  MotionInterchange: ead0e3ae1f3a5fb539e289debbc7ae036160a10d
 
 PODFILE CHECKSUM: 09090d12db5aab00a13fe82da94f338ebd03f5dc
 
