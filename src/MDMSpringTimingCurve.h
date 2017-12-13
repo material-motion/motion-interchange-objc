@@ -55,35 +55,6 @@
                      initialVelocity:(CGFloat)initialVelocity
     NS_DESIGNATED_INITIALIZER;
 
-/**
- Initializes the timing curve with the given UIKit spring damping ratio.
-
- @param duration The desired duration of the spring animation.
- @param dampingRatio From the UIKit documentation: "When `dampingRatio` is 1, the animation will
- smoothly decelerate to its final model values without oscillating. Damping ratios less than 1 will
- oscillate more and more before coming to a complete stop."
- */
-- (nonnull instancetype)initWithDuration:(NSTimeInterval)duration
-                            dampingRatio:(CGFloat)dampingRatio;
-
-/**
- Initializes the timing curve with the given UIKit spring damping ratio and initial velocity.
-
- @param duration The desired duration of the spring animation.
- @param dampingRatio From the UIKit documentation: "When `dampingRatio` is 1, the animation will
- smoothly decelerate to its final model values without oscillating. Damping ratios less than 1 will
- oscillate more and more before coming to a complete stop."
- @param initialVelocity From the UIKit documentation: "You can use the initial spring velocity to
- specify how fast the object at the end of the simulated spring was moving before it was attached.
- It's a unit coordinate system, where 1 is defined as travelling the total animation distance in a
- second. So if you're changing an object's position by 200pt in this animation, and you want the
- animation to behave as if the object was moving at 100pt/s before the animation started, you'd
- pass 0.5. You'll typically want to pass 0 for the velocity."
- */
-- (nonnull instancetype)initWithDuration:(NSTimeInterval)duration
-                            dampingRatio:(CGFloat)dampingRatio
-                         initialVelocity:(CGFloat)initialVelocity;
-
 #pragma mark - Traits
 
 /**
