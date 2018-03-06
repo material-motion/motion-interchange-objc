@@ -20,7 +20,7 @@ set -e
 # Display commands to stderr.
 set -x
 
-KOKORO_RUNNER_VERSION="v3.*"
+KOKORO_RUNNER_VERSION="v4.*"
 
 fix_bazel_imports() {
   if [ -z "$KOKORO_BUILD_NUMBER" ]; then
@@ -51,6 +51,6 @@ popd
 
 fix_bazel_imports
 
-./.kokoro-ios-runner/bazel.sh test //:UnitTests 8.1.0
+./.kokoro-ios-runner/bazel.sh test //:UnitTests --min-xcode-version 9.1.0
 
 echo "Success!"
