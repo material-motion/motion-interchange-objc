@@ -32,8 +32,9 @@ TAG=$(git tag --sort=v:refname -l "$KOKORO_RUNNER_VERSION" | tail -n1)
 git checkout "$TAG" > /dev/null
 popd
 
-cd github/repo
+pushd github/repo
 pod install
+popd
 ./.kokoro-ios-runner/xcodebuild.sh "MotionInterchange/MotionInterchange.xcodeproj" MotionInterchange "iPhone SE"
 
 echo "Success!"
