@@ -83,7 +83,9 @@
     XCTAssertEqualWithAccuracy(spring.mass, springAnimation.mass, 0.001);
     XCTAssertEqualWithAccuracy(spring.tension, springAnimation.stiffness, 0.001);
     XCTAssertEqualWithAccuracy(spring.friction, springAnimation.damping, 0.001);
-    XCTAssertEqualWithAccuracy(spring.initialVelocity, springAnimation.initialVelocity, 0.001);
+    if ([springAnimation respondsToSelector:@selector(initialVelocity)]) {
+      XCTAssertEqualWithAccuracy(spring.initialVelocity, springAnimation.initialVelocity, 0.001);
+    }
   }
 }
 

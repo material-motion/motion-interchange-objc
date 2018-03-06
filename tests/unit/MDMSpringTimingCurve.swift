@@ -39,19 +39,19 @@ class MDMTimingCurveTests: XCTestCase {
   func testInitializerValuesWithDampingCoefficient() {
     for duration in stride(from: TimeInterval(0.1), to: TimeInterval(3), by: TimeInterval(0.5)) {
       for dampingRatio in stride(from: CGFloat(0.1), to: CGFloat(2), by: CGFloat(0.4)) {
-        for initialVelocity in stride(from: CGFloat(-2), to: CGFloat(2), by: CGFloat(0.8)) {
+        for initialVel in stride(from: CGFloat(-2), to: CGFloat(2), by: CGFloat(0.8)) {
           let generator = MDMSpringTimingCurveGenerator(duration: duration,
                                                         dampingRatio: dampingRatio,
-                                                        initialVelocity: initialVelocity)
+                                                        initialVelocity: initialVel)
           let view = UIView()
 
           UIView.animate(withDuration: duration,
                          delay: 0,
                          usingSpringWithDamping: dampingRatio,
-                         initialSpringVelocity: initialVelocity,
+                         initialSpringVelocity: initialVel,
                          options: [],
                          animations: {
-                          view.center = CGPoint(x: initialVelocity * 5, y: dampingRatio * 10)
+                          view.center = CGPoint(x: initialVel * 5, y: dampingRatio * 10)
           }, completion: nil)
 
           if let animationKey = view.layer.animationKeys()?.first,
@@ -61,10 +61,16 @@ class MDMTimingCurveTests: XCTestCase {
             XCTAssertEqualWithAccuracy(curve.mass, animation.mass, accuracy: 0.001)
             XCTAssertEqualWithAccuracy(curve.tension, animation.stiffness, accuracy: 0.001)
             XCTAssertEqualWithAccuracy(curve.friction, animation.damping, accuracy: 0.001)
-            XCTAssertEqualWithAccuracy(curve.initialVelocity, animation.initialVelocity, accuracy: 0.001)
+            if animation.responds(to: #selector(initialVelocity)) {
+              XCTAssertEqualWithAccuracy(curve.initialVelocity, animation.initialVelocity, accuracy: 0.001)
+            }
           }
         }
       }
     }
+  }
+
+  // Dummy getter for #selector(initialVelocity) reference.
+  func initialVelocity() {
   }
 }
