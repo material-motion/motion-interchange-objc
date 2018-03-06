@@ -20,6 +20,18 @@ http_archive(
     sha256 = "0c2f7b903c2334a3e7e0b565f0f80a854047ac36202978318f853cb762bf33f3"
 )
 
+git_repository(
+    name = "bazel_skylib",
+    remote = "https://github.com/bazelbuild/bazel-skylib.git",
+    tag = "0.2.0",
+)
+
+http_file(
+    name = "xctestrunner",
+    executable = 1,
+    url = "https://github.com/google/xctestrunner/releases/download/0.2.1/ios_test_runner.par",
+)
+
 http_archive(
     name = "bazel_ios_warnings",
     url = "https://github.com/material-foundation/bazel_ios_warnings/archive/v2.0.0.zip",
