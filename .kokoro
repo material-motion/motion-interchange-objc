@@ -22,23 +22,6 @@ set -x
 
 KOKORO_RUNNER_VERSION="v4.*"
 
-fix_bazel_imports() {
-  if [ -z "$KOKORO_BUILD_NUMBER" ]; then
-    repo_prefix=""
-  else
-    repo_prefix="github/repo/"
-  fi
-
-  # Fixes a bug in bazel where objc_library targets have a _ prefix.
-  find "${repo_prefix}tests/unit" -type f -name '*.swift' -exec sed -i '' -E "s/import Motion(.+)/import _Motion\1/" {} + || true
-  stashed_dir=$(pwd)
-  reset_imports() {
-    # Undoes our source changes from above.
-    find "${stashed_dir}/${tests_dir_prefix}tests/unit" -type f -name '*.swift' -exec sed -i '' -E "s/import _Motion(.+)/import Motion\1/" {} + || true
-  }
-  trap reset_imports EXIT
-}
-
 if [ ! -d .kokoro-ios-runner ]; then
   git clone https://github.com/material-foundation/kokoro-ios-runner.git .kokoro-ios-runner
 fi
@@ -49,8 +32,8 @@ TAG=$(git tag --sort=v:refname -l "$KOKORO_RUNNER_VERSION" | tail -n1)
 git checkout "$TAG" > /dev/null
 popd
 
-fix_bazel_imports
-
-./.kokoro-ios-runner/bazel.sh test //:UnitTests --min-xcode-version 9.1.0
+pushd github/repo
+pod install
+xcodebuild clean test -workspace MotionInterchange.xcodeproj -sdk iphonesimulator -scheme MotionInterchange
 
 echo "Success!"
