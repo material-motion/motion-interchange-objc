@@ -35,6 +35,6 @@ popd
 pushd github/repo
 pod install
 popd
-./.kokoro-ios-runner/xcodebuild.sh "MotionInterchange.xcodeproj" MotionInterchange "iPhone SE"
+./.kokoro-ios-runner/xcodebuild.sh "github/repo/MotionInterchange.xcodeproj" MotionInterchange "iPhone SE"
 
 echo "Success!"
