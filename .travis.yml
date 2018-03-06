@@ -20,7 +20,7 @@ matrix:
       env: SDK="iphonesimulator10.3" DESTINATION="name=iPhone 6,OS=8.1"
 before_install:
   - gem install cocoapods --no-rdoc --no-ri --no-document --quiet
-  - pod install --repo-update
+  - pod install
 script:
   - set -o pipefail
   - xcodebuild test -workspace MotionInterchange.xcworkspace -scheme MotionInterchangeCatalog -sdk "$SDK" -destination "$DESTINATION" -enableCodeCoverage YES ONLY_ACTIVE_ARCH=YES | xcpretty -c;
