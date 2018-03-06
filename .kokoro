@@ -51,6 +51,10 @@ popd
 
 fix_bazel_imports
 
-./.kokoro-ios-runner/bazel.sh test //:UnitTests --min-xcode-version 9.1.0
+bazel version
+use_bazel.sh 0.11.0
+bazel version
+
+./.kokoro-ios-runner/bazel.sh test //:UnitTests --min-xcode-version 8.3.0
 
 echo "Success!"
