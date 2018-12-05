@@ -76,6 +76,8 @@ fix_bazel_imports() {
 run_bazel() {
   echo "Running bazel builds..."
 
+  fix_bazel_imports
+
   if [ -n "$KOKORO_BUILD_NUMBER" ]; then
     bazel version
     use_bazel.sh "$BAZEL_VERSION"
@@ -96,8 +98,6 @@ run_bazel() {
     | grep string \
     | cut -d'>' -f2 \
     | cut -d'<' -f1)
-
-  fix_bazel_imports
 
   bazel clean
   bazel test //... --xcode_version $xcode_version --ios_minimum_os=8.0 --ios_multi_cpus=i386,x86_64
