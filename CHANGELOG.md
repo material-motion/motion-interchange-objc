@@ -1,7 +1,21 @@
-# #develop#
+# 2.0.0
 
- TODO: Enumerate changes.
+This major release upgrades the bazel dependencies and workspace. This change is breaking for anyone
+using bazel to build this library. In order to use this library with bazel, you will also need to
+upgrade your workspace versions to match the ones now used in this library's `WORKSPACE` file.
 
+## Source changes
+
+* [Update .travis.yml (#35)](https://github.com/material-motion/motion-interchange-objc/commit/f9891a24b843edc004f86ee86f7477d6327957b1) (featherless)
+
+## Non-source changes
+
+* [Update bazel workspace to latest versions. (#40)](https://github.com/material-motion/motion-interchange-objc/commit/a9a1cab4354ce45d8a4548b28c708455ce93885a) (featherless)
+* [Update .kokoro](https://github.com/material-motion/motion-interchange-objc/commit/cfbd73021314ce24b0e0f2d37906b58b128e416c) (featherless)
+* [Update .kokoro](https://github.com/material-motion/motion-interchange-objc/commit/7e3af4ac83426ea8da8283211e09c0458ff24b81) (featherless)
+* [Update bazel workspace and version to latest (#38)](https://github.com/material-motion/motion-interchange-objc/commit/71aa2e4393574d2b4b5cf55695787b9a662165d1) (featherless)
+* [Update .kokoro to build against Xcode 9.1](https://github.com/material-motion/motion-interchange-objc/commit/816f52f4600b311f50dae7ef9aa3b9f9f1fb1b0e) (featherless)
+* [Update .travis.yml](https://github.com/material-motion/motion-interchange-objc/commit/ba7e0f0015b83eda35edf0144fb6fa3ebb52a81a) (featherless)
 
 # 1.6.0
 
