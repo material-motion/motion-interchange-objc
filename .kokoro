@@ -20,7 +20,41 @@ set -e
 # Display commands to stderr.
 set -x
 
-KOKORO_RUNNER_VERSION="v3.*"
+KOKORO_RUNNER_VERSION="v4.*"
+BAZEL_VERSION="0.20.0"
+
+# xcode-select's the provided xcode version.
+# Usage example:
+#     select_xcode 9.2.0
+select_xcode() {
+  desired_version="$1"
+  if [ -z "$desired_version" ]; then
+    return # No Xcode version to select.
+  fi
+
+  xcodes=$(ls /Applications/ | grep "Xcode")
+  for xcode_path in $xcodes; do
+    xcode_version=$(cat /Applications/$xcode_path/Contents/version.plist \
+      | grep "CFBundleShortVersionString" -A1 \
+      | grep string \
+      | cut -d'>' -f2 \
+      | cut -d'<' -f1)
+    xcode_version_as_number="$(version_as_number $xcode_version)"
+
+    if [ "$xcode_version_as_number" -ne "$(version_as_number $desired_version)" ]; then
+      continue
+    fi
+
+    sudo xcode-select --switch /Applications/$xcode_path/Contents/Developer
+    xcodebuild -version
+
+    # Resolves the following crash when switching Xcode versions:
+    # "Failed to locate a valid instance of CoreSimulatorService in the bootstrap"
+    launchctl remove com.apple.CoreSimulator.CoreSimulatorService || true
+
+    break
+  done
+}
 
 fix_bazel_imports() {
   if [ -z "$KOKORO_BUILD_NUMBER" ]; then
@@ -39,18 +73,36 @@ fix_bazel_imports() {
   trap reset_imports EXIT
 }
 
-if [ ! -d .kokoro-ios-runner ]; then
-  git clone https://github.com/material-foundation/kokoro-ios-runner.git .kokoro-ios-runner
-fi
+run_bazel() {
+  echo "Running bazel builds..."
 
-pushd .kokoro-ios-runner
-git fetch > /dev/null
-TAG=$(git tag --sort=v:refname -l "$KOKORO_RUNNER_VERSION" | tail -n1)
-git checkout "$TAG" > /dev/null
-popd
+  fix_bazel_imports
 
-fix_bazel_imports
+  if [ -n "$KOKORO_BUILD_NUMBER" ]; then
+    bazel version
+    use_bazel.sh "$BAZEL_VERSION"
+    bazel version
 
-./.kokoro-ios-runner/bazel.sh test //:UnitTests 8.1.0
+    select_xcode "$XCODE_VERSION"
+
+    # Move into our cloned repo
+    cd github/repo
+  fi
+
+  # Run against whichever Xcode is currently selected.
+  selected_xcode_developer_path=$(xcode-select -p)
+  selected_xcode_contents_path=$(dirname "$selected_xcode_developer_path")
+
+  xcode_version=$(cat "$selected_xcode_contents_path/version.plist" \
+    | grep "CFBundleShortVersionString" -A1 \
+    | grep string \
+    | cut -d'>' -f2 \
+    | cut -d'<' -f1)
+
+  bazel clean
+  bazel test //... --xcode_version $xcode_version --ios_minimum_os=8.0 --ios_multi_cpus=i386,x86_64
+}
+
+run_bazel
 
 echo "Success!"
