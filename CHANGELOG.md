@@ -1,7 +1,6 @@
-# #develop#
+# 3.0.0
 
- TODO: Enumerate changes.
-
+This major release drops official support for iOS 8.
 
 # 2.0.0
 
