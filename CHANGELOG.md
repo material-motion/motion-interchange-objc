@@ -1,3 +1,12 @@
+# 3.0.0
+
+This major release drops official support for iOS 8.
+
+## Non-source changes
+
+* [Drop support for iOS 8 (#43)](https://github.com/material-motion/motion-interchange-objc/commit/31a6c576f752a132206c7b09412bd6a390052b88) (featherless)
+* [Remove the xcode_select logic. (#42)](https://github.com/material-motion/motion-interchange-objc/commit/9cd51bc492174aabfa99cd2d4d802f8f58a3239c) (featherless)
+
 # 2.0.0
 
 This major release upgrades the bazel dependencies and workspace. This change is breaking for anyone
