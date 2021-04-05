@@ -21,18 +21,18 @@ class MDMTimingCurveTests: XCTestCase {
 
   func testInitializerValuesWithNoInitialVelocity() {
     let curve = MDMSpringTimingCurve(mass: 0.1, tension: 0.2, friction: 0.3)
-    XCTAssertEqualWithAccuracy(curve.mass, 0.1, accuracy: 0.001)
-    XCTAssertEqualWithAccuracy(curve.tension, 0.2, accuracy: 0.001)
-    XCTAssertEqualWithAccuracy(curve.friction, 0.3, accuracy: 0.001)
-    XCTAssertEqualWithAccuracy(curve.initialVelocity, 0.0, accuracy: 0.001)
+    XCTAssertEqual(curve.mass, 0.1, accuracy: 0.001)
+    XCTAssertEqual(curve.tension, 0.2, accuracy: 0.001)
+    XCTAssertEqual(curve.friction, 0.3, accuracy: 0.001)
+    XCTAssertEqual(curve.initialVelocity, 0.0, accuracy: 0.001)
   }
 
   func testInitializerValuesWithInitialVelocity() {
     let curve = MDMSpringTimingCurve(mass: 0.1, tension: 0.2, friction: 0.3, initialVelocity: 0.4)
-    XCTAssertEqualWithAccuracy(curve.mass, 0.1, accuracy: 0.001)
-    XCTAssertEqualWithAccuracy(curve.tension, 0.2, accuracy: 0.001)
-    XCTAssertEqualWithAccuracy(curve.friction, 0.3, accuracy: 0.001)
-    XCTAssertEqualWithAccuracy(curve.initialVelocity, 0.4, accuracy: 0.001)
+    XCTAssertEqual(curve.mass, 0.1, accuracy: 0.001)
+    XCTAssertEqual(curve.tension, 0.2, accuracy: 0.001)
+    XCTAssertEqual(curve.friction, 0.3, accuracy: 0.001)
+    XCTAssertEqual(curve.initialVelocity, 0.4, accuracy: 0.001)
   }
 
   @available(iOS 9.0, *)
@@ -58,11 +58,11 @@ class MDMTimingCurveTests: XCTestCase {
             let animation = view.layer.animation(forKey: animationKey) as? CASpringAnimation {
 
             let curve = generator.springTimingCurve()
-            XCTAssertEqualWithAccuracy(curve.mass, animation.mass, accuracy: 0.001)
-            XCTAssertEqualWithAccuracy(curve.tension, animation.stiffness, accuracy: 0.001)
-            XCTAssertEqualWithAccuracy(curve.friction, animation.damping, accuracy: 0.001)
+            XCTAssertEqual(curve.mass, animation.mass, accuracy: 0.001)
+            XCTAssertEqual(curve.tension, animation.stiffness, accuracy: 0.001)
+            XCTAssertEqual(curve.friction, animation.damping, accuracy: 0.001)
             if animation.responds(to: #selector(initialVelocity)) {
-              XCTAssertEqualWithAccuracy(curve.initialVelocity, animation.initialVelocity, accuracy: 0.001)
+              XCTAssertEqual(curve.initialVelocity, animation.initialVelocity, accuracy: 0.001)
             }
           }
         }

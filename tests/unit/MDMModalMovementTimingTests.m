@@ -33,7 +33,11 @@
 
   // We just want the first position key path animation that affects this view controller.
   if (!self.presentationPositionAnimation) {
-    self.presentationPositionAnimation = [self.view.layer animationForKey:@"position"];
+    UIView *iterator = self.view;
+    while (iterator != nil && self.presentationPositionAnimation == nil) {
+      self.presentationPositionAnimation = [iterator.layer animationForKey:@"position"];
+      iterator = iterator.superview;
+    }
   }
 }
 

@@ -27,18 +27,18 @@ class MDMLegacyAPITests: XCTestCase {
 
     let traits = MDMAnimationTraits(motionTiming: timing)
 
-    XCTAssertEqualWithAccuracy(traits.duration, timing.duration, accuracy: 0.001)
-    XCTAssertEqualWithAccuracy(traits.delay, timing.delay, accuracy: 0.001)
+    XCTAssertEqual(traits.duration, timing.duration, accuracy: 0.001)
+    XCTAssertEqual(traits.delay, timing.delay, accuracy: 0.001)
     XCTAssertTrue(traits.timingCurve is CAMediaTimingFunction)
     if let timingCurve = traits.timingCurve as? CAMediaTimingFunction {
-      XCTAssertEqualWithAccuracy(timingCurve.mdm_point1.x, timing.curve.data.0, accuracy: 0.001)
-      XCTAssertEqualWithAccuracy(timingCurve.mdm_point1.y, timing.curve.data.1, accuracy: 0.001)
-      XCTAssertEqualWithAccuracy(timingCurve.mdm_point2.x, timing.curve.data.2, accuracy: 0.001)
-      XCTAssertEqualWithAccuracy(timingCurve.mdm_point2.y, timing.curve.data.3, accuracy: 0.001)
+      XCTAssertEqual(timingCurve.mdm_point1.x, timing.curve.data.0, accuracy: 0.001)
+      XCTAssertEqual(timingCurve.mdm_point1.y, timing.curve.data.1, accuracy: 0.001)
+      XCTAssertEqual(timingCurve.mdm_point2.x, timing.curve.data.2, accuracy: 0.001)
+      XCTAssertEqual(timingCurve.mdm_point2.y, timing.curve.data.3, accuracy: 0.001)
     }
     XCTAssertTrue(traits.repetition is MDMRepetitionOverTime)
     if let repetition = traits.repetition as? MDMRepetitionOverTime {
-      XCTAssertEqualWithAccuracy(repetition.duration, timing.repetition.amount, accuracy: 0.001)
+      XCTAssertEqual(repetition.duration, timing.repetition.amount, accuracy: 0.001)
       XCTAssertEqual(repetition.autoreverses, timing.repetition.autoreverses.boolValue)
     }
   }

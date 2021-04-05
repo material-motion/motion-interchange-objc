@@ -21,13 +21,13 @@ class MDMRepetitionTests: XCTestCase {
 
   func testInitializationWithNumberOfRepetitions() {
     let repetition = MDMRepetition(numberOfRepetitions: 5.5)
-    XCTAssertEqualWithAccuracy(repetition.numberOfRepetitions, 5.5, accuracy: 0.001)
+    XCTAssertEqual(repetition.numberOfRepetitions, 5.5, accuracy: 0.001)
     XCTAssertFalse(repetition.autoreverses)
   }
 
   func testInitializationWithNumberOfRepetitionsAndAutoreversed() {
     let repetition = MDMRepetition(numberOfRepetitions: 5.5, autoreverses: true)
-    XCTAssertEqualWithAccuracy(repetition.numberOfRepetitions, 5.5, accuracy: 0.001)
+    XCTAssertEqual(repetition.numberOfRepetitions, 5.5, accuracy: 0.001)
     XCTAssertTrue(repetition.autoreverses)
   }
 }

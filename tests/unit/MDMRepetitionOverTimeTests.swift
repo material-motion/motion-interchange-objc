@@ -21,13 +21,13 @@ class MDMRepetitionOverTimeTests: XCTestCase {
 
   func testInitializationWithDuration() {
     let repetition = MDMRepetitionOverTime(duration: 5.5)
-    XCTAssertEqualWithAccuracy(repetition.duration, 5.5, accuracy: 0.001)
+    XCTAssertEqual(repetition.duration, 5.5, accuracy: 0.001)
     XCTAssertFalse(repetition.autoreverses)
   }
 
   func testInitializationWithDurationAndAutoreversed() {
     let repetition = MDMRepetitionOverTime(duration: 5.5, autoreverses: true)
-    XCTAssertEqualWithAccuracy(repetition.duration, 5.5, accuracy: 0.001)
+    XCTAssertEqual(repetition.duration, 5.5, accuracy: 0.001)
     XCTAssertTrue(repetition.autoreverses)
   }
 }
