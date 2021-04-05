@@ -22,15 +22,15 @@ class MDMAnimationTraitsTests: XCTestCase {
   func testInitializerValuesWithDuration() {
     let traits = MDMAnimationTraits(duration: 0.5)
 
-    XCTAssertEqualWithAccuracy(traits.duration, 0.5, accuracy: 0.001)
-    XCTAssertEqualWithAccuracy(traits.delay, 0, accuracy: 0.001)
+    XCTAssertEqual(traits.duration, 0.5, accuracy: 0.001)
+    XCTAssertEqual(traits.delay, 0, accuracy: 0.001)
     XCTAssertTrue(traits.timingCurve is CAMediaTimingFunction)
     if let timingCurve = traits.timingCurve as? CAMediaTimingFunction {
-      let easeInOut = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-      XCTAssertEqualWithAccuracy(timingCurve.mdm_point1.x, easeInOut.mdm_point1.x, accuracy: 0.001)
-      XCTAssertEqualWithAccuracy(timingCurve.mdm_point1.y, easeInOut.mdm_point1.y, accuracy: 0.001)
-      XCTAssertEqualWithAccuracy(timingCurve.mdm_point2.x, easeInOut.mdm_point2.x, accuracy: 0.001)
-      XCTAssertEqualWithAccuracy(timingCurve.mdm_point2.y, easeInOut.mdm_point2.y, accuracy: 0.001)
+      let easeInOut = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+      XCTAssertEqual(timingCurve.mdm_point1.x, easeInOut.mdm_point1.x, accuracy: 0.001)
+      XCTAssertEqual(timingCurve.mdm_point1.y, easeInOut.mdm_point1.y, accuracy: 0.001)
+      XCTAssertEqual(timingCurve.mdm_point2.x, easeInOut.mdm_point2.x, accuracy: 0.001)
+      XCTAssertEqual(timingCurve.mdm_point2.y, easeInOut.mdm_point2.y, accuracy: 0.001)
     }
     XCTAssertNil(traits.repetition)
   }
@@ -38,15 +38,15 @@ class MDMAnimationTraitsTests: XCTestCase {
   func testInitializerValuesWithDurationAndEaseInCurve() {
     let traits = MDMAnimationTraits(duration: 0.5, animationCurve: .easeIn)
 
-    XCTAssertEqualWithAccuracy(traits.duration, 0.5, accuracy: 0.001)
-    XCTAssertEqualWithAccuracy(traits.delay, 0, accuracy: 0.001)
+    XCTAssertEqual(traits.duration, 0.5, accuracy: 0.001)
+    XCTAssertEqual(traits.delay, 0, accuracy: 0.001)
     XCTAssertTrue(traits.timingCurve is CAMediaTimingFunction)
     if let timingCurve = traits.timingCurve as? CAMediaTimingFunction {
-      let easeInOut = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
-      XCTAssertEqualWithAccuracy(timingCurve.mdm_point1.x, easeInOut.mdm_point1.x, accuracy: 0.001)
-      XCTAssertEqualWithAccuracy(timingCurve.mdm_point1.y, easeInOut.mdm_point1.y, accuracy: 0.001)
-      XCTAssertEqualWithAccuracy(timingCurve.mdm_point2.x, easeInOut.mdm_point2.x, accuracy: 0.001)
-      XCTAssertEqualWithAccuracy(timingCurve.mdm_point2.y, easeInOut.mdm_point2.y, accuracy: 0.001)
+      let easeInOut = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeIn)
+      XCTAssertEqual(timingCurve.mdm_point1.x, easeInOut.mdm_point1.x, accuracy: 0.001)
+      XCTAssertEqual(timingCurve.mdm_point1.y, easeInOut.mdm_point1.y, accuracy: 0.001)
+      XCTAssertEqual(timingCurve.mdm_point2.x, easeInOut.mdm_point2.x, accuracy: 0.001)
+      XCTAssertEqual(timingCurve.mdm_point2.y, easeInOut.mdm_point2.y, accuracy: 0.001)
     }
     XCTAssertNil(traits.repetition)
   }
@@ -54,15 +54,15 @@ class MDMAnimationTraitsTests: XCTestCase {
   func testInitializerValuesWithDurationDelay() {
     let traits = MDMAnimationTraits(delay: 0.2, duration: 0.5)
 
-    XCTAssertEqualWithAccuracy(traits.duration, 0.5, accuracy: 0.001)
-    XCTAssertEqualWithAccuracy(traits.delay, 0.2, accuracy: 0.001)
+    XCTAssertEqual(traits.duration, 0.5, accuracy: 0.001)
+    XCTAssertEqual(traits.delay, 0.2, accuracy: 0.001)
     XCTAssertTrue(traits.timingCurve is CAMediaTimingFunction)
     if let timingCurve = traits.timingCurve as? CAMediaTimingFunction {
-      let easeInOut = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-      XCTAssertEqualWithAccuracy(timingCurve.mdm_point1.x, easeInOut.mdm_point1.x, accuracy: 0.001)
-      XCTAssertEqualWithAccuracy(timingCurve.mdm_point1.y, easeInOut.mdm_point1.y, accuracy: 0.001)
-      XCTAssertEqualWithAccuracy(timingCurve.mdm_point2.x, easeInOut.mdm_point2.x, accuracy: 0.001)
-      XCTAssertEqualWithAccuracy(timingCurve.mdm_point2.y, easeInOut.mdm_point2.y, accuracy: 0.001)
+      let easeInOut = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+      XCTAssertEqual(timingCurve.mdm_point1.x, easeInOut.mdm_point1.x, accuracy: 0.001)
+      XCTAssertEqual(timingCurve.mdm_point1.y, easeInOut.mdm_point1.y, accuracy: 0.001)
+      XCTAssertEqual(timingCurve.mdm_point2.x, easeInOut.mdm_point2.x, accuracy: 0.001)
+      XCTAssertEqual(timingCurve.mdm_point2.y, easeInOut.mdm_point2.y, accuracy: 0.001)
     }
     XCTAssertNil(traits.repetition)
   }
@@ -70,24 +70,24 @@ class MDMAnimationTraitsTests: XCTestCase {
   func testInitializerValuesWithDurationDelayNilTimingCurve() {
     let traits = MDMAnimationTraits(delay: 0.2, duration: 0.5, timingCurve: nil)
 
-    XCTAssertEqualWithAccuracy(traits.duration, 0.5, accuracy: 0.001)
-    XCTAssertEqualWithAccuracy(traits.delay, 0.2, accuracy: 0.001)
+    XCTAssertEqual(traits.duration, 0.5, accuracy: 0.001)
+    XCTAssertEqual(traits.delay, 0.2, accuracy: 0.001)
     XCTAssertNil(traits.timingCurve)
     XCTAssertNil(traits.repetition)
   }
 
   func testInitializerValuesWithDurationDelayLinearTimingCurve() {
-    let linear = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+    let linear = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
     let traits = MDMAnimationTraits(delay: 0.2, duration: 0.5, timingCurve: linear)
 
-    XCTAssertEqualWithAccuracy(traits.duration, 0.5, accuracy: 0.001)
-    XCTAssertEqualWithAccuracy(traits.delay, 0.2, accuracy: 0.001)
+    XCTAssertEqual(traits.duration, 0.5, accuracy: 0.001)
+    XCTAssertEqual(traits.delay, 0.2, accuracy: 0.001)
     XCTAssertTrue(traits.timingCurve is CAMediaTimingFunction)
     if let timingCurve = traits.timingCurve as? CAMediaTimingFunction {
-      XCTAssertEqualWithAccuracy(timingCurve.mdm_point1.x, linear.mdm_point1.x, accuracy: 0.001)
-      XCTAssertEqualWithAccuracy(timingCurve.mdm_point1.y, linear.mdm_point1.y, accuracy: 0.001)
-      XCTAssertEqualWithAccuracy(timingCurve.mdm_point2.x, linear.mdm_point2.x, accuracy: 0.001)
-      XCTAssertEqualWithAccuracy(timingCurve.mdm_point2.y, linear.mdm_point2.y, accuracy: 0.001)
+      XCTAssertEqual(timingCurve.mdm_point1.x, linear.mdm_point1.x, accuracy: 0.001)
+      XCTAssertEqual(timingCurve.mdm_point1.y, linear.mdm_point1.y, accuracy: 0.001)
+      XCTAssertEqual(timingCurve.mdm_point2.x, linear.mdm_point2.x, accuracy: 0.001)
+      XCTAssertEqual(timingCurve.mdm_point2.y, linear.mdm_point2.y, accuracy: 0.001)
     }
     XCTAssertNil(traits.repetition)
   }
@@ -96,14 +96,14 @@ class MDMAnimationTraitsTests: XCTestCase {
     let spring = MDMSpringTimingCurve(mass: 0.7, tension: 0.8, friction: 0.9)
     let traits = MDMAnimationTraits(delay: 0.2, duration: 0.5, timingCurve: spring)
 
-    XCTAssertEqualWithAccuracy(traits.duration, 0.5, accuracy: 0.001)
-    XCTAssertEqualWithAccuracy(traits.delay, 0.2, accuracy: 0.001)
+    XCTAssertEqual(traits.duration, 0.5, accuracy: 0.001)
+    XCTAssertEqual(traits.delay, 0.2, accuracy: 0.001)
     XCTAssertTrue(traits.timingCurve is MDMSpringTimingCurve)
     if let timingCurve = traits.timingCurve as? MDMSpringTimingCurve {
-      XCTAssertEqualWithAccuracy(timingCurve.mass, spring.mass, accuracy: 0.001)
-      XCTAssertEqualWithAccuracy(timingCurve.friction, spring.friction, accuracy: 0.001)
-      XCTAssertEqualWithAccuracy(timingCurve.tension, spring.tension, accuracy: 0.001)
-      XCTAssertEqualWithAccuracy(timingCurve.initialVelocity, spring.initialVelocity,
+      XCTAssertEqual(timingCurve.mass, spring.mass, accuracy: 0.001)
+      XCTAssertEqual(timingCurve.friction, spring.friction, accuracy: 0.001)
+      XCTAssertEqual(timingCurve.tension, spring.tension, accuracy: 0.001)
+      XCTAssertEqual(timingCurve.initialVelocity, spring.initialVelocity,
                                  accuracy: 0.001)
     }
     XCTAssertNil(traits.repetition)
@@ -116,12 +116,12 @@ class MDMAnimationTraitsTests: XCTestCase {
                                     timingCurve: nil,
                                     repetition: repetition)
 
-    XCTAssertEqualWithAccuracy(traits.duration, 0.5, accuracy: 0.001)
-    XCTAssertEqualWithAccuracy(traits.delay, 0.2, accuracy: 0.001)
+    XCTAssertEqual(traits.duration, 0.5, accuracy: 0.001)
+    XCTAssertEqual(traits.delay, 0.2, accuracy: 0.001)
     XCTAssertNil(traits.timingCurve)
     XCTAssertTrue(traits.repetition is MDMRepetition)
     if let setRepetition = traits.repetition as? MDMRepetition {
-      XCTAssertEqualWithAccuracy(setRepetition.numberOfRepetitions, repetition.numberOfRepetitions,
+      XCTAssertEqual(setRepetition.numberOfRepetitions, repetition.numberOfRepetitions,
                                  accuracy: 0.001)
       XCTAssertEqual(setRepetition.autoreverses, repetition.autoreverses)
     }
@@ -144,10 +144,10 @@ class MDMAnimationTraitsTests: XCTestCase {
       springCopy.mass = springCopy.mass + 1
       springCopy.initialVelocity = springCopy.initialVelocity + 1
 
-      XCTAssertNotEqualWithAccuracy(springCopy.friction, spring.friction, 0.001)
-      XCTAssertNotEqualWithAccuracy(springCopy.tension, spring.tension, 0.001)
-      XCTAssertNotEqualWithAccuracy(springCopy.mass, spring.mass, 0.001)
-      XCTAssertNotEqualWithAccuracy(springCopy.initialVelocity, spring.initialVelocity, 0.001)
+      XCTAssertNotEqual(springCopy.friction, spring.friction, accuracy: 0.001)
+      XCTAssertNotEqual(springCopy.tension, spring.tension, accuracy: 0.001)
+      XCTAssertNotEqual(springCopy.mass, spring.mass, accuracy: 0.001)
+      XCTAssertNotEqual(springCopy.initialVelocity, spring.initialVelocity, accuracy: 0.001)
     }
     if let repetitionCopy = copy.repetition as? MDMRepetition {
       repetitionCopy.autoreverses = !repetitionCopy.autoreverses
@@ -157,7 +157,7 @@ class MDMAnimationTraitsTests: XCTestCase {
       XCTAssertNotEqual(repetitionCopy.numberOfRepetitions, repetition.numberOfRepetitions)
     }
 
-    XCTAssertNotEqualWithAccuracy(copy.duration, traits.duration, 0.001)
-    XCTAssertNotEqualWithAccuracy(copy.delay, traits.delay, 0.001)
+    XCTAssertNotEqual(copy.duration, traits.duration, accuracy: 0.001)
+    XCTAssertNotEqual(copy.delay, traits.delay, accuracy: 0.001)
   }
 }
