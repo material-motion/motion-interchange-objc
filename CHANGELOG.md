@@ -1,3 +1,7 @@
+# 4.0.1
+
+This patch release resolves some missed warnings in 4.0.0 and fixes a broken test on iOS 13+14.
+
 # 4.0.0
 
 This major release drops official support for Bazel and iOS 9.
