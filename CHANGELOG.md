@@ -1,3 +1,7 @@
+# 4.0.0
+
+This major release drops official support for Bazel and iOS 9.
+
 # 3.0.0
 
 This major release drops official support for iOS 8.
