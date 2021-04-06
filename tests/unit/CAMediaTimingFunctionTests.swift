@@ -21,19 +21,19 @@ class CAMediaTimingFunctionTests: XCTestCase {
   func testReversalAlgorithm() {
     let curve = CAMediaTimingFunction(controlPoints: 0.1, 0.2, 0.3, 0.4)
     let reversed = curve.mdm_reversed()
-    XCTAssertEqualWithAccuracy(curve.mdm_point1.x, 1 - reversed.mdm_point2.x, accuracy: 0.001)
-    XCTAssertEqualWithAccuracy(curve.mdm_point1.y, 1 - reversed.mdm_point2.y, accuracy: 0.001)
-    XCTAssertEqualWithAccuracy(curve.mdm_point2.x, 1 - reversed.mdm_point1.x, accuracy: 0.001)
-    XCTAssertEqualWithAccuracy(curve.mdm_point2.y, 1 - reversed.mdm_point1.y, accuracy: 0.001)
+    XCTAssertEqual(curve.mdm_point1.x, 1 - reversed.mdm_point2.x, accuracy: 0.001)
+    XCTAssertEqual(curve.mdm_point1.y, 1 - reversed.mdm_point2.y, accuracy: 0.001)
+    XCTAssertEqual(curve.mdm_point2.x, 1 - reversed.mdm_point1.x, accuracy: 0.001)
+    XCTAssertEqual(curve.mdm_point2.y, 1 - reversed.mdm_point1.y, accuracy: 0.001)
   }
 
   func testReversingBezierCurveTwiceGivesSameResult() {
     let curve = CAMediaTimingFunction(controlPoints: 0.1, 0.2, 0.3, 0.4)
     let reversed = curve.mdm_reversed()
     let reversedAgain = reversed.mdm_reversed()
-    XCTAssertEqualWithAccuracy(curve.mdm_point1.x, reversedAgain.mdm_point1.x, accuracy: 0.001)
-    XCTAssertEqualWithAccuracy(curve.mdm_point1.y, reversedAgain.mdm_point1.y, accuracy: 0.001)
-    XCTAssertEqualWithAccuracy(curve.mdm_point2.x, reversedAgain.mdm_point2.x, accuracy: 0.001)
-    XCTAssertEqualWithAccuracy(curve.mdm_point2.y, reversedAgain.mdm_point2.y, accuracy: 0.001)
+    XCTAssertEqual(curve.mdm_point1.x, reversedAgain.mdm_point1.x, accuracy: 0.001)
+    XCTAssertEqual(curve.mdm_point1.y, reversedAgain.mdm_point1.y, accuracy: 0.001)
+    XCTAssertEqual(curve.mdm_point2.x, reversedAgain.mdm_point2.x, accuracy: 0.001)
+    XCTAssertEqual(curve.mdm_point2.y, reversedAgain.mdm_point2.y, accuracy: 0.001)
   }
 }

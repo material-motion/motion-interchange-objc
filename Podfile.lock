@@ -1,6 +1,6 @@
 PODS:
-  - CatalogByConvention (2.1.1)
-  - MotionInterchange (4.0.0)
+  - CatalogByConvention (2.5.2)
+  - MotionInterchange (4.0.1)
 
 DEPENDENCIES:
   - CatalogByConvention
@@ -15,9 +15,9 @@ EXTERNAL SOURCES:
     :path: "./"
 
 SPEC CHECKSUMS:
-  CatalogByConvention: c3a5319de04250a7cd4649127fcfca5fe3322a43
-  MotionInterchange: 61f6994d1fe915b931e8751e3f86098729580b6c
+  CatalogByConvention: ef713654160053be026fa4648dd28caf6b5ca4e1
+  MotionInterchange: d58704efd5dcd62c6535bc1081df832533a8e9b9
 
-PODFILE CHECKSUM: 09090d12db5aab00a13fe82da94f338ebd03f5dc
+PODFILE CHECKSUM: aea7b8b75a397821880e2ba54fc4cf979d21cd99
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.1
