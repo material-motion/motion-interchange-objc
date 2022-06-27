@@ -20,14 +20,10 @@
 
 /** The possible kinds of motion curves that can be used to describe an animation. */
 typedef NS_ENUM(NSUInteger, MDMMotionCurveType) {
-  /**
-   The value will be instantly set with no animation.
-   */
+  /** The value will be instantly set with no animation. */
   MDMMotionCurveTypeInstant,
 
-  /**
-   The value will be animated using a cubic bezier curve to model its velocity.
-   */
+  /** The value will be animated using a cubic bezier curve to model its velocity. */
   MDMMotionCurveTypeBezier,
 
   /**
@@ -38,9 +34,7 @@ typedef NS_ENUM(NSUInteger, MDMMotionCurveType) {
    */
   MDMMotionCurveTypeSpring,
 
-  /**
-   The default curve will be used.
-   */
+  /** The default curve will be used. */
   MDMMotionCurveTypeDefault __deprecated_enum_msg("Use MDMMotionCurveTypeBezier instead."),
 
 } NS_SWIFT_NAME(MotionCurveType);
