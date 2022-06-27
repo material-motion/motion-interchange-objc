@@ -18,9 +18,7 @@
 #import <Foundation/Foundation.h>
 #import <QuartzCore/QuartzCore.h>
 
-/**
- The possible kinds of motion curves that can be used to describe an animation.
- */
+/** The possible kinds of motion curves that can be used to describe an animation. */
 typedef NS_ENUM(NSUInteger, MDMMotionCurveType) {
   /**
    The value will be instantly set with no animation.
