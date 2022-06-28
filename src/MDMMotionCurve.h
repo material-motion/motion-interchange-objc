@@ -18,6 +18,9 @@
 #import <Foundation/Foundation.h>
 #import <QuartzCore/QuartzCore.h>
 
+API_DEPRECATED_BEGIN("Use standard UIKit/CALayer animation APIs instead.",
+                     ios(12, API_TO_BE_DEPRECATED))
+
 /** The possible kinds of motion curves that can be used to describe an animation. */
 typedef NS_ENUM(NSUInteger, MDMMotionCurveType) {
   /** The value will be instantly set with no animation. */
@@ -184,3 +187,5 @@ typedef NS_ENUM(NSUInteger, MDMSpringMotionCurveDataIndex) {
 #define MDMModalMovementTiming { \
   .delay = 0.000, .duration = 0.500, .curve = _MDMSpring(3, 1000, 500) \
 }
+
+API_DEPRECATED_END

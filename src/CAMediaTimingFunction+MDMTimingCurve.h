@@ -19,6 +19,9 @@
 
 #import "MDMTimingCurve.h"
 
+API_DEPRECATED_BEGIN("Use standard UIKit/CALayer animation APIs instead.",
+                     ios(12, API_TO_BE_DEPRECATED))
+
 // A CAMediaTimingFunction is a timing curve - we simply define its conformity to our protocol here.
 @interface CAMediaTimingFunction () <MDMTimingCurve>
 @end
@@ -42,3 +45,4 @@
 
 @end
 
+API_DEPRECATED_END

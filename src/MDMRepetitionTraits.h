@@ -16,6 +16,9 @@
 
 #import <Foundation/Foundation.h>
 
+API_DEPRECATED_BEGIN("Use standard UIKit/CALayer animation APIs instead.",
+                     ios(12, API_TO_BE_DEPRECATED))
+
 /**
  A generalized representation of a repetition traits.
  */
@@ -28,3 +31,4 @@
 
 @end
 
+API_DEPRECATED_END

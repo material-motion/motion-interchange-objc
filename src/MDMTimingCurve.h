@@ -17,8 +17,13 @@
 #import <Foundation/Foundation.h>
 #import <QuartzCore/QuartzCore.h>
 
+API_DEPRECATED_BEGIN("Use standard UIKit/CALayer animation APIs instead.",
+                     ios(12, API_TO_BE_DEPRECATED))
+
 /**
  A generalized representation of a timing curve.
  */
 @protocol MDMTimingCurve <NSObject, NSCopying>
 @end
+
+API_DEPRECATED_END
